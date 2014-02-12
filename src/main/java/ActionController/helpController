@@ -1,2 +1,5 @@
 /*här har vi kod för kontrollern. inga nya metoder!
-enkel kod som använder kod i modellen. (ActiveRecord).*/
+enkel kod som använder kod i modellen. (ActiveRecord).
+http://docs.spring.io/docs/Spring-MVC-step-by-step/
+*/
+
