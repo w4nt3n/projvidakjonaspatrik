@@ -2,12 +2,12 @@
     <html>  
     <head>  
     <script type="text/javascript" src="jquery-1.2.6.min.js"></script>  
-    <title>Being Java Guys | Hello World</title>  
+    <title>CV Upload</title>  
     </head>  
     <body>  
       
      <center>  
-      <h2>Being Java Guys | Hello World</h2>  
+      <h2>CV Upload</h2>  
       <h3>Please select a file to upload !</h3>  
         
       
