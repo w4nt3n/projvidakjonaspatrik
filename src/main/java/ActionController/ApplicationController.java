@@ -37,7 +37,6 @@ public class ApplicationController {
      
     @RequestMapping("/application")
     public ModelAndView showAppliers() {
-         
         return new ModelAndView("application", "command", new ApplicationBean());
     }
 }

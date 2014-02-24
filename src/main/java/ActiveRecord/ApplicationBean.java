@@ -22,31 +22,30 @@ public class ApplicationBean {
     // "Insert Code > Add Business Method")
     
     //getters
- public String getEmail() {
-		return email;
-	}
-	public String getTelephone() {
-		return telephone;
-	}
-	public String getFirstname() {
-		return firstname;
-	}
-	public String getLastname() {
-		return lastname;
-	}
-    
-    //setters
+    public String getEmail() {
+            return email;
+    }
+    public String getTelephone() {
+            return telephone;
+    }
+    public String getFirstname() {
+            return firstname;
+    }
+    public String getLastname() {
+            return lastname;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+    //setters
+    public void setEmail(String email) {
+            this.email = email;
+    }
+    public void setTelephone(String telephone) {
+            this.telephone = telephone;
+    }
+    public void setFirstname(String firstname) {
+            this.firstname = firstname;
+    }
+    public void setLastname(String lastname) {
+            this.lastname = lastname;
+    }
 }
