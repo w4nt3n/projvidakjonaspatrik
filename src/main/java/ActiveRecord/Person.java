@@ -25,40 +25,73 @@ import java.sql.Timestamp;
  
 public class Person
 {
-    public Person(String n, int a)
+    public Person(String n, String sn, int a, String em, String tel)
     {
         this.name = n;
+        this.surname = sn;
         this.age = a;
+        this.email = em;
+        this.telephone = tel;
     }
     
-    int custId;
+    int personId;
     String name;
+    String surname;
     int age;
+    String email;
+    String telephone;
+    
+    
     //getter and setter methods
     
     //getters
-    public int getCustId() {
-        return custId;
+    public int getPersonId() {
+        return personId;
     }
     
     public String getName() {
         return name;
     }
     
+    public String getSurname() {
+        return surname;
+    }
+    
     public int getAge() {
         return age;
     }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public String getTelephone() {
+        return telephone;
+    }
 
+    
     //setters
-    public void setCustId(int id) {
-        this.custId = id;
+    public void setPersonId(int id) {
+        this.personId = id;
     }
     
     public void setName(String n) {
         this.name = n;
     }
     
+    public void setSurame(String n) {
+        this.surname = n;
+    }
+    
     public void setAge(int a) {
         this.age = a;
+    }
+    
+    public void setEmail(String e) {
+        this.email = e;
+    }
+    
+    public void setTelephone(String t) {
+        this.telephone = t;
     }
 }

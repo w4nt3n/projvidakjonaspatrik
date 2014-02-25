@@ -12,6 +12,10 @@ package ActionController;
  */
  
 import ActiveRecord.ApplicationBean;
+import ActiveRecord.Person;
+import ActiveRecord.PersonDAO;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
  
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -28,9 +32,15 @@ public class ApplicationController {
     @RequestMapping(value = "/addApplier", method = RequestMethod.POST)
     public String addApplier(@ModelAttribute("application")
                             ApplicationBean application, BindingResult result) {
-         
-        System.out.println("First Name:" + application.getFirstname() +
-                    "Last Name:" + application.getLastname());
+        
+        // adds the application to the database
+        ApplicationContext context = 
+    		new ClassPathXmlApplicationContext("Spring-Module.xml");
+        
+        PersonDAO personDAO = (PersonDAO) context.getBean("personDAO");
+        Person person = new Person(application.getFirstname(), application.getSurname(), application.getAge(), application.getEmail(), application.getTelephone());
+        personDAO.insert(person);
+        
          
         return "redirect:application.htm";
     }

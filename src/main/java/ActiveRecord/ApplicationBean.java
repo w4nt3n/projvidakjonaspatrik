@@ -15,7 +15,8 @@ package ActiveRecord;
 public class ApplicationBean {
 
     private String firstname;
-    private String lastname;
+    private String surname;
+    private int age;
     private String email;
     private String telephone;
     // Add business logic below. (Right-click in editor and choose
@@ -23,29 +24,35 @@ public class ApplicationBean {
     
     //getters
     public String getEmail() {
-            return email;
+        return email;
     }
     public String getTelephone() {
-            return telephone;
+        return telephone;
     }
     public String getFirstname() {
-            return firstname;
+        return firstname;
     }
-    public String getLastname() {
-            return lastname;
+    public String getSurname() {
+        return surname;
+    }
+    public int getAge(){
+        return age;
     }
 
     //setters
     public void setEmail(String email) {
-            this.email = email;
+        this.email = email;
     }
     public void setTelephone(String telephone) {
-            this.telephone = telephone;
+        this.telephone = telephone;
     }
     public void setFirstname(String firstname) {
-            this.firstname = firstname;
+        this.firstname = firstname;
     }
-    public void setLastname(String lastname) {
-            this.lastname = lastname;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+    public void setAge(int age){
+        this.age = age;
     }
 }

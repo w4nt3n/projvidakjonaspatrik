@@ -14,5 +14,5 @@ package ActiveRecord;
 public interface PersonDAO 
 {
 	public void insert(Person person);
-	public Person findByCustomerId(int custId);
+	public Person findByPersonId(int custId);
 }

@@ -1,0 +1,39 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 25, 2014, 10:30:29 PM
+    Author     : Vidak
+*/
+
+#contentWrapper{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
+.textCenterDiv{
+    text-align: center;
+}
+
+
+.centerdInput{
+    margin: auto;
+}
+
+.formTable{
+    border: 1px solid #d3d3d3;
+    padding: 15px;
+    margin: auto;
+}
+
+.formTable td{
+    padding: 5px;
+}
+
+.formTable .textInput{
+    width: 250px;
+}

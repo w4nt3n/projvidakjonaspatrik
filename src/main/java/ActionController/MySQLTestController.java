@@ -13,10 +13,7 @@ package ActionController;
 import ActiveRecord.MySQLTestBean;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,13 +34,13 @@ public class MySQLTestController {
     		new ClassPathXmlApplicationContext("Spring-Module.xml");
         
         PersonDAO personDAO = (PersonDAO) context.getBean("personDAO");
-        Person person = new Person("vidak",21);
+        Person person = new Person("vidak", "mijailovic", 21, "mina@mail.com", "0707777777");
         personDAO.insert(person);
  
-        Person customer1 = personDAO.findByCustomerId(1);
+        Person customer1 = personDAO.findByPersonId(1);
         
         MySQLTestBean myBean = new MySQLTestBean();
-        myBean.setMessage( customer1.getName());
+        myBean.setMessage(customer1.getName());
         
         return new ModelAndView("mysqltest", "message", myBean);
     }
