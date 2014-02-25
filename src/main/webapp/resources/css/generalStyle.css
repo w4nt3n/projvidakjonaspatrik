@@ -8,8 +8,10 @@ and open the template in the editor.
     Author     : Vidak
 */
 
-body{
+body, td, div{
     font-family: "Arial Black", Gadget, sans-serif;
+    color:#333333;
+    font-size: 14px;
 }
 
 input{

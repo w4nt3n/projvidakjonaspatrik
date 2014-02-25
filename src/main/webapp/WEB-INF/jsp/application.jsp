@@ -16,11 +16,14 @@
 <body>
     
     <div id="contentWrapper">
-        
-        <h2>Contact Manager</h2>
-
+ 
         <form:form method="post" action="addApplier.htm">
             <table class="formTable">
+                <tr>
+                    <th colspan="2">
+                        <h2>Contact Manager</h2> 
+                    </th>
+                </tr>
                 <tr>
                     <td><form:label path="firstname">Name:</form:label></td>
                     <td><form:input path="firstname" class="textInput" /></td>

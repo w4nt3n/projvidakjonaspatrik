@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ApplicationController {
  
     @RequestMapping(value = "/addApplier", method = RequestMethod.POST)
-    public String addApplier(@ModelAttribute("application")
+    public ModelAndView addApplier(@ModelAttribute("application")
                             ApplicationBean application, BindingResult result) {
         
         // adds the application to the database
@@ -42,7 +42,8 @@ public class ApplicationController {
         personDAO.insert(person);
         
          
-        return "redirect:application.htm";
+        //return "redirect:comfirmApplication.htm";
+        return new ModelAndView("comfirmApplication");
     }
      
     @RequestMapping("/application")
