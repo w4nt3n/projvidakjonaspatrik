@@ -75,3 +75,7 @@ and open the template in the editor.
 #applicationListTable tr:hover{
     background-color: #99ccff;
 }
+
+#workExpertiseListDiv{
+    width: 100%;
+}

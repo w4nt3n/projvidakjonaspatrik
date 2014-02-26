@@ -38,13 +38,12 @@ public class ApplicationController {
     		new ClassPathXmlApplicationContext("Spring-Module.xml");
         
         PersonDAO personDAO = (PersonDAO) context.getBean("personDAO");
-        Person person = new Person(application.getFirstname(), application.getSurname(), application.getAge(), application.getEmail(), application.getTelephone());
+        Person person = new Person(application.getFirstname(), application.getSurname(), application.getEmail(), application.getTelephone());
         personDAO.insert(person);
         
         ApplicationBean applicationBean = new ApplicationBean();
         applicationBean.setAfterSubmit(true);
         return new ModelAndView("application", "command", applicationBean);
-        //return new ModelAndView("comfirmApplication");
     }
      
     @RequestMapping("/application")

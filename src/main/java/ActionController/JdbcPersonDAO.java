@@ -31,7 +31,7 @@ public class JdbcPersonDAO implements PersonDAO {
     public void insert(Person person){
 
         String sql = "INSERT INTO PERSON " +
-                        "(personId, name, surname, age, email, telephone) VALUES (?, ?, ?, ?, ?, ?)";
+                        "(personId, name, surname, email, telephone) VALUES (?, ?, ?, ?, ?)";
         Connection conn = null;
 
         try {
@@ -40,9 +40,8 @@ public class JdbcPersonDAO implements PersonDAO {
             ps.setInt(1, person.getPersonId());
             ps.setString(2, person.getName());
             ps.setString(3, person.getSurname());
-            ps.setInt(4, person.getAge());
-            ps.setString(5, person.getEmail());
-            ps.setString(6, person.getTelephone());
+            ps.setString(4, person.getEmail());
+            ps.setString(5, person.getTelephone());
             ps.executeUpdate();
             ps.close();
 
@@ -74,7 +73,6 @@ public class JdbcPersonDAO implements PersonDAO {
                 person = new Person(
                     rs.getString("name"), 
                     rs.getString("surname"),
-                    rs.getInt("age"),
                     rs.getString("email"),
                     rs.getString("telephone")
                 );
@@ -108,7 +106,6 @@ public class JdbcPersonDAO implements PersonDAO {
                 Person person = new Person(
                     rs.getString("name"), 
                     rs.getString("surname"),
-                    rs.getInt("age"),
                     rs.getString("email"),
                     rs.getString("telephone")
                 );

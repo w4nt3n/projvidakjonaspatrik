@@ -115,3 +115,37 @@ function setBirthdayDaySelect(yearSelect, monthSelect, daySelect){
     if(temp > -1)
         daySelectInput.value = temp;
 }
+
+//-------------------------------------------
+// Expertise adder logics
+
+var expertiseCounter = 0;
+
+function replaceAll(find, replace, str) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}
+
+function addANewExpertise(){
+    expertiseCounter++;
+    item = document.getElementById("workExpertiseListDiv");
+    
+    var newRowCode = document.getElementById("jobExpertiseTemplate").innerHTML;
+    
+    var text = document.getElementById("workExpertiseExpertiseSelect").value;
+    newRowCode = replaceAll("jobExpertiseRowPlaceholderText", text, newRowCode);
+    
+    var text2 = document.getElementById("workExpertiseYearsSelect").value;
+    newRowCode = replaceAll("jobExpertiseRowPlaceholderYears", text2, newRowCode);
+    
+    var newId = "jobExpertiseRow" + expertiseCounter;
+    newRowCode = replaceAll("jobExpertiseRow", newId, newRowCode);
+    
+    item.innerHTML = item.innerHTML + newRowCode;
+    
+    document.getElementById("jobExpertiseRow" + expertiseCounter + "ExperiteseInput").value = text;
+    document.getElementById("jobExpertiseRow" + expertiseCounter + "YearsInput").value = text2;
+}
+
+function removeRow(rowID){
+    (function(x){x.parentNode.removeChild(x);})(document.getElementById(rowID))
+}

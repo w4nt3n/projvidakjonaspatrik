@@ -20,6 +20,18 @@
     
     <div id="contentWrapper">
         
+        <div id="jobExpertiseTemplate" style="display: none;">
+            <table id="jobExpertiseRow">
+                <input id="jobExpertiseRowExperiteseInput" name="jobExpertiseRowExperiteseInput" type="hidden" value="" />
+                <input id="jobExpertiseRowYearsInput" name="jobExpertiseRowExperiteseInput" type="hidden" value="" />
+                <tr>
+                    <td><button type="button" onclick="removeRow('jobExpertiseRow')">X</button></td>
+                    <td>jobExpertiseRowPlaceholderText</td>
+                    <td>jobExpertiseRowPlaceholderYears years</td>
+                </tr>
+            </table>
+        </div>
+        
         <c:choose>
             
             <c:when test="${command.getAfterSubmit() == true}">
@@ -45,25 +57,20 @@
                             <td><form:input path="surname" id="surnameTextBox" onkeyup="checkName('surnameTextBox', 1)" onchange="checkName('surnameTextBox', 1)" class="textInput" /></td>
                         </tr>
                         <tr>
-                            <td><form:label path="age">Age:</form:label></td>
-                            <td><form:input path="age" class="textInput" /></td>
-                        </tr>
-                        <tr>
                             <td>
                                 Date of birth:
                             </td>
                             <td>
                                 Year:
-                                <select id="birthdayYearSelect" onchange="setBirthdayDaySelect('birthdayYearSelect', 'birthdayMonthSelect', 'birthdayDaySelect'); checkDate('birthdayYearSelect', 2); checkDate('birthdayDaySelect', 4)">
+                                <select name="birthdayYearSelect" id="birthdayYearSelect" onchange="setBirthdayDaySelect('birthdayYearSelect', 'birthdayMonthSelect', 'birthdayDaySelect'); checkDate('birthdayYearSelect', 2); checkDate('birthdayDaySelect', 4)">
                                     <option></option>
                                     <%int number = (Calendar.getInstance()).get(Calendar.YEAR);
                                     for(int i = number; i>= number - 150; i--){%>
                                         <option><%=i %></option>
                                     <%} %>
                                 </select>
-                                
                                 Month:
-                                <select id="birthdayMonthSelect" onchange="setBirthdayDaySelect('birthdayYearSelect', 'birthdayMonthSelect', 'birthdayDaySelect'); checkDate('birthdayMonthSelect', 3); checkDate('birthdayDaySelect', 4)">
+                                <select name="birthdayMonthSelect" id="birthdayMonthSelect" onchange="setBirthdayDaySelect('birthdayYearSelect', 'birthdayMonthSelect', 'birthdayDaySelect'); checkDate('birthdayMonthSelect', 3); checkDate('birthdayDaySelect', 4)">
                                     <option></option>
                                     <%number = 12;
                                     for(int i = 01; i<= number; i++){%>
@@ -71,7 +78,7 @@
                                     <%} %>
                                 </select>
                                 Day:
-                                <select id="birthdayDaySelect" onchange="checkDate('birthdayDaySelect', 4)">
+                                <select id="birthdayDaySelect" id="birthdayDaySelect" onchange="checkDate('birthdayDaySelect', 4)">
                                     <select></select>
                                 </select>
                             </td>
@@ -85,7 +92,25 @@
                             <td><form:input path="telephone" id="telephoneTextBox" onkeyup="checkTelephone('telephoneTextBox', 6)" onchange="checkTelephone('telephoneTextBox', 6)" class="textInput" /></td>
                         </tr>
                         <tr>
-                            
+                            <td colspan="2">
+                                Expertise:
+                                <select id="workExpertiseExpertiseSelect">
+                                    <option>Ate ice cream</option>
+                                    <option>Programming</option>
+                                    <option>Ice skating</option>
+                                    <option>Doing nothing</option>
+                                </select>
+                                Years: 
+                                <select id="workExpertiseYearsSelect">
+                                    <%number = 100;
+                                    for(int i = 0; i <= number; i++){%>
+                                        <option><%=i %></option>
+                                    <%} %>
+                                </select>
+                                <button type="button" onclick="addANewExpertise()">Add expertise</button>
+                                <div id="workExpertiseListDiv">
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -105,7 +130,6 @@
                                         <option><%=i %></option>
                                     <%} %>
                                 </select>
-                                
                                 Month:
                                 <select id="workFromMonthSelect" onchange="setBirthdayDaySelect('workFromYearSelect', 'workFromMonthSelect', 'workFromDaySelect'); checkDate('workFromMonthSelect', 8); checkDate('workFromDaySelect', 9)">
                                     <option></option>
@@ -133,7 +157,6 @@
                                         <option><%=i %></option>
                                     <%} %>
                                 </select>
-                                
                                 Month:
                                 <select id="workToMonthSelect" onchange="setBirthdayDaySelect('workToYearSelect', 'workToMonthSelect', 'workToDaySelect'); checkDate('workToMonthSelect', 11); checkDate('workToDaySelect', 12)">
                                     <option></option>

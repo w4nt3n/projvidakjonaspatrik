@@ -26,18 +26,16 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><b>Name:</b></td>
-                    <td><b>Surname:</b></td>
-                    <td><b>Age:</b></td>
-                    <td><b>Email:</b></td>
-                    <td><b>Telephone:</b></td>
+                    <td><b>Name</b></td>
+                    <td><b>Surname</b></td>
+                    <td><b>Email</b></td>
+                    <td><b>Telephone</b></td>
                 </tr>
                 <c:forEach items="${message.getAllApplications()}" var="person">
                     <tr>
                         <td><button>View</button></td>
                         <td>${person.getName()}</td>
                         <td>${person.getSurname()}</td>
-                        <td>${person.getAge()}</td>
                         <td>${person.getEmail()}</td>
                         <td>${person.getTelephone()}</td>
                     </tr>
