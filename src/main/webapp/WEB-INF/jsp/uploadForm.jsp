@@ -25,7 +25,7 @@
                 </tr>
                 <tr>  
                     <td>Upload File: </td>  
-                    <td><input type="file" name="file" /> </td>  
+                    <td><input type="file" name="file" /></td>  
                     <td style="color: red; font-style: italic;">
                         <form:errors  path="file" />  
                     </td>  

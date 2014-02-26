@@ -36,7 +36,16 @@ and open the template in the editor.
 }
 
 .formTable .textInput{
-    width: 250px;
+    width: 350px;
+}
+
+.bigTextBox{
+    width: 100%;
+    height: 250px;
+}
+
+#applicationFormTable{
+    width: 500px;
 }
 
 #applicationListTable{
@@ -47,6 +56,10 @@ and open the template in the editor.
     border-collapse: separate;
 }
 
+#applicationListTable .textInput{
+    width: 350px;
+}
+
 #applicationListTable tr{
     
 }
@@ -55,9 +68,10 @@ and open the template in the editor.
     padding: 0px;
     padding-top: 5px;
     padding-bottom: 5px;
+    padding-left: 5px;
     border-bottom: 1px solid #d3d3d3;
 }
 
 #applicationListTable tr:hover{
-    background-color: #e7e7e7;
+    background-color: #99ccff;
 }

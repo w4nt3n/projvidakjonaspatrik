@@ -31,21 +31,14 @@ public class ApplicationListController {
     @RequestMapping("/applicationList")
     public ModelAndView showAppliers() {
         
-        ApplicationListBean applicationBean = new ApplicationListBean();
-        Person person1 = new Person("Vidak", "Mijailovic", 21, "email@mail.com", "+46704470905");
-        Person person2 = new Person("Vidak", "Mijailovic", 21, "email@mail.com", "+46704470905");
-        Person person3 = new Person("Vidak", "Mijailovic", 21, "email@mail.com", "+46704470905");
-        
-        applicationBean.addPerson(person1);
-        applicationBean.addPerson(person2);
-        applicationBean.addPerson(person3);
+        ApplicationListBean applicationListBean = new ApplicationListBean();
         
         ApplicationContext context = 
     		new ClassPathXmlApplicationContext("Spring-Module.xml");
         
         PersonDAO personDAO = (PersonDAO) context.getBean("personDAO");
-        applicationBean.setAllApplications(personDAO.getAllPersons());
+        applicationListBean.setAllApplications(personDAO.getAllPersons());
         
-        return new ModelAndView("applicationList", "message", applicationBean);
+        return new ModelAndView("applicationList", "message", applicationListBean);
     }
 }

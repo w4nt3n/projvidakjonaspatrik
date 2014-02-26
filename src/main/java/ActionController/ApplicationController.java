@@ -41,9 +41,10 @@ public class ApplicationController {
         Person person = new Person(application.getFirstname(), application.getSurname(), application.getAge(), application.getEmail(), application.getTelephone());
         personDAO.insert(person);
         
-         
-        //return "redirect:comfirmApplication.htm";
-        return new ModelAndView("comfirmApplication");
+        ApplicationBean applicationBean = new ApplicationBean();
+        applicationBean.setAfterSubmit(true);
+        return new ModelAndView("application", "command", applicationBean);
+        //return new ModelAndView("comfirmApplication");
     }
      
     @RequestMapping("/application")

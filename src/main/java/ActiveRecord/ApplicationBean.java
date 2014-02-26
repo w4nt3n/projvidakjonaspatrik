@@ -14,6 +14,7 @@ package ActiveRecord;
 
 public class ApplicationBean {
 
+    private boolean afterSubmit;
     private String firstname;
     private String surname;
     private int age;
@@ -23,6 +24,9 @@ public class ApplicationBean {
     // "Insert Code > Add Business Method")
     
     //getters
+    public boolean getAfterSubmit(){
+        return this.afterSubmit;
+    }
     public String getEmail() {
         return email;
     }
@@ -40,6 +44,9 @@ public class ApplicationBean {
     }
 
     //setters
+    public void setAfterSubmit(boolean afterSubmit){
+        this.afterSubmit = afterSubmit;
+    }
     public void setEmail(String email) {
         this.email = email;
     }

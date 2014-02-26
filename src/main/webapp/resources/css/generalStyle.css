@@ -17,3 +17,7 @@ body, td, div{
 input{
     border: 1px solid #999999;
 }
+
+textbox{
+    border: 1px solid #999999;
+}

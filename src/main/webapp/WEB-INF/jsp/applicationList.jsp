@@ -20,18 +20,27 @@
  
             <table id="applicationListTable" class="formTable">
                 <tr>
-                    <th colspan="5">
+                    <th colspan="6">
                         <h2>Applications received</h2> 
                     </th>
                 </tr>
-                <c:forEach items="${message.getAllApplications()}" var="person">
                 <tr>
-                    <td><b>Name:</b> ${person.getName()}</td>
-                    <td><b>Surname:</b> ${person.getSurname()}</td>
-                    <td><b>Age:</b> ${person.getAge()}</td>
-                    <td><b>Email:</b> ${person.getEmail()}</td>
-                    <td><b>Telephone:</b> ${person.getTelephone()}</td>
+                    <td></td>
+                    <td><b>Name:</b></td>
+                    <td><b>Surname:</b></td>
+                    <td><b>Age:</b></td>
+                    <td><b>Email:</b></td>
+                    <td><b>Telephone:</b></td>
                 </tr>
+                <c:forEach items="${message.getAllApplications()}" var="person">
+                    <tr>
+                        <td><button>View</button></td>
+                        <td>${person.getName()}</td>
+                        <td>${person.getSurname()}</td>
+                        <td>${person.getAge()}</td>
+                        <td>${person.getEmail()}</td>
+                        <td>${person.getTelephone()}</td>
+                    </tr>
                 </c:forEach>
             </table> 
     
