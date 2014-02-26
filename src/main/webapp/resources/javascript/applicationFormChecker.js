@@ -7,7 +7,7 @@
 //-------------------------------------------
 // FOrm validation function
 
-var allIsCheckedValue = 0x3F; // When all fields have valid input, this will be set to 0.
+var allIsCheckedValue = 0x1FFF; // When all fields have valid input, this will be set to 0.
 
 var borderOkStyle = "1px solid lime";
 var borderNotOkStyle = "1px solid red";
@@ -26,9 +26,9 @@ function enableSubmit()
     }
 }
 
-function checkName(textBoxName, textBoxID){
+function checkName(inputBoxName, textBoxID){
     var patt = new RegExp("^[a-zA-Z]+$");
-    item = document.getElementById(textBoxName);
+    item = document.getElementById(inputBoxName);
     // Valid input
     if(patt.test(item.value)){
         item.style.border = borderOkStyle;
@@ -41,9 +41,9 @@ function checkName(textBoxName, textBoxID){
     enableSubmit();
 }
 
-function checkEmail(textBoxName, textBoxID){
+function checkEmail(inputBoxName, textBoxID){
     var patt = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$");
-    item = document.getElementById(textBoxName);
+    item = document.getElementById(inputBoxName);
     // Valid input
     if(patt.test(item.value)){
         item.style.border = borderOkStyle;
@@ -56,8 +56,8 @@ function checkEmail(textBoxName, textBoxID){
     enableSubmit();
 }
 
-function checkDate(textBoxName, textBoxID){
-    item = document.getElementById(textBoxName);
+function checkDate(inputBoxName, textBoxID){
+    item = document.getElementById(inputBoxName);
     // Valid input
     if(item.value !== ""){
         item.style.border = borderOkStyle;
@@ -70,9 +70,9 @@ function checkDate(textBoxName, textBoxID){
     enableSubmit();
 }
 
-function checkTelephone(textBoxName, textBoxID){
+function checkTelephone(inputBoxName, textBoxID){
     var patt = new RegExp("^\\+?[0-9\\- ]{7,}$");
-    item = document.getElementById(textBoxName);
+    item = document.getElementById(inputBoxName);
     // Valid input
     if(patt.test(item.value)){
         item.style.border = borderOkStyle;
@@ -93,23 +93,25 @@ function daysInMonth(year, month) {
     return new Date(year, month, 0).getDate();
 }
 
-function setBirthdayDaySelect(){
-    var birthdayYear = document.getElementById("birthdayYearSelect").value;
-    var birthdayMonth = document.getElementById("birthdayMonthSelect").value;
+function setBirthdayDaySelect(yearSelect, monthSelect, daySelect){
+    var birthdayYear = document.getElementById(yearSelect).value;
+    var birthdayMonth = document.getElementById(monthSelect).value;
     var numberOfDays = daysInMonth(birthdayYear, birthdayMonth);
     
+    daySelectInput = document.getElementById(daySelect);
+    
     var temp = -1;
-    if(document.getElementById("birthdayDaySelect").value <= numberOfDays){
-        temp = document.getElementById("birthdayDaySelect").value;
+    if(daySelectInput.value <= numberOfDays){
+        temp = daySelectInput.value;
     }
     
-    document.getElementById("birthdayDaySelect").innerHTML = "";
-    document.getElementById("birthdayDaySelect").innerHTML = "<option></option>";
+    daySelectInput.innerHTML = "";
+    daySelectInput.innerHTML = "<option></option>";
     for(var i = 1; i < numberOfDays + 1; i++){
         var str = "<option>" + i + "</option>";
-        document.getElementById("birthdayDaySelect").innerHTML = document.getElementById("birthdayDaySelect").innerHTML + str;
+        daySelectInput.innerHTML = daySelectInput.innerHTML + str;
     }
     
     if(temp > -1)
-        document.getElementById("birthdayDaySelect").value = temp;
+        daySelectInput.value = temp;
 }

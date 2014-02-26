@@ -54,7 +54,7 @@
                             </td>
                             <td>
                                 Year:
-                                <select id="birthdayYearSelect" onchange="setBirthdayDaySelect(); checkDate('birthdayYearSelect', 2); checkDate('birthdayDaySelect', 4)">
+                                <select id="birthdayYearSelect" onchange="setBirthdayDaySelect('birthdayYearSelect', 'birthdayMonthSelect', 'birthdayDaySelect'); checkDate('birthdayYearSelect', 2); checkDate('birthdayDaySelect', 4)">
                                     <option></option>
                                     <%int number = (Calendar.getInstance()).get(Calendar.YEAR);
                                     for(int i = number; i>= number - 150; i--){%>
@@ -63,7 +63,7 @@
                                 </select>
                                 
                                 Month:
-                                <select id="birthdayMonthSelect" onchange="setBirthdayDaySelect(); checkDate('birthdayMonthSelect', 3); checkDate('birthdayDaySelect', 4)">
+                                <select id="birthdayMonthSelect" onchange="setBirthdayDaySelect('birthdayYearSelect', 'birthdayMonthSelect', 'birthdayDaySelect'); checkDate('birthdayMonthSelect', 3); checkDate('birthdayDaySelect', 4)">
                                     <option></option>
                                     <%number = 12;
                                     for(int i = 01; i<= number; i++){%>
@@ -85,21 +85,75 @@
                             <td><form:input path="telephone" id="telephoneTextBox" onkeyup="checkTelephone('telephoneTextBox', 6)" onchange="checkTelephone('telephoneTextBox', 6)" class="textInput" /></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Competence Profile: </td>
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Periods of time available for work
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                From:
+                            </td>
+                            <td>
+                                Year:
+                                <select id="workFromYearSelect" onchange="setBirthdayDaySelect('workFromYearSelect', 'workFromMonthSelect', 'workFromDaySelect'); checkDate('workFromYearSelect', 7); checkDate('workFromDaySelect', 9)">
+                                    <option></option>
+                                    <%number = (Calendar.getInstance()).get(Calendar.YEAR);
+                                    for(int i = number; i>= number - 150; i--){%>
+                                        <option><%=i %></option>
+                                    <%} %>
+                                </select>
+                                
+                                Month:
+                                <select id="workFromMonthSelect" onchange="setBirthdayDaySelect('workFromYearSelect', 'workFromMonthSelect', 'workFromDaySelect'); checkDate('workFromMonthSelect', 8); checkDate('workFromDaySelect', 9)">
+                                    <option></option>
+                                    <%number = 12;
+                                    for(int i = 01; i<= number; i++){%>
+                                        <option><%=i %></option>
+                                    <%} %>
+                                </select>
+                                Day:
+                                <select id="workFromDaySelect" onchange="checkDate('workFromDaySelect', 9)">
+                                    <select></select>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Until:
+                            </td>
+                            <td>
+                                Year:
+                                <select id="workToYearSelect" onchange="setBirthdayDaySelect('workToYearSelect', 'workToMonthSelect', 'workToDaySelect'); checkDate('workToYearSelect', 10); checkDate('workToDaySelect', 12)">
+                                    <option></option>
+                                    <%number = (Calendar.getInstance()).get(Calendar.YEAR);
+                                    for(int i = number; i>= number - 150; i--){%>
+                                        <option><%=i %></option>
+                                    <%} %>
+                                </select>
+                                
+                                Month:
+                                <select id="workToMonthSelect" onchange="setBirthdayDaySelect('workToYearSelect', 'workToMonthSelect', 'workToDaySelect'); checkDate('workToMonthSelect', 11); checkDate('workToDaySelect', 12)">
+                                    <option></option>
+                                    <%number = 12;
+                                    for(int i = 01; i<= number; i++){%>
+                                        <option><%=i %></option>
+                                    <%} %>
+                                </select>
+                                Day:
+                                <select id="workToDaySelect" onchange="checkDate('workToDaySelect', 12)">
+                                    <select></select>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Write your experience in different areas of expertise: </td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <textarea class="bigTextBox"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                Upload your CV, please select it.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <input type="file" name="file" />
                             </td>
                         </tr>
                         <tr>
