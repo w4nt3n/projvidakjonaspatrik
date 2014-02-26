@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 #contentWrapper{
-    width: 400px;
+    width: 1000px;
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
@@ -37,4 +37,27 @@ and open the template in the editor.
 
 .formTable .textInput{
     width: 250px;
+}
+
+#applicationListTable{
+    width: 900px;
+    border: 1px solid #d3d3d3;
+    
+    border-spacing: 0px;
+    border-collapse: separate;
+}
+
+#applicationListTable tr{
+    
+}
+#applicationListTable td{
+    margin: 0px;
+    padding: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+#applicationListTable tr:hover{
+    background-color: #e7e7e7;
 }
