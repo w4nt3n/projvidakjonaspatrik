@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
+        <!-- This is the login information for the databse, it is used in the entire system -->
 	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
- 
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/projvidakjonaspatrikdb" />
-		<property name="username" value="root" />
-		<property name="password" value="" />
+            class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+            <property name="url" value="jdbc:mysql://localhost:3306/projvidakjonaspatrikdb" />
+            <property name="username" value="root" />
+            <property name="password" value="" />
 	</bean>
  
 </beans>

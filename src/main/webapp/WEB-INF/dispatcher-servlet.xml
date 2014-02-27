@@ -25,6 +25,14 @@
     <bean id="fileValidator" class="ActionView.FileValidator" />  
 
     
+    <!-- This is needed in order to have resources such as CSS and JavaScript.
+    It points to where the resources folder for the .jsp files are
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    and
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    Are needed for this
+    -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:annotation-driven />
         

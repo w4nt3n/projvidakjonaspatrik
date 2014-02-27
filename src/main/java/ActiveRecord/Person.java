@@ -6,36 +6,20 @@ package ActiveRecord;
  * and open the template in the editor.
  */
 
-import ActiveRecord.ApplicationBean;
- 
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 /**
  *
  * @author Vidak
  */
 
-
-import java.sql.Timestamp;
- 
 public class Person
 {
-    public Person(String n, String sn, String em, String tel)
-    {
-        this.name = n;
-        this.surname = sn;
-        this.email = em;
-        this.telephone = tel;
+    public Person() {
     }
     
     int personId;
     String name;
     String surname;
+    String birthDate;
     String email;
     String telephone;
     
@@ -51,6 +35,9 @@ public class Person
     }
     public String getSurname() {
         return surname;
+    }
+    public String getBirthDate() {
+        return birthDate;
     }
     public String getEmail() {
         return email;
@@ -68,6 +55,9 @@ public class Person
     }
     public void setSurame(String n) {
         this.surname = n;
+    }
+    public void setBirthDate(String bd) {
+        this.birthDate = bd;
     }
     public void setEmail(String e) {
         this.email = e;

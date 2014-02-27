@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Jonas
+ * @author Vidak
  */
 
 public class ApplicationListBean {

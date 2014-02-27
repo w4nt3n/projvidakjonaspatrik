@@ -78,7 +78,7 @@
                                     <%} %>
                                 </select>
                                 Day:
-                                <select id="birthdayDaySelect" id="birthdayDaySelect" onchange="checkDate('birthdayDaySelect', 4)">
+                                <select name="birthdayDaySelect" id="birthdayDaySelect" onchange="checkDate('birthdayDaySelect', 4)">
                                     <select></select>
                                 </select>
                             </td>
