@@ -14,7 +14,7 @@
     <link href="<c:url value="/resources/css/generalStyle.css" />" type="text/css" rel="stylesheet">
     <link href="<c:url value="/resources/css/layout.css" />" type="text/css" rel="stylesheet">
     <script src="<c:url value="/resources/javascript/applicationFormChecker.js" />"></script>
-    <title>Spring 3 MVC Series - Contact Manager</title>
+    <title>Application Form</title>
 </head>
 <body onload="setBirthdayDaySelect()">
     

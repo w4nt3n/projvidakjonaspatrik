@@ -12,7 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="<c:url value="/resources/css/generalStyle.css" />" type="text/css" rel="stylesheet">
     <link href="<c:url value="/resources/css/layout.css" />" type="text/css" rel="stylesheet">
-    <title>Spring 3 MVC Series - Contact Manager</title>
+    <title>Applications</title>
 </head>
 <body>
     
