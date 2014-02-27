@@ -8,5 +8,5 @@
         and the PersonDAO bean
         -->
 	<import resource="database/Spring-Datasource.xml" />
-	<import resource="person/Spring-Person.xml" />
+	<import resource="applicant/Spring-Applicant.xml" />
 </beans>

@@ -31,13 +31,13 @@
                     <td><b>Email</b></td>
                     <td><b>Telephone</b></td>
                 </tr>
-                <c:forEach items="${message.getAllApplications()}" var="person">
+                <c:forEach items="${message.getAllApplications()}" var="applicant">
                     <tr>
                         <td><button>View</button></td>
-                        <td>${person.getName()}</td>
-                        <td>${person.getSurname()}</td>
-                        <td>${person.getEmail()}</td>
-                        <td>${person.getTelephone()}</td>
+                        <td>${applicant.getName()}</td>
+                        <td>${applicant.getSurname()}</td>
+                        <td>${applicant.getEmail()}</td>
+                        <td>${applicant.getTelephone()}</td>
                     </tr>
                 </c:forEach>
             </table> 

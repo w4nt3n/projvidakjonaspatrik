@@ -14,9 +14,9 @@ import java.util.ArrayList;
  * @author Vidak
  */
  
-public interface PersonDAO 
+public interface ApplicantDAO 
 {
-    public void insert(Person person);
-    public Person findByPersonId(int custId);
-    public ArrayList<Person> getAllPersons();
+    public void insert(Applicant applicant);
+    public Applicant findById(int applicantId);
+    public ArrayList<Applicant> getAllApplicants();
 }

@@ -15,27 +15,25 @@ import java.util.ArrayList;
 
 public class ApplicationListBean {
     
-    private ArrayList<Person> allApplications;
+    private ArrayList<Applicant> allApplications;
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     
-    public ApplicationListBean()
-    {
-        this.allApplications = new ArrayList<Person>();
+    public ApplicationListBean(){
+        this.allApplications = new ArrayList<Applicant>();
     }
     
     //getters
-    public ArrayList<Person> getAllApplications() {
+    public ArrayList<Applicant> getAllApplications() {
         return allApplications;
     }
 
     //setters
-    public void setAllApplications(ArrayList<Person> list) {
+    public void setAllApplications(ArrayList<Applicant> list) {
         this.allApplications = list;
     }
     
-    public void addPerson(Person person)
-    {
-        this.allApplications.add(person);
+    public void addPerson(Applicant applicant){
+        this.allApplications.add(applicant);
     }
 }

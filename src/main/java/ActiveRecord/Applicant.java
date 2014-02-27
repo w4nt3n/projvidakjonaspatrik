@@ -11,15 +11,15 @@ package ActiveRecord;
  * @author Vidak
  */
 
-public class Person
+public class Applicant
 {
-    public Person() {
+    public Applicant() {
     }
     
-    int personId;
+    int id;
     String name;
     String surname;
-    String birthDate;
+    String dateOfBirth;
     String email;
     String telephone;
     
@@ -27,8 +27,8 @@ public class Person
     //getter and setter methods
     
     //getters
-    public int getPersonId() {
-        return personId;
+    public int geId() {
+        return id;
     }
     public String getName() {
         return name;
@@ -36,8 +36,8 @@ public class Person
     public String getSurname() {
         return surname;
     }
-    public String getBirthDate() {
-        return birthDate;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
     public String getEmail() {
         return email;
@@ -47,8 +47,8 @@ public class Person
     }
     
     //setters
-    public void setPersonId(int id) {
-        this.personId = id;
+    public void setId(int id) {
+        this.id = id;
     }
     public void setName(String n) {
         this.name = n;
@@ -56,8 +56,8 @@ public class Person
     public void setSurame(String n) {
         this.surname = n;
     }
-    public void setBirthDate(String bd) {
-        this.birthDate = bd;
+    public void setDateOfBirth(String bd) {
+        this.dateOfBirth = bd;
     }
     public void setEmail(String e) {
         this.email = e;

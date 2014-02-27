@@ -8,12 +8,12 @@ package ActionController;
 
 /**
  *
- * @author Jonas
+ * @author Jonas, Vidak
  */
  
 import ActiveRecord.ApplicationBean;
-import ActiveRecord.Person;
-import ActiveRecord.PersonDAO;
+import ActiveRecord.Applicant;
+import ActiveRecord.ApplicantDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
  
@@ -51,25 +51,25 @@ public class ApplicationController {
                             @RequestParam("birthdayMonthSelect") String birthdayMonthSelect,
                             @RequestParam("birthdayDaySelect") String birthdayDaySelect) {
         
-        // Creates a bean for MySQL PersonDAO object.
+        // Creates a bean for MySQL ApplicantDAO object.
 	// Spring-Module.xml contains references to Spring-Datasource.xml
-	// and Spring-Person.xml, these contain beans for Person and database login
+	// and Spring-Applicant.xml, these contain beans for Applicant and database login
         ApplicationContext context = 
     		new ClassPathXmlApplicationContext("Spring-Module.xml");
-	// Fetches the personDAO bean
-        PersonDAO personDAO = (PersonDAO) context.getBean("personDAO");
+	// Fetches the applicantDAO bean
+        ApplicantDAO applicantDAO = (ApplicantDAO) context.getBean("applicantDAO");
         
-	// Creates a new person and sets all of it's values
-        Person person = new Person();
-        person.setName(application.getFirstname());
-        person.setSurame(application.getSurname());
+	// Creates a new applicant and sets all of it's values
+        Applicant applicant = new Applicant();
+        applicant.setName(application.getFirstname());
+        applicant.setSurame(application.getSurname());
         String sqlDateFormat = birthdayYearSelect + "-" + birthdayMonthSelect + "-" + birthdayDaySelect;
-        person.setBirthDate(sqlDateFormat);
-        person.setEmail(application.getEmail());
-        person.setTelephone(application.getTelephone());
+        applicant.setDateOfBirth(sqlDateFormat);
+        applicant.setEmail(application.getEmail());
+        applicant.setTelephone(application.getTelephone());
         
-	// Adds the new person to the database
-        personDAO.insert(person);
+	// Adds the new applicant to the database
+        applicantDAO.insert(applicant);
         
 	// Creates a bean that contains text that should be printed on the 
 	// new page, setAfterSubmit = true means that the page will display
