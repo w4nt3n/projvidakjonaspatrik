@@ -168,9 +168,19 @@ function addANewExpertise(){
                                                                                     // Setts the values for the new hidden input fields
     document.getElementById("jobExpertiseRow" + expertiseCounter + "ExperiteseInput").value = text; 
     document.getElementById("jobExpertiseRow" + expertiseCounter + "YearsInput").value = text2;
+    document.getElementById("workExpertiseInput").value = document.getElementById("workExpertiseInput").value + "   " + text + "    " + text2;
 }
 
 // An element ID of a expertise row table is given, the expertise is then deleted
 function removeRow(rowID){
+    var expertise = document.getElementById(rowID + "ExperiteseInput").value; 
+    var years = document.getElementById(rowID + "YearsInput").value;
+    var input = document.getElementById("workExpertiseInput");
+    
+    // Removes the removed elements data from the hidden input
+    var removeSpring = "   " + expertise + "    " + years;
+    input.value = input.value.replace(removeSpring, "");
+    
+    // Removes the element named rowID
     (function(x){x.parentNode.removeChild(x);})(document.getElementById(rowID))
 }

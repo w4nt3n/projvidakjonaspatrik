@@ -22,8 +22,8 @@
         
         <div id="jobExpertiseTemplate" style="display: none;">
             <table id="jobExpertiseRow">
-                <input id="jobExpertiseRowExperiteseInput" name="jobExpertiseRowExperiteseInput" type="hidden" value="" />
-                <input id="jobExpertiseRowYearsInput" name="jobExpertiseRowExperiteseInput" type="hidden" value="" />
+                <input id="jobExpertiseRowExperiteseInput" type="hidden" value="" />
+                <input id="jobExpertiseRowYearsInput" type="hidden" value="" />
                 <tr>
                     <td><button type="button" onclick="removeRow('jobExpertiseRow')">X</button></td>
                     <td>jobExpertiseRowPlaceholderText</td>
@@ -37,6 +37,7 @@
             <c:when test="${command.getAfterSubmit() == true}">
                 <div class="textCenterDiv">
                     Your application has now been submitted.
+                    " ${command.getFirstname()} "
                 </div>
             </c:when>
 
@@ -93,6 +94,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
+                                <input type="hidden" id="workExpertiseInput" name="workExpertiseInput" />
                                 Expertise:
                                 <select id="workExpertiseExpertiseSelect">
                                     <option>Ate ice cream</option>

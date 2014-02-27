@@ -14,6 +14,8 @@ package ActionController;
 import ActiveRecord.ApplicationBean;
 import ActiveRecord.Applicant;
 import ActiveRecord.ApplicantDAO;
+import ActiveRecord.ApplicantExperience;
+import java.util.ArrayList;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
  
@@ -49,8 +51,41 @@ public class ApplicationController {
                             ApplicationBean application, BindingResult result, 
                             @RequestParam("birthdayYearSelect") String birthdayYearSelect,
                             @RequestParam("birthdayMonthSelect") String birthdayMonthSelect,
-                            @RequestParam("birthdayDaySelect") String birthdayDaySelect) {
+                            @RequestParam("birthdayDaySelect") String birthdayDaySelect,
+			    @RequestParam("workExpertiseInput") String workExpertiseInput) {
         
+	ArrayList<ApplicantExperience> appExpList = new ArrayList<ApplicantExperience>();
+	
+	String stringBuffer = "";
+	int mode = 1;
+	ApplicantExperience appExp = new ApplicantExperience();
+	for(int i = 0; i < workExpertiseInput.length(); i++){	// Goes through all of the characters
+	    if(workExpertiseInput.charAt(i) == '\t'){	// If the next character is a tab
+		if(stringBuffer.length() >= 1){		// and we currently have something in the buffer
+		    if(mode == 1){			// and we are searching for an expertise
+			appExp.setExpertiese(stringBuffer); // set the expertise in the current applicantExpertise
+			stringBuffer = "";		    // clear the buffer
+			mode = 2;			    // start search for years
+		    }
+		    else if(mode == 2){			    // if searching for years
+			appExp.setYears(Integer.parseInt(stringBuffer));    // set the years in the current applicantExpertise
+			stringBuffer = "";				    // clear the buffer
+			mode = 1;					    // start search for expertise
+			appExpList.add(appExp);				    // add expertise to expertise list
+			appExp = new ApplicantExperience();		    // create a new expertise
+		    }
+		}
+		else{
+		    stringBuffer = stringBuffer + workExpertiseInput.charAt(i);
+		}
+	    }
+	    else{
+		stringBuffer = stringBuffer + workExpertiseInput.charAt(i);
+	    }
+	}
+	
+	
+	
         // Creates a bean for MySQL ApplicantDAO object.
 	// Spring-Module.xml contains references to Spring-Datasource.xml
 	// and Spring-Applicant.xml, these contain beans for Applicant and database login
@@ -76,6 +111,8 @@ public class ApplicationController {
 	// a message stating the insert was performed
         ApplicationBean applicationBean = new ApplicationBean();
         applicationBean.setAfterSubmit(true);
+	if(appExpList.size() >= 1)
+	    applicationBean.setFirstname(appExpList.get(0).geExpertiese());
         return new ModelAndView("application", "command", applicationBean);
     }
      
