@@ -1,0 +1,12 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+        <!-- 
+        When you want to access Person, you use this to get both databse bean
+        and the PersonDAO bean
+        -->
+	<import resource="database/Spring-Datasource.xml" />
+	<import resource="applicant/Spring-ApplicantExperience.xml" />
+</beans>

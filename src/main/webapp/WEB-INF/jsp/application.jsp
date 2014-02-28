@@ -97,10 +97,9 @@
                                 <input type="hidden" id="workExpertiseInput" name="workExpertiseInput" />
                                 Expertise:
                                 <select id="workExpertiseExpertiseSelect">
-                                    <option>Ate ice cream</option>
-                                    <option>Programming</option>
-                                    <option>Ice skating</option>
-                                    <option>Doing nothing</option>
+                                    <c:forEach items="${command.getExpertiseList()}" var="expertise">
+                                        <option>${expertise.getExpertise()}</option>
+                                    </c:forEach>
                                 </select>
                                 Years: 
                                 <select id="workExpertiseYearsSelect">

@@ -14,10 +14,7 @@ import java.util.ArrayList;
  * @author Vidak
  */
  
-public interface ApplicantDAO 
-{
-    public void insert(Applicant applicant);
-    public Applicant getApplicantWithId(int applicantId);
-    public ArrayList<Applicant> getAllApplicants();
-    public ArrayList<Applicant> getApplicantIDWhere(String insertedSQL);
+public interface ApplicantExperienceDAO {
+    public void insert(ApplicantExperience applicantExperience);
+    public ArrayList<ApplicantExperience> getAllApplicantIDExpertises(int applicantID);
 }

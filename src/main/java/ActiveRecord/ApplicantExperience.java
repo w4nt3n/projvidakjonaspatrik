@@ -12,13 +12,17 @@ package ActiveRecord;
  */
 public class ApplicantExperience {
     
-    String expertise;
+    int applicantID;
+    int expertise;
     int years;
     
     //getter and setter methods
     
     //getters
-    public String geExpertiese() {
+    public int getApplicantID() {
+        return applicantID;
+    }
+    public int getExpertiese() {
         return expertise;
     }
     public int getYears() {
@@ -26,7 +30,10 @@ public class ApplicantExperience {
     }
     
     //setters
-    public void setExpertiese(String exp) {
+    public void setApplicantID(int ID) {
+        this.applicantID = ID;
+    }
+    public void setExpertiese(int exp) {
         this.expertise = exp;
     }
     public void setYears(int y) {

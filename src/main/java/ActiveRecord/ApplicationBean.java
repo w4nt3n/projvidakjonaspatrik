@@ -6,6 +6,8 @@
 
 package ActiveRecord;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -20,6 +22,8 @@ public class ApplicationBean {
     private int age;
     private String email;
     private String telephone;
+    
+    private ArrayList<Expertise> expertiseList;
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     
@@ -42,6 +46,9 @@ public class ApplicationBean {
     public int getAge(){
         return age;
     }
+    public ArrayList<Expertise> getExpertiseList(){
+        return expertiseList;
+    }
 
     //setters
     public void setAfterSubmit(boolean afterSubmit){
@@ -61,5 +68,8 @@ public class ApplicationBean {
     }
     public void setAge(int age){
         this.age = age;
+    }
+    public void setExpertiseList(ArrayList<Expertise> expList){
+        this.expertiseList = expList;
     }
 }

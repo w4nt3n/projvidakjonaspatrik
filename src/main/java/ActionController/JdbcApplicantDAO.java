@@ -48,7 +48,7 @@ public class JdbcApplicantDAO implements ApplicantDAO {
             conn = dataSource.getConnection();
 	    // We have paramaters, we need a prepareStatement
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, applicant.geId());
+            ps.setInt(1, applicant.getId());
             ps.setString(2, applicant.getName());
             ps.setString(3, applicant.getSurname());
             ps.setString(4, applicant.getDateOfBirth());
@@ -80,7 +80,7 @@ public class JdbcApplicantDAO implements ApplicantDAO {
      * @return A Applicant object.
      */
     @Override
-    public Applicant findById(int applicantId){
+    public Applicant getApplicantWithId(int applicantId){
 
 	// The SQL code to be sent
         String sql = "SELECT * FROM applicant WHERE id = ?";
@@ -100,6 +100,7 @@ public class JdbcApplicantDAO implements ApplicantDAO {
 	    // If we get a applicant that matches, write to the Applicant object
             if (rs.next()) {
                 applicant = new Applicant();
+		applicant.setId(rs.getInt("id"));
                 applicant.setName(rs.getString("name"));
                 applicant.setSurame(rs.getString("surname"));
                 applicant.setDateOfBirth(rs.getString("dateOfBirth"));
@@ -121,6 +122,8 @@ public class JdbcApplicantDAO implements ApplicantDAO {
             }
         }
     }
+    
+    
     
     /**
      * This functions return all the Applicant objects in the database.
@@ -148,6 +151,7 @@ public class JdbcApplicantDAO implements ApplicantDAO {
 	    // While we have more applicants that match, write them the Applicant object
             while (rs.next()) {
                 Applicant applicants = new Applicant();
+		applicants.setId(rs.getInt("id"));
                 applicants.setName(rs.getString("name"));
                 applicants.setSurame(rs.getString("surname"));
                 applicants.setDateOfBirth(rs.getString("dateOfBirth"));
@@ -158,6 +162,51 @@ public class JdbcApplicantDAO implements ApplicantDAO {
             }
             rs.close();
             ps.close();
+            return resultsArrayList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                conn.close();
+                } catch (SQLException e) {}
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<Applicant> getApplicantIDWhere(String insertedSQL) {
+	// The SQL code to be sent
+        String sql = "SELECT * FROM applicant WHERE " + insertedSQL;
+	// The object containing the connection
+        Connection conn = null;
+
+        try {
+	    // Get a connection (the source is Spring-Datasource.xml)
+            conn = dataSource.getConnection();
+	    // We have paramaters, we need a prepareStatement
+            PreparedStatement ps = conn.prepareStatement(sql);
+	    ArrayList<Applicant> resultsArrayList = new ArrayList<Applicant>();
+	    // Creates a applicant to return
+            Applicant applicant = null;
+	    // Execute query
+            ResultSet rs = ps.executeQuery();
+	    // If we get a applicant that matches, write to the Applicant object
+            while (rs.next()) {
+                applicant = new Applicant();
+		applicant.setId(rs.getInt("id"));
+                applicant.setName(rs.getString("name"));
+                applicant.setSurame(rs.getString("surname"));
+                applicant.setDateOfBirth(rs.getString("dateOfBirth"));
+                applicant.setEmail(rs.getString("email"));
+                applicant.setTelephone(rs.getString("telephone"));
+		// Add the applicant object to the returned ArrayList
+                resultsArrayList.add(applicant);
+            }
+	    // Close 
+            rs.close();
+            ps.close();
+	    // return applicant
             return resultsArrayList;
         } catch (SQLException e) {
             throw new RuntimeException(e);

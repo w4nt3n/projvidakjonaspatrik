@@ -27,7 +27,7 @@ public class Applicant
     //getter and setter methods
     
     //getters
-    public int geId() {
+    public int getId() {
         return id;
     }
     public String getName() {
