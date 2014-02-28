@@ -38,17 +38,12 @@ public class ApplicationListController {
 	// Creates a bean for the applicationList.jsp
         ApplicationListBean applicationListBean = new ApplicationListBean();
         
-	// Creates a bean for MySQL ApplicantDAO object.
-	// Spring-Module.xml contains references to Spring-Datasource.xml
-	// and Spring-Applicant.xml, these contain beans for Applicant and database login
-        ApplicationContext context = 
-    		new ClassPathXmlApplicationContext("Spring-Module.xml");
-        // Fetches the ApplicantDAO bean
-        ApplicantDAO applicantDAO = (ApplicantDAO) context.getBean("applicantDAO");
+	// This is used for all access to Applicant class in the database
+	ApplicationDataSourceManager appDSM = new ApplicationDataSourceManager();
 	
 	// Fetches all of the applicants. getALlApplicants() returns ArrayList<Applicant>
 	// this list is sent to applicationListBean
-        applicationListBean.setAllApplications(applicantDAO.getAllApplicants());
+        applicationListBean.setAllApplications(appDSM.getAllApplicants());
         
 	// Sends the bean and reurns the page
         return new ModelAndView("applicationList", "message", applicationListBean);
