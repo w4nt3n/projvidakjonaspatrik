@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ApplicationBean {
 
     private boolean afterSubmit;
-    private String firstname;
+    private String name;
     private String surname;
     private int age;
     private String email;
@@ -38,7 +38,7 @@ public class ApplicationBean {
         return telephone;
     }
     public String getName() {
-        return firstname;
+        return name;
     }
     public String getSurname() {
         return surname;
@@ -61,7 +61,7 @@ public class ApplicationBean {
         this.telephone = telephone;
     }
     public void setName(String firstname) {
-        this.firstname = firstname;
+        this.name = firstname;
     }
     public void setSurname(String surname) {
         this.surname = surname;
