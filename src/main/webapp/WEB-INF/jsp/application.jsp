@@ -92,7 +92,7 @@
                                 Expertise:
                                 <select id="workExpertiseExpertiseSelect">
                                     <c:forEach items="${command.getExpertiseList()}" var="expertise">
-                                        <option>${expertise.getExpertise()}</option>
+                                        <option>${expertise.getExpertiseName()}</option>
                                     </c:forEach>
                                 </select>
                                 Years:

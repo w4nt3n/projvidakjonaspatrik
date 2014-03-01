@@ -33,7 +33,7 @@
                 </tr>
                 <c:forEach items="${message.getAllApplications()}" var="applicant">
                     <tr>
-                        <td><button>View</button></td>
+                        <td><a href="applicationView.htm?applicantID=${applicant.getId()}">View</a></td>
                         <td>${applicant.getName()}</td>
                         <td>${applicant.getSurname()}</td>
                         <td>${applicant.getEmail()}</td>

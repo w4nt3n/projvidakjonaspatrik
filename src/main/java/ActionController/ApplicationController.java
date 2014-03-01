@@ -163,7 +163,7 @@ public class ApplicationController {
      * When application.html is called, this shows the application page. 
      * @return* @return a ModelAndView of the application.jsp
      */
-        @RequestMapping("/application")
+    @RequestMapping("/application")
     public ModelAndView showAppliers() {
 	
 	// This is used for all access to Expertise class in the database
