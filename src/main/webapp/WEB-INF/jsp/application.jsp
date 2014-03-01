@@ -172,20 +172,6 @@
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="2">Write your experience in different areas of expertise: </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <textarea class="bigTextBox"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <input type="submit" id="submitButton" disabled="true" value="Submit application" class="centerdInput"/>
-                                <label id="submitButtonEnableLable" style="display: none; float: right; color: red;">Please review your form, some inputs are invalid</label>
-                            </td>
-                        </tr>
                     </table> 
                 </form:form>
             </c:otherwise>

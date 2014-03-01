@@ -21,7 +21,7 @@ public class Expertise {
     public int getID() {
         return ID;
     }
-    public String getExpertise() {
+    public String getExpertiseName() {
         return expertise;
     }
     

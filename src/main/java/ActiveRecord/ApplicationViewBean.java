@@ -11,19 +11,24 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Jonas
+ * @author Vidak
  */
 
-public class ApplicationBean {
-
+public class ApplicationViewBean {
+    
     private boolean afterSubmit;
     private String firstname;
     private String surname;
-    private int age;
+    private String dateOfBirth;
     private String email;
     private String telephone;
+    public ArrayList<ExpertiseExperienceContainer> expExpList;
     
-    private ArrayList<Expertise> expertiseList;
+    public ApplicationViewBean(){
+	this.expExpList = new ArrayList<ExpertiseExperienceContainer>();
+    }
+    
+    
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     
@@ -43,11 +48,11 @@ public class ApplicationBean {
     public String getSurname() {
         return surname;
     }
-    public int getAge(){
-        return age;
+    public String getDateOfBirth(){
+        return dateOfBirth;
     }
-    public ArrayList<Expertise> getExpertiseList(){
-        return expertiseList;
+    public ArrayList<ExpertiseExperienceContainer> getExpExpList(){
+        return expExpList;
     }
 
     //setters
@@ -66,10 +71,10 @@ public class ApplicationBean {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-    public void setAge(int age){
-        this.age = age;
+    public void setDateOfBirth(String dateOfBirth){
+        this.dateOfBirth = dateOfBirth;
     }
-    public void setExpertiseList(ArrayList<Expertise> expList){
-        this.expertiseList = expList;
+    public void setAddToExpExpList(Expertise expertise, ApplicantExperience applicantExperience){
+        this.expExpList.add(new ExpertiseExperienceContainer(expertise, applicantExperience));
     }
 }

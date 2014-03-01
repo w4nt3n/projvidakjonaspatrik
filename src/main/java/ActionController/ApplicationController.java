@@ -99,7 +99,7 @@ public class ApplicationController {
 	
 	// Creates a new applicant and sets all of it's values
         Applicant applicant = new Applicant();
-        applicant.setName(application.getFirstname());
+        applicant.setName(application.getName());
         applicant.setSurame(application.getSurname());
         String sqlDateFormat = birthdayYearSelect + "-" + birthdayMonthSelect + "-" + birthdayDaySelect;
         applicant.setDateOfBirth(sqlDateFormat);
@@ -166,15 +166,12 @@ public class ApplicationController {
         @RequestMapping("/application")
     public ModelAndView showAppliers() {
 	
-	// Creates a bean for MySQL ApplicantDAO object.
-	// Spring-Module.xml contains references to Spring-Datasource.xml
-	// and Spring-Applicant.xml, these contain beans for Applicant and database login
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-ApplicantExpertiseModule.xml");
-	// Fetches the applicantDAO bean
-        ExpertiseDAO expertiseDAO = (ExpertiseDAO) context.getBean("expertiseDAO");
+	// This is used for all access to Expertise class in the database
+	ApplicationExpertiseDataSourceManager appExpertiseDSM = new ApplicationExpertiseDataSourceManager();
+	
 	// Creates a new applicant and sets all of it's values
 	ApplicationBean appBean = new ApplicationBean();
-	appBean.setExpertiseList(expertiseDAO.getAllExpertises());
+	appBean.setExpertiseList(appExpertiseDSM.getAllExpertises());
 	
 	// Just returns application jsp
         return new ModelAndView("application", "command", appBean);

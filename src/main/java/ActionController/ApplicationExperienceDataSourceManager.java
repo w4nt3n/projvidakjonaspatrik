@@ -8,6 +8,7 @@ package ActionController;
 
 import ActiveRecord.ApplicantExperience;
 import ActiveRecord.ApplicantExperienceDAO;
+import ActiveRecord.Expertise;
 import java.util.ArrayList;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -33,5 +34,9 @@ public class ApplicationExperienceDataSourceManager {
     
     public ArrayList<ApplicantExperience> getAllApplicantIDExpertises(int applicantID){
 	return this.appExpDAO.getAllApplicantIDExpertises(applicantID);
+    }
+    
+    public ArrayList<ApplicantExperience> getExpertiseWhere(String insertedSQL){
+	return this.appExpDAO.getExpertiseWhere(insertedSQL);
     }
 }

@@ -10,6 +10,7 @@ import ActiveRecord.Applicant;
 import ActiveRecord.ApplicantDAO;
 import ActiveRecord.ApplicantExperience;
 import ActiveRecord.ApplicantExperienceDAO;
+import ActiveRecord.Expertise;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -105,5 +106,44 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
             }
         }
     }
+    
+    @Override
+    public ArrayList<ApplicantExperience> getExpertiseWhere(String insertedSQL) {
+	// The SQL code to be sent
+        String sql = "SELECT * FROM applicantexperience WHERE " + insertedSQL;
+	// The object containing the connection
+        Connection conn = null;
 
+        try {
+	    // Get a connection (the source is Spring-Datasource.xml)
+            conn = dataSource.getConnection();
+	    // We have paramaters, we need a prepareStatement
+            PreparedStatement ps = conn.prepareStatement(sql);
+	    ArrayList<ApplicantExperience> resultsArrayList = new ArrayList<ApplicantExperience>();
+	    // Execute query
+            ResultSet rs = ps.executeQuery();
+	    // If we get a applicant that matches, write to the Applicant object
+            while (rs.next()) {
+		ApplicantExperience exp = new ApplicantExperience();
+		exp.setApplicantID(rs.getInt("expertiseID"));
+		exp.setExpertiese(rs.getInt("expertiseID"));
+		exp.setYears(rs.getInt("yearsOfExperience"));
+		// Add the applicant object to the returned ArrayList
+                resultsArrayList.add(exp);
+            }
+	    // Close 
+            rs.close();
+            ps.close();
+	    // return applicant
+            return resultsArrayList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                conn.close();
+                } catch (SQLException e) {}
+            }
+        }
+    }
 }

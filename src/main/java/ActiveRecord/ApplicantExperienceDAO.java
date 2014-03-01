@@ -17,4 +17,5 @@ import java.util.ArrayList;
 public interface ApplicantExperienceDAO {
     public void insert(ApplicantExperience applicantExperience);
     public ArrayList<ApplicantExperience> getAllApplicantIDExpertises(int applicantID);
+    public ArrayList<ApplicantExperience> getExpertiseWhere(String insertedSQL);
 }
