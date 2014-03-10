@@ -6,11 +6,7 @@
 
 package ActionController;
 
-import ActiveRecord.ApplicantExperience;
-import ActiveRecord.ApplicantExperienceDAO;
 import ActiveRecord.Expertise;
-import ActiveRecord.ExpertiseDAO;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,29 +19,46 @@ import javax.sql.DataSource;
  * @author Vidak
  */
 
-public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
-    private DataSource dataSource;
- 
+public class MySQLHandler {
+    /*private DataSource dataSource;
+    private Connection conn;
+    private ResultSet resultset;
+
     public void setDataSource(DataSource dataSource) {
             this.dataSource = dataSource;
     }
+    
+    SQL sql = new SQL();
+    SQL.select("id="+string(4), "expertiseList", "id", "expertise");
+    while(SQL.getRow()) {
+        add(SQL.getColumn("id"));
+    }
 
-    @Override
-    public Expertise getExpertiseWithId(int ID){
-	// The SQL code to be sent
-        String sql = "SELECT * FROM expertiselist WHERE id = ?";
-	// The object containing the connection
-        Connection conn = null;
-
+    public boolean select(String conditions, String table, String...columnNames){
+	// If any columns have been provided, join them into a comma separated string,
+        // otherwise, use "*" for all columns in table.
+        String columns = "";
+        if(columnNames.length == 0) {
+            columns = "*";
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append(columnNames[0]);
+            for(int i = 1; i < columnNames.length; i++)
+                sb.append(",").append(columnNames[i]);
+            columns = sb.toString();
+        }
+        
+        // Setup the query
+        String sql = "SELECT "+columns+" FROM "+table+" WHERE "+conditions;
+        
         try {
 	    // Get a connection (the source is Spring-Datasource.xml)
             conn = dataSource.getConnection();
 	    // We have paramaters, we need a prepareStatement
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, ID);
-	    Expertise exp = new Expertise();	    // <----- comment
-	    // Execute query
+            // Run query
             ResultSet rs = ps.executeQuery();
+            
 	    // If we get a applicant that matches, write to the Applicant object
             if (rs.next()) {
                 exp = new Expertise();
@@ -68,45 +81,6 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
         }
     }
 
-    @Override
-    public int getIdWithExpertise(String expertise) {
-	// The SQL code to be sent
-        String sql = "SELECT * FROM expertiselist WHERE expertise = ?";
-	// The object containing the connection
-        Connection conn = null;
-
-        try {
-	    // Get a connection (the source is Spring-Datasource.xml)
-            conn = dataSource.getConnection();
-	    // We have paramaters, we need a prepareStatement
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, expertise);
-	    Expertise exp = new Expertise();	    // <----- comment
-	    // Execute query
-            ResultSet rs = ps.executeQuery();
-	    // If we get a applicant that matches, write to the Applicant object
-            if (rs.next()) {
-                exp = new Expertise();
-                exp.setID(rs.getInt("id"));
-                exp.setExpertise(rs.getString("expertise"));
-            }
-	    // Close 
-            rs.close();
-            ps.close();
-	    // return applicant
-            return exp.getID();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (conn != null) {
-                try {
-                conn.close();
-                } catch (SQLException e) {}
-            }
-        }
-    }
-    
-    @Override
     public ArrayList<Expertise> getAllExpertises() {
 	// The SQL code to be sent
         String sql = "SELECT * FROM expertiselist";
@@ -144,5 +118,5 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
                 } catch (SQLException e) {}
             }
         }
-    }
+    }*/
 }

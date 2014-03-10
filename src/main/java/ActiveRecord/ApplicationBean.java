@@ -17,12 +17,11 @@ import java.util.ArrayList;
 public class ApplicationBean {
 
     private boolean afterSubmit;
-    private String name;
-    private String surname;
-    private int age;
+    private String firstname;
+    private String lastname;
     private String email;
-    private String telephone;
-    
+    private String phone;
+
     private ArrayList<Expertise> expertiseList;
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -34,17 +33,14 @@ public class ApplicationBean {
     public String getEmail() {
         return email;
     }
-    public String getTelephone() {
-        return telephone;
+    public String getPhone() {
+        return phone;
     }
-    public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
-    public String getSurname() {
-        return surname;
-    }
-    public int getAge(){
-        return age;
+    public String getLastname() {
+        return lastname;
     }
     public ArrayList<Expertise> getExpertiseList(){
         return expertiseList;
@@ -57,17 +53,14 @@ public class ApplicationBean {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setPhone(String telephone) {
+        this.phone = telephone;
     }
-    public void setName(String firstname) {
-        this.name = firstname;
+    public void setFirstname(String name) {
+        this.firstname = name;
     }
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-    public void setAge(int age){
-        this.age = age;
+    public void setLastname(String surname) {
+        this.lastname = surname;
     }
     public void setExpertiseList(ArrayList<Expertise> expList){
         this.expertiseList = expList;

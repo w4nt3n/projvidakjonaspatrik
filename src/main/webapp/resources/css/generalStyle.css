@@ -6,18 +6,40 @@ and open the template in the editor.
 /* 
     Created on : Feb 25, 2014, 9:40:19 PM
     Author     : Vidak
+    Edited by  : Patrik
 */
 
-body, td, div{
-    font-family: "Arial Black", Gadget, sans-serif;
+body, td, div, select, input, textbox {
+    font-family: "Verdana", Gadget, sans-serif;
     color:#333333;
-    font-size: 14px;
+    font-size: 13px;
+}
+
+table{
+    width:100%;
 }
 
 input{
     border: 1px solid #999999;
+    -moz-border-radius:3px;  
+    border-radius: 3px;  
+    -webkit-border-radius: 3px;
 }
 
 textbox{
     border: 1px solid #999999;
+    -moz-border-radius:3px;  
+    border-radius: 3px;  
+    -webkit-border-radius: 3px;
+}
+
+/* -moz for backwards compatibility
+ * -webkit for Safari
+ * border-radius for the rest
+ */
+fieldset{   
+  border: 1px solid #999999;
+  -moz-border-radius:5px;  
+  border-radius: 5px;  
+  -webkit-border-radius: 5px; //3em 5em; different rounding
 }

@@ -34,10 +34,10 @@
                 <c:forEach items="${message.getAllApplications()}" var="applicant">
                     <tr>
                         <td><button>View</button></td>
-                        <td>${applicant.getName()}</td>
-                        <td>${applicant.getSurname()}</td>
+                        <td>${applicant.getFirstname()}</td>
+                        <td>${applicant.getLastname()}</td>
                         <td>${applicant.getEmail()}</td>
-                        <td>${applicant.getTelephone()}</td>
+                        <td>${applicant.getPhone()}</td>
                     </tr>
                 </c:forEach>
             </table> 

@@ -49,11 +49,11 @@ public class JdbcApplicantDAO implements ApplicantDAO {
 	    // We have paramaters, we need a prepareStatement
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, applicant.getId());
-            ps.setString(2, applicant.getName());
-            ps.setString(3, applicant.getSurname());
+            ps.setString(2, applicant.getFirstname());
+            ps.setString(3, applicant.getLastname());
             ps.setString(4, applicant.getDateOfBirth());
             ps.setString(5, applicant.getEmail());
-            ps.setString(6, applicant.getTelephone());
+            ps.setString(6, applicant.getPhone());
 	    // Execute query
             ps.executeUpdate();
             ps.close();
@@ -101,11 +101,11 @@ public class JdbcApplicantDAO implements ApplicantDAO {
             if (rs.next()) {
                 applicant = new Applicant();
 		applicant.setId(rs.getInt("id"));
-                applicant.setName(rs.getString("name"));
-                applicant.setSurame(rs.getString("surname"));
+                applicant.setFirstname(rs.getString("name"));
+                applicant.setLastname(rs.getString("surname"));
                 applicant.setDateOfBirth(rs.getString("dateOfBirth"));
                 applicant.setEmail(rs.getString("email"));
-                applicant.setTelephone(rs.getString("telephone"));
+                applicant.setPhone(rs.getString("telephone"));
             }
 	    // Close 
             rs.close();
@@ -152,11 +152,11 @@ public class JdbcApplicantDAO implements ApplicantDAO {
             while (rs.next()) {
                 Applicant applicants = new Applicant();
 		applicants.setId(rs.getInt("id"));
-                applicants.setName(rs.getString("name"));
-                applicants.setSurame(rs.getString("surname"));
+                applicants.setFirstname(rs.getString("name"));
+                applicants.setLastname(rs.getString("surname"));
                 applicants.setDateOfBirth(rs.getString("dateOfBirth"));
                 applicants.setEmail(rs.getString("email"));
-                applicants.setTelephone(rs.getString("telephone"));
+                applicants.setPhone(rs.getString("telephone"));
 		// Add the applicant object to the returned ArrayList
                 resultsArrayList.add(applicants);
             }
@@ -195,11 +195,11 @@ public class JdbcApplicantDAO implements ApplicantDAO {
             while (rs.next()) {
                 applicant = new Applicant();
 		applicant.setId(rs.getInt("id"));
-                applicant.setName(rs.getString("name"));
-                applicant.setSurame(rs.getString("surname"));
+                applicant.setFirstname(rs.getString("name"));
+                applicant.setLastname(rs.getString("surname"));
                 applicant.setDateOfBirth(rs.getString("dateOfBirth"));
                 applicant.setEmail(rs.getString("email"));
-                applicant.setTelephone(rs.getString("telephone"));
+                applicant.setPhone(rs.getString("telephone"));
 		// Add the applicant object to the returned ArrayList
                 resultsArrayList.add(applicant);
             }

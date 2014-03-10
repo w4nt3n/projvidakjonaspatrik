@@ -17,11 +17,11 @@ public class Applicant
     }
     
     int id;
-    String name;
-    String surname;
+    String firstname;
+    String lastname;
     String dateOfBirth;
     String email;
-    String telephone;
+    String phone;
     
     
     //getter and setter methods
@@ -30,11 +30,11 @@ public class Applicant
     public int getId() {
         return id;
     }
-    public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
-    public String getSurname() {
-        return surname;
+    public String getLastname() {
+        return lastname;
     }
     public String getDateOfBirth() {
         return dateOfBirth;
@@ -42,19 +42,19 @@ public class Applicant
     public String getEmail() {
         return email;
     }
-    public String getTelephone() {
-        return telephone;
+    public String getPhone() {
+        return phone;
     }
     
     //setters
     public void setId(int id) {
         this.id = id;
     }
-    public void setName(String n) {
-        this.name = n;
+    public void setFirstname(String n) {
+        this.firstname = n;
     }
-    public void setSurame(String n) {
-        this.surname = n;
+    public void setLastname(String n) {
+        this.lastname = n;
     }
     public void setDateOfBirth(String bd) {
         this.dateOfBirth = bd;
@@ -62,7 +62,7 @@ public class Applicant
     public void setEmail(String e) {
         this.email = e;
     }
-    public void setTelephone(String t) {
-        this.telephone = t;
+    public void setPhone(String t) {
+        this.phone = t;
     }
 }

@@ -46,7 +46,7 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
 	    // We have paramaters, we need a prepareStatement
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, applicantExperience.getApplicantID());
-            ps.setInt(2, applicantExperience.getExpertiese());
+            ps.setInt(2, applicantExperience.getExpertise());
             ps.setInt(3, applicantExperience.getYears());
 	    // Execute query
             ps.executeUpdate();
@@ -87,7 +87,7 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
             if (rs.next()) {
                 appExp = new ApplicantExperience();
                 appExp.setApplicantID(rs.getInt("applicantID"));
-                appExp.setExpertiese(rs.getInt("expertiseID"));
+                appExp.setExpertise(rs.getInt("expertiseID"));
                 appExp.setYears(rs.getInt("dateOfBirth"));
 		resultsArrayList.add(appExp);
             }
@@ -126,7 +126,7 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
             while (rs.next()) {
 		ApplicantExperience exp = new ApplicantExperience();
 		exp.setApplicantID(rs.getInt("expertiseID"));
-		exp.setExpertiese(rs.getInt("expertiseID"));
+		exp.setExpertise(rs.getInt("expertiseID"));
 		exp.setYears(rs.getInt("yearsOfExperience"));
 		// Add the applicant object to the returned ArrayList
                 resultsArrayList.add(exp);

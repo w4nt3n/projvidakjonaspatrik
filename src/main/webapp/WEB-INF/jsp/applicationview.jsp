@@ -28,11 +28,11 @@
             </tr>
             <tr>
                 <td>Name:</td>
-                <td>${message.getName()}</td>
+                <td>${message.getFirstname()}</td>
             </tr>
             <tr>
                 <td>Surname:</td>
-                <td>${message.getSurname()}</td>
+                <td>${message.getLastname()}</td>
             </tr>
             <tr>
                 <td>
@@ -48,7 +48,7 @@
             </tr>
             <tr>
                 <td>Telephone:</td>
-                <td>${message.getTelephone()}</td>
+                <td>${message.getPhone()}</td>
             </tr>
             <tr>
                 <td colspan="2">

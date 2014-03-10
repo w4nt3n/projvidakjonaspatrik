@@ -4,8 +4,8 @@
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
         <!-- 
-        When you want to access Person, you use this to get both databse bean
-        and the PersonDAO bean
+        When you want to access Applicant, you use this to get both database bean
+        and the ApplicantDAO bean
         -->
 	<import resource="database/Spring-Datasource.xml" />
 	<import resource="applicant/Spring-ApplicantExperience.xml" />

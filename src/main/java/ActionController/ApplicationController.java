@@ -17,10 +17,12 @@ import ActiveRecord.ApplicantDAO;
 import ActiveRecord.ApplicantExperience;
 import ActiveRecord.ApplicantExperienceDAO;
 import ActiveRecord.ExpertiseDAO;
+import java.io.Console;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
  
@@ -46,20 +48,21 @@ public class ApplicationController {
      * the write was completed.
      * @param application
      * @param result
-     * @param birthdayYearSelect
-     * @param birthdayMonthSelect
-     * @param birthdayDaySelect
+     * @param dropdownYear
+     * @param dropdownMonth
+     * @param dropdownDay
+     * @param inputExperience
      * @return a ModelAndView of the application.jsp
      */
     @RequestMapping(value = "/addApplier", method = RequestMethod.POST)
     public ModelAndView addApplier(@ModelAttribute("application")
                             ApplicationBean application, BindingResult result, 
-                            @RequestParam("birthdayYearSelect") String birthdayYearSelect,
-                            @RequestParam("birthdayMonthSelect") String birthdayMonthSelect,
-                            @RequestParam("birthdayDaySelect") String birthdayDaySelect,
-			    @RequestParam("workExpertiseInput") String workExpertiseInput){
+                            @RequestParam("dropdownYear") String dropdownYear,
+                            @RequestParam("dropdownMonth") String dropdownMonth,
+                            @RequestParam("dropdownDay") String dropdownDay,
+			    @RequestParam("inputExperience") String inputExperience){
         
-	ArrayList<ApplicantExperience> appExpList = new ArrayList<ApplicantExperience>();
+	ArrayList<ApplicantExperience> appExpList = new ArrayList<>();
 	
 	// This is used for all access to Expertise class in the database
 	ApplicationExpertiseDataSourceManager appExpertiseDSM = new ApplicationExpertiseDataSourceManager();
@@ -67,11 +70,11 @@ public class ApplicationController {
 	//------------------------------------------------------------
 	//----------------------- Parses all of the expertises -------
 	
-	String stringBuffer = "";
+	/*String stringBuffer = "";
 	int mode = 1;
 	ApplicantExperience appExp = new ApplicantExperience();
-	for (int i = 0; i < workExpertiseInput.length(); i++){	// Goes through all of the characters
-	    if (workExpertiseInput.charAt(i) == ','){	// If the next character is a tab
+	for (int i = 0; i < inputExperience.length(); i++){	// Goes through all of the characters
+	    if (inputExperience.charAt(i) == ','){	// If the next character is a tab
 		if (stringBuffer.length() >= 1){	// and we currently have something in the buffer
 		    if (mode == 1){			// and we are searching for an expertise
 			appExp.setExpertiese(appExpertiseDSM.getIdWithExpertise(stringBuffer)); // set the expertise in the current applicantExpertise
@@ -88,8 +91,18 @@ public class ApplicationController {
 		}
 	    }
 	    else
-		stringBuffer = stringBuffer + workExpertiseInput.charAt(i);
-	}
+		stringBuffer = stringBuffer + inputExperience.charAt(i);
+	}*/
+        
+        String experience[] = inputExperience.split(",");
+        ApplicantExperience appExp;
+        for(int i = 0; i+2 <= experience.length; i+=2) {
+            appExp = new ApplicantExperience();
+            appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(experience[i]));
+            appExp.setYears(Integer.parseInt(experience[i+1]));
+
+            appExpList.add(appExp);
+        }
 	
 	//------------------------------------------------------------
 	//----------------------- Writes to the applicant ------------
@@ -99,21 +112,20 @@ public class ApplicationController {
 	
 	// Creates a new applicant and sets all of it's values
         Applicant applicant = new Applicant();
-        applicant.setName(application.getName());
-        applicant.setSurame(application.getSurname());
-        String sqlDateFormat = birthdayYearSelect + "-" + birthdayMonthSelect + "-" + birthdayDaySelect;
+        applicant.setFirstname(application.getFirstname());
+        applicant.setLastname(application.getLastname());
+        String sqlDateFormat = dropdownYear + "-" + dropdownMonth + "-" + dropdownDay;
         applicant.setDateOfBirth(sqlDateFormat);
         applicant.setEmail(application.getEmail());
-        applicant.setTelephone(application.getTelephone());
+        applicant.setPhone(application.getPhone());
         
 	// Adds the new applicant to the database
         appDSM.insert(applicant);
 	
-	
 	//------------------------------------------------------------
 	//----------------------- Writes to the experience ------------
 	
-	if(appExpList.size() >= 1){
+	if(!appExpList.isEmpty()){
 	    
 	    // This is used for all access to Experience class in the database
 	    ApplicationExperienceDataSourceManager appExperienceDSM = new ApplicationExperienceDataSourceManager();
@@ -127,16 +139,16 @@ public class ApplicationController {
 		// Creates a new applicant and sets all of it's values
 		applicantExperience = new ApplicantExperience();
 		// Get the ID of the newly added appicant
-		appThatMatch = appDSM.getApplicantIDWhere("name='" + applicant.getName() + "' AND"
-			+ " surname='" + applicant.getSurname() + "' AND"
+		appThatMatch = appDSM.getApplicantIDWhere("name='" + applicant.getFirstname() + "' AND"
+			+ " surname='" + applicant.getLastname() + "' AND"
 			+ " dateOfBirth='" + applicant.getDateOfBirth() + "' AND"
 			+ " email='" + applicant.getEmail() + "' AND"
-			+ " telephone='" + applicant.getTelephone() + "'");
+			+ " telephone='" + applicant.getPhone() + "'");
 		
 		if(appThatMatch.size() == 1){
 		    // There should only be one that matches, lets make an error message if there are more than one later
 		    applicantExperience.setApplicantID(appThatMatch.get(0).getId());
-		    applicantExperience.setExpertiese(appExpList.get(i).getExpertiese());
+		    applicantExperience.setExpertise(appExpList.get(i).getExpertise());
 		    applicantExperience.setYears(appExpList.get(i).getYears());
 
 		    // Adds the new applicant to the database

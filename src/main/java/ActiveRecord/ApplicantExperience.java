@@ -22,7 +22,7 @@ public class ApplicantExperience {
     public int getApplicantID() {
         return applicantID;
     }
-    public int getExpertiese() {
+    public int getExpertise() {
         return expertise;
     }
     public int getYears() {
@@ -33,7 +33,7 @@ public class ApplicantExperience {
     public void setApplicantID(int ID) {
         this.applicantID = ID;
     }
-    public void setExpertiese(int exp) {
+    public void setExpertise(int exp) {
         this.expertise = exp;
     }
     public void setYears(int y) {

@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class ApplicationViewBean {
     
     private boolean afterSubmit;
-    private String name;
-    private String surname;
+    private String firstname;
+    private String lastname;
     private String dateOfBirth;
     private String email;
-    private String telephone;
+    private String phone;
     public ArrayList<ExpertiseExperienceContainer> expExpList;
     
     public ApplicationViewBean(){
@@ -39,14 +39,14 @@ public class ApplicationViewBean {
     public String getEmail() {
         return email;
     }
-    public String getTelephone() {
-        return telephone;
+    public String getPhone() {
+        return phone;
     }
-    public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
-    public String getSurname() {
-        return surname;
+    public String getLastname() {
+        return lastname;
     }
     public String getDateOfBirth(){
         return dateOfBirth;
@@ -62,14 +62,14 @@ public class ApplicationViewBean {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
-    public void setName(String firstname) {
-        this.name = firstname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
     public void setDateOfBirth(String dateOfBirth){
         this.dateOfBirth = dateOfBirth;

@@ -29,7 +29,7 @@ public class Expertise {
     public void setID (int ID) {
         this.ID = ID;
     }
-    public void setExpertiese(String exp) {
+    public void setExpertise(String exp) {
         this.expertise = exp;
     }
 }

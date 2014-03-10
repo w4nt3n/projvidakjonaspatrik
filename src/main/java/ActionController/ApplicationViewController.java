@@ -49,11 +49,11 @@ public class ApplicationViewController {
 	ArrayList<Applicant> appList = appDSM.getApplicantIDWhere("name='newNamedvdvdsdvds' AND surname='NewSurnamesdvdsv'");
 	
 	if(appList.size() >= 1){
-	    appBean.setName(appList.get(0).getName());
-	    appBean.setSurname(appList.get(0).getSurname());
+	    appBean.setFirstname(appList.get(0).getFirstname());
+	    appBean.setLastname(appList.get(0).getLastname());
 	    appBean.setDateOfBirth(appList.get(0).getDateOfBirth());
 	    appBean.setEmail(appList.get(0).getEmail());
-	    appBean.setTelephone(appList.get(0).getTelephone());
+	    appBean.setPhone(appList.get(0).getPhone());
 
 	    // This is used for all access to Applicant class in the database
 	    ApplicationExperienceDataSourceManager appExperienceDSM = new ApplicationExperienceDataSourceManager();
@@ -65,9 +65,9 @@ public class ApplicationViewController {
 		
 		for(int i = 0; i < appExperienceList.size(); i++){
 		    Expertise expertise = new Expertise();
-		    expertise.setExpertiese(appExpertiseDSM.getExpertiseWithId(appExperienceList.get(i).getExpertiese()).getExpertiseName());
+		    expertise.setExpertise(appExpertiseDSM.getExpertiseWithId(appExperienceList.get(i).getExpertise()).getExpertiseName());
 		    appBean.setAddToExpExpList(expertise, appExperienceList.get(i));
-		    appBean.setName(appBean.getName() + appBean.getExpExpList().get(i).getExpertise().getExpertiseName());
+		    appBean.setFirstname(appBean.getFirstname() + appBean.getExpExpList().get(i).getExpertise().getExpertiseName());
 		}
 	    }
 	}

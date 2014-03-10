@@ -17,8 +17,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author Vidak
  */
 public class ApplicationExpertiseDataSourceManager {
-    private ExpertiseDAO appExpertiseDAO;
-    private ApplicationContext context;
+    private final ExpertiseDAO appExpertiseDAO;
+    private final ApplicationContext context;
     
     public ApplicationExpertiseDataSourceManager(){
 	this.context = new ClassPathXmlApplicationContext("Spring-ApplicantExpertiseModule.xml");
