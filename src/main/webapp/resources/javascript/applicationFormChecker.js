@@ -6,15 +6,14 @@
 
 //-------------------------------------------
 // Form validation function
-
-var allIsCheckedValue = 0x1FFF;                             // When all fields have valid input, this will be set to 0.
-
 var borderOkStyle = "1px solid lime";                       // When a field is valid, this is it's style
 var borderNotOkStyle = "1px solid red";                     // When a field is invalid, this is it's style
 var submitButtonID = "submitButton";                        // The ID tag of the submit button
 
 /**
- * 
+ * This class checks that all given inputs are valid.
+ * Input IDs can either be given in the constructor
+ * as parameters or with the add-function.
  * @returns {Validator}
  */
 function Validator() {
@@ -22,10 +21,19 @@ function Validator() {
     this.inputs = 0;
     this.mask = 0;
 
+    /**
+     * Use this function to add inputs for validation.
+     * Optionally give a custom validator function as
+     * the second parameter.
+     * @param {type} inputID
+     * @param {type} validatorFun
+     * @returns {undefined}
+     */
     this.add = function (inputID, validatorFun) {
         var element = document.getElementById(inputID);
-        element.index = 1 << (self.inputs++);
-        self.mask |= element.index;
+        element.index = 1 << (self.inputs++);   // The index bit of the element
+        self.mask |= element.index;             // Each set bit represents an invalid input field.
+                                                // That means that all are valid when self.mask == 0.
         document.getElementById("inputText").innerHTML = self.mask.toString(2);
 
         // Choose validation function depending on type of input

@@ -29,7 +29,7 @@
             <c:otherwise>
                 <form:form method="post" action="addApplier.htm">
                     <table id="applicationFormTable" class="formTable">
-                        <input id="inputExperience" name="inputExperience" type="hidden" onsubmit="bListExp.join()"></input>
+                        <input id="inputExperience" name="inputExperience" type="hidden" onsubmit="submitButtonLists()"></input>
                         <tr>
                             <th colspan="2">
                                 <h2>Contact Manager</h2>

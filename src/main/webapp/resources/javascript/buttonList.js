@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 
-
-//-------------------------------------------
 // Expertise adder logics
 // Adds an experience pair from the inputs to the buttonList
 function addANewExpertise() {
@@ -20,6 +18,10 @@ function addPeriod() {
     var from = document.getElementById("datepickerFrom").value;
     var to   = document.getElementById("datepickerTo").value;
     bListPeriods["add"](new Exp(from, to));
+}
+
+function submitButtonLists() {
+    document.getElementById("inputExperience").innerHTML = bListExp.join();
 }
 
 // Container for a period of availability (from date, to date)

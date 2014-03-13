@@ -24,6 +24,14 @@
 
     <bean id="fileValidator" class="ActionView.FileValidator" />  
 
+    <bean id="messageSource"
+            class="org.springframework.context.support.ResourceBundleMessageSource">
+            <property name="basenames">
+                    <list>
+                            <value>mymessages</value>
+                    </list>
+            </property>
+    </bean>
     
     <!-- This is needed in order to have resources such as CSS and JavaScript.
     It points to where the resources folder for the .jsp files are
