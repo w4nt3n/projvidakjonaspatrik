@@ -29,7 +29,8 @@
             <c:otherwise>
                 <form:form method="post" action="addApplier.htm">
                     <table id="applicationFormTable" class="formTable">
-                        <input id="inputExperience" name="inputExperience" type="hidden" onsubmit="submitButtonLists()"></input>
+                        <input id="inputExperience" name="inputExperience" type="hidden" onsubmit="submitButtonLists()"/>
+                        <input id="inputAvailability" name="inputAvailability" type="hidden"/>
                         <tr>
                             <th colspan="2">
                                 <h2>Contact Manager</h2>
@@ -152,6 +153,11 @@
     validator.add("dropdownYear", checkDateOfBirth);
     validator.add("dropdownMonth", checkDateOfBirth);
     validator.add("dropdownDay", checkDropdown);
+    
+    function submitButtonLists() {
+        document.getElementById("inputExperience").innerHTML = bListExp.join();
+        document.getElementById("inputAvailability").innerHTML = bListPeriods.join();
+    }
 </script>
     
 </body>

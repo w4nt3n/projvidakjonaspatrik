@@ -36,12 +36,12 @@
                 </tr>
                 <tr>
                     <td>User:</td>
-                    <td><input type='text' name='j_username' />
+                    <td><input type='text' name='j_username' class="textInput" />
                     </td>
                 </tr>
                 <tr>
                     <td>Password:</td>
-                    <td><input type='password' name='j_password' />
+                    <td><input type='password' name='j_password' class="textInput" />
                     </td>
                 </tr>
                 <tr>

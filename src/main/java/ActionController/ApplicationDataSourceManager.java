@@ -18,8 +18,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class ApplicationDataSourceManager {
     private JdbcApplicantDAO jdbcAppDAO;
-    private ApplicantDAO appDAO;
-    private ApplicationContext context;
+    private final ApplicantDAO appDAO;
+    private final ApplicationContext context;
     
     public ApplicationDataSourceManager(){
 	this.context = new ClassPathXmlApplicationContext("Spring-Module.xml");

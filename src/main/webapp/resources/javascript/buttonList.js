@@ -20,10 +20,6 @@ function addPeriod() {
     bListPeriods["add"](new Exp(from, to));
 }
 
-function submitButtonLists() {
-    document.getElementById("inputExperience").innerHTML = bListExp.join();
-}
-
 // Container for a period of availability (from date, to date)
 function Period(_from, _to) {
     this.from = _from;

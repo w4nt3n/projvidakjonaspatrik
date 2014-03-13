@@ -13,18 +13,8 @@ package ActionController;
  
 import ActiveRecord.ApplicationBean;
 import ActiveRecord.Applicant;
-import ActiveRecord.ApplicantDAO;
 import ActiveRecord.ApplicantExperience;
-import ActiveRecord.ApplicantExperienceDAO;
-import ActiveRecord.ExpertiseDAO;
-import java.io.Console;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
  
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -42,8 +32,8 @@ public class ApplicationController {
     /**
      * The method called when the form is submitted. All data collection 
      * and writing is done here.
-     * <p>
-     * This method collects the form values inputed by the user and writes
+     * 
+     * This method collects the form values input by the user and writes
      * them to the database, whereafter the user sees a message stating that
      * the write was completed.
      * @param application
@@ -60,7 +50,8 @@ public class ApplicationController {
                             @RequestParam("dropdownYear") String dropdownYear,
                             @RequestParam("dropdownMonth") String dropdownMonth,
                             @RequestParam("dropdownDay") String dropdownDay,
-			    @RequestParam("inputExperience") String inputExperience){
+			    @RequestParam("inputExperience") String inputExperience,
+                            @RequestParam("inputAvailability") String inputAvailability){
         
 	ArrayList<ApplicantExperience> appExpList = new ArrayList<>();
 	
@@ -77,7 +68,7 @@ public class ApplicationController {
 	    if (inputExperience.charAt(i) == ','){	// If the next character is a tab
 		if (stringBuffer.length() >= 1){	// and we currently have something in the buffer
 		    if (mode == 1){			// and we are searching for an expertise
-			appExp.setExpertiese(appExpertiseDSM.getIdWithExpertise(stringBuffer)); // set the expertise in the current applicantExpertise
+			appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(stringBuffer)); // set the expertise in the current applicantExpertise
 			stringBuffer = "";		    // clear the buffer
 			mode = 2;			    // start search for years
 		    }
@@ -94,9 +85,13 @@ public class ApplicationController {
 		stringBuffer = stringBuffer + inputExperience.charAt(i);
 	}*/
         
+        /* Parse the input for experiences separated with comma.
+         * Each experience in turn is an expertise and yearsOfExperience
+         * also separated by a comma.
+         */
         String experience[] = inputExperience.split(",");
         ApplicantExperience appExp;
-        for(int i = 0; i+2 <= experience.length; i+=2) {
+        for(int i = 0; i+2 < experience.length; i+=2) {
             appExp = new ApplicantExperience();
             appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(experience[i]));
             appExp.setYears(Integer.parseInt(experience[i+1]));
@@ -132,18 +127,19 @@ public class ApplicationController {
 	    
 	    // Creates a new applicant and sets all of it's values
 	    ApplicantExperience applicantExperience = null;
-	    // Get the ID of the newly added appicant
-	    ArrayList<Applicant> appThatMatch = null;
-	    
+
+            // Get the ID of the newly added applicant
+            ArrayList<Applicant> appThatMatch = appDSM.getApplicantIDWhere(
+                  "name='" + applicant.getFirstname() + "' AND "
+                + "surname='" + applicant.getLastname() + "' AND "
+                + "dateOfBirth='" + applicant.getDateOfBirth() + "' AND "
+                + "email='" + applicant.getEmail() + "' AND "
+                + "telephone='" + applicant.getPhone() + "'");
+            
 	    for(int i = 0; i < appExpList.size(); i++){
-		// Creates a new applicant and sets all of it's values
+		// Creates a new applicant and sets all of its values
 		applicantExperience = new ApplicantExperience();
-		// Get the ID of the newly added appicant
-		appThatMatch = appDSM.getApplicantIDWhere("name='" + applicant.getFirstname() + "' AND"
-			+ " surname='" + applicant.getLastname() + "' AND"
-			+ " dateOfBirth='" + applicant.getDateOfBirth() + "' AND"
-			+ " email='" + applicant.getEmail() + "' AND"
-			+ " telephone='" + applicant.getPhone() + "'");
+		
 		
 		if(appThatMatch.size() == 1){
 		    // There should only be one that matches, lets make an error message if there are more than one later
