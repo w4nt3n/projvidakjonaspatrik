@@ -79,3 +79,9 @@ and open the template in the editor.
 #workExpertiseListDiv{
     width: 100%;
 }
+
+#loginTable{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}

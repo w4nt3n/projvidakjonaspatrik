@@ -15,6 +15,8 @@
 </head>
 <body onload="setBirthdayDaySelect()">
     
+    <%@include file="header.jsp" %>
+    
     <div id="contentWrapper">
         
         <c:choose>
@@ -140,6 +142,9 @@
     
     </div>
 
+    
+    <%@include file="footer.jsp" %>
+    
 <%-- Pikaday, instantiate datepickers for Periods of Availability field --%>
 <script src="pikaday.js"></script>
 <script>

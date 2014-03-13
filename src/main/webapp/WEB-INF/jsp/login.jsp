@@ -16,6 +16,9 @@
 </style>
 </head>
 <body onload='document.f.j_username.focus();'>
+    
+    <%@include file="header.jsp" %>
+    
     <div id="contentWrapper">
         <%-- If there is an error --%>
 	<c:if test="${not empty error}">
@@ -28,7 +31,7 @@
 	<form name='f' action="<c:url value='j_spring_security_check' />"
             method='POST'>
 
-            <table class="formTable">
+            <table id="loginTable" class="formTable">
                 <tr>
                     <th colspan="2">
                         <h2>Login</h2>
@@ -45,14 +48,17 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input name="reset" type="reset" />
+                    <td><input value="Reset" name="reset" type="reset" />
                     </td>
-                    <td><input name="submit" type="submit" />
+                    <td><input value="Login" name="submit" type="submit" />
                     </td>
                 </tr>
             </table>
 
 	</form>
     </div>                
+
+    <%@include file="footer.jsp" %>
+
 </body>
 </html>

@@ -17,6 +17,8 @@
 </head>
 <body>
     
+    <%@include file="header.jsp" %>
+    
     <div id="contentWrapper">
         
         
@@ -107,5 +109,7 @@
     
     </div>
     
+    <%@include file="footer.jsp" %>
+            
 </body>
 </html>

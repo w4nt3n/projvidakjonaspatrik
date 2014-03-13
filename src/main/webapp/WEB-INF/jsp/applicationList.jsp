@@ -16,33 +16,35 @@
 </head>
 <body>
     
-    <div id="contentWrapper">
- 
-            <table id="applicationListTable" class="formTable">
-                <tr>
-                    <th colspan="6">
-                        <h2>Applications received</h2> 
-                    </th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><b>Name</b></td>
-                    <td><b>Surname</b></td>
-                    <td><b>Email</b></td>
-                    <td><b>Telephone</b></td>
-                </tr>
-                <c:forEach items="${message.getAllApplications()}" var="applicant">
-                    <tr>
-                        <td><button>View</button></td>
-                        <td>${applicant.getFirstname()}</td>
-                        <td>${applicant.getLastname()}</td>
-                        <td>${applicant.getEmail()}</td>
-                        <td>${applicant.getPhone()}</td>
-                    </tr>
-                </c:forEach>
-            </table> 
+    <%@include file="header.jsp" %>
     
+    <div id="contentWrapper">
+        <table id="applicationListTable" class="formTable">
+            <tr>
+                <th colspan="6">
+                    <h2>Applications received</h2> 
+                </th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><b>Name</b></td>
+                <td><b>Surname</b></td>
+                <td><b>Email</b></td>
+                <td><b>Telephone</b></td>
+            </tr>
+            <c:forEach items="${message.getAllApplications()}" var="applicant">
+                <tr>
+                    <td><a href="applicationView.htm?applicantID=${applicant.getId()}">View</a></td>
+                    <td>${applicant.getFirstname()}</td>
+                    <td>${applicant.getLastname()}</td>
+                    <td>${applicant.getEmail()}</td>
+                    <td>${applicant.getPhone()}</td>
+                </tr>
+            </c:forEach>
+        </table> 
     </div>
+    
+    <%@include file="footer.jsp" %>
     
 </body>
 </html>

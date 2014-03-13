@@ -8,20 +8,15 @@ package ActionController;
 
 import ActiveRecord.Applicant;
 import ActiveRecord.ApplicantExperience;
-import ActiveRecord.ApplicationBean;
 import ActiveRecord.ApplicationViewBean;
 import ActiveRecord.Expertise;
-import ActiveRecord.ExpertiseDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.faces.application.Application;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,8 +30,19 @@ import org.springframework.web.servlet.ModelAndView;
 public class ApplicationViewController {
  
     @RequestMapping("/applicationView")
-    public ModelAndView showAppliers() {
+    public ModelAndView showAppliers(HttpServletRequest req, HttpServletResponse response) throws IOException {
+	// Get the value of a request parameter; the name is case-sensitive
+	String name = "applicantID";
+	int targetApplicantID;
+	String parameter = "";
+	if(req.getParameter(name) == null)
+	    try (PrintWriter out = response.getWriter()) {
+		out.println("Error, you didnt submit any user");
+	    }
 	
+	parameter = req.getParameter(name);
+	
+	targetApplicantID = Integer.parseInt(parameter);
 	// Creates a bean for MySQL ApplicantDAO object.
 	// Spring-Module.xml contains references to Spring-Datasource.xml
 	// and Spring-Applicant.xml, these contain beans for Applicant and database login
@@ -46,7 +52,7 @@ public class ApplicationViewController {
 	
 	// This is used for all access to Applicant class in the database
 	ApplicationDataSourceManager appDSM = new ApplicationDataSourceManager();
-	ArrayList<Applicant> appList = appDSM.getApplicantIDWhere("name='newNamedvdvdsdvds' AND surname='NewSurnamesdvdsv'");
+	ArrayList<Applicant> appList = appDSM.getApplicantIDWhere("id='" + targetApplicantID + "'");
 	
 	if(appList.size() >= 1){
 	    appBean.setFirstname(appList.get(0).getFirstname());
@@ -67,7 +73,6 @@ public class ApplicationViewController {
 		    Expertise expertise = new Expertise();
 		    expertise.setExpertise(appExpertiseDSM.getExpertiseWithId(appExperienceList.get(i).getExpertise()).getExpertiseName());
 		    appBean.setAddToExpExpList(expertise, appExperienceList.get(i));
-		    appBean.setFirstname(appBean.getFirstname() + appBean.getExpExpList().get(i).getExpertise().getExpertiseName());
 		}
 	    }
 	}
