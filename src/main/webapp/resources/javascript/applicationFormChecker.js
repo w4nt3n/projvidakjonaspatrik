@@ -59,10 +59,10 @@ function Validator() {
             // Check if the validity of the input has changed
             
             if (validatorFun(inputID)) {
-                element.border = borderOkStyle;
+                element.style.border = borderOkStyle;
                 self.mask &= ~element.index;
             } else {
-                element.border = borderNotOkStyle;
+                element.style.border = borderNotOkStyle;
                 self.mask |= element.index;
             }
             document.getElementById(submitButtonID).disabled = (self.mask !== 0);
