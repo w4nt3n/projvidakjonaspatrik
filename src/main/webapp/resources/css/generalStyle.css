@@ -43,3 +43,11 @@ fieldset{
   border-radius: 5px;  
   -webkit-border-radius: 5px; //3em 5em; different rounding
 }
+
+#headerDiv{
+    padding: 30px;
+}
+
+#footerDiv{
+    padding-top: 50px;
+}

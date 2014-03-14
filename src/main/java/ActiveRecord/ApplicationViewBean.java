@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class ApplicationViewBean {
     
     private boolean hasError = false;
+    private String error;
     int applicantID;
     private boolean afterSubmit;
     private String firstname;
@@ -58,6 +59,9 @@ public class ApplicationViewBean {
     public String getLastname() {
         return lastname;
     }
+    public String getError() {
+        return error;
+    }
     public String getDateOfBirth(){
         return dateOfBirth;
     }
@@ -71,6 +75,14 @@ public class ApplicationViewBean {
     //setters
     public void hasError(boolean value){
 	this.hasError = value;
+        setError("");
+    }
+    public void hasError(boolean value, String error){
+	this.hasError = value;
+        setError(error);
+    }
+    public void setError(String error) {
+        this.error = error;
     }
     public void setApplicantID (int ID) {
         this.applicantID = ID;

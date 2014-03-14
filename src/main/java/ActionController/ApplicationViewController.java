@@ -58,7 +58,7 @@ public class ApplicationViewController {
 	try{
 	    appList = appDSM.getApplicantIDWhere("id='" + targetApplicantID + "'");
 	}catch(Exception e){
-	    appBean.hasError(true);
+	    appBean.hasError(true, "That applicant does not exist");
 	    return new ModelAndView("applicationview", "message", appBean);
 	}
 	
@@ -76,7 +76,7 @@ public class ApplicationViewController {
 	    try{
 		appExperienceList = appExperienceDSM.getExpertiseWhere("applicantID='" + appList.get(0).getId() + "'");
 	    }catch(Exception e){
-		appBean.hasError(true);
+		appBean.hasError(true, "That applicant does not exist");
 		return new ModelAndView("applicationview", "message", appBean);
 	    }
 	    if(appExperienceList.size() >= 1){
@@ -88,7 +88,7 @@ public class ApplicationViewController {
 		    try{
 			expertise.setExpertise(appExpertiseDSM.getExpertiseWithId(appExperienceList.get(i).getExpertise()).getExpertiseName());
 		    }catch(Exception e){
-			appBean.hasError(true);
+			appBean.hasError(true, "Could not retrieve data from the database");
 			return new ModelAndView("applicationview", "message", appBean);
 		    }
 		    appBean.setAddToExpExpList(expertise, appExperienceList.get(i));
@@ -102,7 +102,7 @@ public class ApplicationViewController {
         try{
             appAvList = appAvDSM.getAllApplicantAvailability(appList.get(0).getId());
         }catch(Exception e){
-            appBean.hasError(true);
+            appBean.hasError(true, "Could not get the applicant available date data");
             return new ModelAndView("applicationview", "message", appBean);
 	}
         

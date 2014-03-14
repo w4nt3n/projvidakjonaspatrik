@@ -86,7 +86,12 @@ public class ApplicationController {
 	ApplicantExperience appExp;
         for(int i = 0; i < experience.length; i+=2) {
 	    appExp = new ApplicantExperience();
-            appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(experience[i]));
+	    try{
+		appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(experience[i]));
+	    }catch(Exception e){
+		application.hasError(true, "Could not acces the database");
+		return new ModelAndView("application", "command", application);
+	    }
             appExp.setYears(Integer.parseInt(experience[i+1]));
 
             appExpList.add(appExp);
@@ -139,9 +144,10 @@ public class ApplicationController {
         
 	// Adds the new applicant to the database
 	try{
-        appDSM.insert(applicant);
+	    appDSM.insert(applicant);
 	} catch(Exception e){
-	    application.hasError(true);
+	    application.hasError(true, "Could not add application to server");
+            return new ModelAndView("application", "command", application);
 	}
 	
 	//------------------------------------------------------------
@@ -158,7 +164,8 @@ public class ApplicationController {
 		    + " email='" + applicant.getEmail() + "' AND"
 		    + " telephone='" + applicant.getPhone() + "'");
 	} catch(Exception e){
-	    application.hasError(true);
+	    application.hasError(true, "Could not get application ID");
+            return new ModelAndView("application", "command", application);
 	}
 	
 	if(appThatMatch.size() == 1){
@@ -168,7 +175,8 @@ public class ApplicationController {
 	    }
 	}
 	else{
-	    application.hasError(true);
+	    application.hasError(true, "This user already exists in the database");
+            return new ModelAndView("application", "command", application);
 	}
 	//------------------------------------------------------------
 	//----------------------- Writes to the experience ------------
@@ -197,9 +205,10 @@ public class ApplicationController {
 
 		    // Adds the new applicant to the database
 		    try{
-		    appExperienceDSM.insert(applicantExperience);
+			appExperienceDSM.insert(applicantExperience);
 		    } catch(Exception e){
-			application.hasError(true);
+			application.hasError(true, "Could not add the applicant experiences to database");
+			return new ModelAndView("application", "command", application);
 		    }
 		}
 	    }

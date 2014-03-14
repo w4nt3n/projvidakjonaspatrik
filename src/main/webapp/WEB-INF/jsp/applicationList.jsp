@@ -23,7 +23,7 @@
             
         <c:when test="${message.hasError() == true}">
             <div class="textCenterDiv">
-                Something went wrong, we are sorry.
+                It seems components of the page cant be loaded. We are sorry.
             </div>
         </c:when>
 

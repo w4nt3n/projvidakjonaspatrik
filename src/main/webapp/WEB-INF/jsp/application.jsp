@@ -33,7 +33,7 @@
             
             <c:when test="${command.getAfterSubmit() == true}">
                 <div class="textCenterDiv">
-                    <spring:message code="label.submitted"/>
+                    <spring:message code="application.submitted"/>
                 </div>
             </c:when>
             
@@ -156,7 +156,7 @@
     new Pikaday({ field: document.getElementById('datepickerFrom') });
     new Pikaday({ field: document.getElementById('datepickerTo') });
     
-    var validator = new Validator("inputName", "inputSurname", "inputPhone");
+    var validator = new Validator("inputName", "inputEmail", "inputSurname", "inputPhone");
     validator.add("dropdownYear", checkDateOfBirth);
     validator.add("dropdownMonth", checkDateOfBirth);
     validator.add("dropdownDay", checkDropdown);

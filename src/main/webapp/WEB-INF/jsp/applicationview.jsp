@@ -25,7 +25,7 @@
             
         <c:when test="${message.hasError() == true}">
             <div class="textCenterDiv">
-                Something went wrong, we are sorry.
+                Something went wrong, we are sorry. ${message.getError()}
             </div>
         </c:when>
 
