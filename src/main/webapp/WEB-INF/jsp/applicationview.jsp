@@ -25,31 +25,31 @@
         <table id="applicationFormTable" class="formTable">
             <tr>
                 <th colspan="2">
-                    <h2>Application view</h2> 
+                    <h2><spring:message code="label.applicationViewForm"/></h2> 
                 </th>
             </tr>
             <tr>
-                <td>Name:</td>
+                <td><spring:message code="label.firstname"/>:</td>
                 <td>${message.getFirstname()}</td>
             </tr>
             <tr>
-                <td>Surname:</td>
+                <td><spring:message code="label.lastname"/>:</td>
                 <td>${message.getLastname()}</td>
             </tr>
             <tr>
                 <td>
-                    Date of birth:
+                    <spring:message code="label.dateOfBirth"/>:
                 </td>
                 <td>
                     ${message.getDateOfBirth()}
                 </td>
             </tr>
             <tr>
-                <td>Email:</td>
+                <td><spring:message code="label.email"/>:</td>
                 <td>${message.getEmail()}</td>
             </tr>
             <tr>
-                <td>Telephone:</td>
+                <td><spring:message code="label.phone"/>:</td>
                 <td>${message.getPhone()}</td>
             </tr>
             <tr>

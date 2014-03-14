@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -23,7 +24,7 @@
         <%-- If there is an error --%>
 	<c:if test="${not empty error}">
             <div class="errorblock">
-                Your login attempt was not successful, try again.<br /> Cause :
+                Your login attempt was not successful, try again:<br/>
                 ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
             </div>
 	</c:if>
@@ -34,23 +35,23 @@
             <table id="loginTable" class="formTable">
                 <tr>
                     <th colspan="2">
-                        <h2>Login</h2>
+                        <h2><spring:message code="label.loginForm"/></h2>
                     </th>
                 </tr>
                 <tr>
-                    <td>User:</td>
+                    <td><spring:message code="label.username"/>:</td>
                     <td><input type='text' name='j_username' class="textInput" />
                     </td>
                 </tr>
                 <tr>
-                    <td>Password:</td>
+                    <td><spring:message code="label.password"/>:</td>
                     <td><input type='password' name='j_password' class="textInput" />
                     </td>
                 </tr>
                 <tr>
-                    <td><input value="Reset" name="reset" type="reset" />
+                    <td><input value="<spring:message code="label.reset"/>" name="reset" type="reset" />
                     </td>
-                    <td><input value="Login" name="submit" type="submit" />
+                    <td><input value="<spring:message code="label.login"/>" name="submit" type="submit" />
                     </td>
                 </tr>
             </table>

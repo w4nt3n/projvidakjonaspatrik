@@ -5,7 +5,8 @@
 --%>
 
 <div id="footerDiv">
+    <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
     <div class="textCenterDiv">
-    Created by Vidak, Jonas and Patrik
+    <spring:message code="label.footer"/>
     </div>
 </div>

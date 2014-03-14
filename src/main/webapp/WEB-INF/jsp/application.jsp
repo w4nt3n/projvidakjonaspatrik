@@ -20,11 +20,9 @@
     }
         
     </script>
-    <title>Application Form</title>
+    <title><spring:message code="label.title"/></title>
 </head>
 <body onload="setBirthdayDaySelect()">
-    
-    <button onclick="submitButtonLists()"/>test</button>
     
     <%@include file="header.jsp" %>
     
@@ -34,34 +32,33 @@
             
             <c:when test="${command.getAfterSubmit() == true}">
                 <div class="textCenterDiv">
-                    Your application has now been submitted.
-                    " ${command.getFirstname()} "
+                    <spring:message code="label.submitted"/>
                 </div>
             </c:when>
 
             <c:otherwise>
                 <form:form method="post" action="addApplier.htm">
                     <table id="applicationFormTable" class="formTable">
-                        <input id="inputExperience" name="inputExperience" type="text" style="width:700px;" onchange="submitButtonLists()"/>
-                        <input id="inputAvailability" name="inputAvailability" type="text" style="width:700px;" onchange="submitButtonLists()"/>
+                        <input id="inputExperience" name="inputExperience" type="hidden"/>
+                        <input id="inputAvailability" name="inputAvailability" type="hidden"/>
                         <tr>
                             <th colspan="2">
-                                <h2>Contact Manager</h2>
+                                <h2><spring:message code="label.applicationForm"/></h2>
                             </th>
                         </tr>
                         <tr>
-                            <td><form:label path="firstname">Name:</form:label></td>
+                            <td><form:label path="firstname"><spring:message code="label.firstname"/>:</form:label></td>
                             <td><form:input path="firstname" id="inputName" class="textInput" /></td>
                             <%--<td><input type="text" id="inputName" name="FirstName"></td>--%>
                         </tr>
                         <tr>
-                            <td><form:label path="lastname">Surname:</form:label></td>
+                            <td><form:label path="lastname"><spring:message code="label.lastname"/>:</form:label></td>
                             <td><form:input path="lastname" id="inputSurname" class="textInput" /></td>
                         </tr>
                         <tr>
-                            <td>Date of birth:</td>
+                            <td><spring:message code="label.dateOfBirth"/>:</td>
                             <td>
-                                Year:
+                                <spring:message code="label.year"/>:
                                 <select name="dropdownYear" id="dropdownYear">
                                     <option></option>
                                     <%int number = (Calendar.getInstance()).get(Calendar.YEAR);
@@ -69,7 +66,7 @@
                                         <option><%=i %></option>
                                     <%} %>
                                 </select>
-                                Month:
+                                <spring:message code="label.month"/>:
                                 <select name="dropdownMonth" id="dropdownMonth">
                                     <option></option>
                                     <%number = 12;
@@ -84,11 +81,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><form:label path="email">Email:</form:label></td>
+                            <td><form:label path="email"><spring:message code="label.email"/>:</form:label></td>
                             <td><form:input path="email" id="inputEmail" class="textInput" /></td>
                         </tr>
                         <tr>
-                            <td><form:label path="phone">Telephone:</form:label></td>
+                            <td><form:label path="phone"><spring:message code="label.phone"/>:</form:label></td>
                             <td><form:input path="phone" id="inputPhone" class="textInput" /></td>
                         </tr>
                         
@@ -96,22 +93,22 @@
                         <tr>
                             <td colspan = "20">
                                 <fieldset id="fieldsetExperiences">
-                                    <legend>Areas of Expertise</legend>
-                                    Expertise:
+                                    <legend><spring:message code="label.areasOfExpertise"/></legend>
+                                    <spring:message code="label.expertise"/>::
                                     <select id="workExpertiseExpertiseSelect">
                                         <c:forEach items="${command.getExpertiseList()}" var="expertise">
                                             <option value="${expertise.getID()}">${expertise.getExpertiseName()}</option>
                                         </c:forEach>
                                     </select><br>
-                                    Years:
+                                    <spring:message code="label.years"/>:
                                     <select id="workExpertiseYearsSelect">
                                         <option></option>
                                         <%number = 100;
-                                        for(int i = 1; i <= number; i++){%> // @TODO: Kolla upp $taggar
+                                        for(int i = 1; i <= number; i++){%>
                                             <option><%=i %></option>
                                         <%} %>
                                     </select>
-                                    <button type="button" onclick="addANewExpertise(); submitButtonLists();">Add</button>
+                                    <button type="button" onclick="addANewExpertise(); submitButtonLists();"><spring:message code="label.add"/></button>
                                 </fieldset>
                             </td>
                         </tr>
@@ -120,27 +117,17 @@
                         <tr>
                             <td colspan = "20">
                                 <fieldset id="fieldsetAvailability">
-                                    <legend>Periods of Availability</legend>
-                                    From: <input type="text" style="width:120px;" id="datepickerFrom">
-                                    To: <input type="text" style="width:120px;" id="datepickerTo">
-                                    <button type="button" onclick="addPeriod(); submitButtonLists();">Add</button>
+                                    <legend><spring:message code="label.periodsOfAvailability"/></legend>
+                                    <spring:message code="label.from"/>: <input type="text" style="width:120px;" id="datepickerFrom">
+                                    <spring:message code="label.to"/>: <input type="text" style="width:120px;" id="datepickerTo">
+                                    <button type="button" onclick="addPeriod(); submitButtonLists();"><spring:message code="label.add"/></button>
                                 </fieldset>
-                            </td>
-                        </tr>
-                        
-                        
-                        <tr>
-                            <td colspan="2">Write your experience in different areas of expertise: </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <textarea class="bigTextBox" id="inputText"></textarea>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <input type="submit" id="submitButton" disabled="true" value="Submit application" class="centerdInput"/>
-                                <label id="submitButtonEnableLable" style="display: none; float: right; color: red;">Please review your form, some inputs are invalid</label>
+                                <label id="submitButtonEnableLable" style="display: none; float: right; color: red;"><spring:message code="error.invalidInput"/></label>
                             </td>
                         </tr>
                     </table>
@@ -157,8 +144,8 @@
 <%-- Pikaday, instantiate datepickers for Periods of Availability field --%>
 <script src="pikaday.js"></script>
 <script>
-    var bListExp = new ButtonList("fieldsetExperiences", ["Expertise", "Years of Experience"]);
-    var bListPeriods = new ButtonList("fieldsetAvailability", ["From", "To"]);
+    var bListExp = new ButtonList("fieldsetExperiences", ["<spring:message code="label.expertise"/>", "<spring:message code="label.yearsOfExperience"/>"]);
+    var bListPeriods = new ButtonList("fieldsetAvailability", ["<spring:message code="label.from"/>", "<spring:message code="label.to"/>"]);
     
     new Pikaday({ field: document.getElementById('datepickerFrom') });
     new Pikaday({ field: document.getElementById('datepickerTo') });
