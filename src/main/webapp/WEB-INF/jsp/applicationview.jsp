@@ -21,92 +21,105 @@
     
     <%@include file="header.jsp" %>
     
-    <div id="contentWrapper">
-        
-        
-        <table id="applicationFormTable" class="formTable">
-            <tr>
-                <th colspan="2">
-                    <h2><spring:message code="label.applicationViewForm"/></h2> 
-                </th>
-            </tr>
-            <tr>
-                <td><spring:message code="label.firstname"/>:</td>
-                <td>${message.getFirstname()}</td>
-            </tr>
-            <tr>
-                <td><spring:message code="label.lastname"/>:</td>
-                <td>${message.getLastname()}</td>
-            </tr>
-            <tr>
-                <td>
-                    <spring:message code="label.dateOfBirth"/>:
-                </td>
-                <td>
-                    ${message.getDateOfBirth()}
-                </td>
-            </tr>
-            <tr>
-                <td><spring:message code="label.email"/>:</td>
-                <td>${message.getEmail()}</td>
-            </tr>
-            <tr>
-                <td><spring:message code="label.phone"/>:</td>
-                <td>${message.getPhone()}</td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div id="workExpertiseListDiv">
-                        <table colspan="0" rowspan="0" style="padding: 0px; margin: 0px;">
-                            <tr>
-                                <td>
-                                    <b><spring:message code="label.expertise"/>:</b>
-                                </td>
-                                <td>
-                                    <b><spring:message code="label.years"/>:</b>
-                                </td>
-                            </tr>
-                            <c:forEach items="${message.getExpExpList()}" var="container">
-                                <tr>
-                                    <td>${container.getExpertise().getExpertiseName()}</td>
-                                    <td>${container.getApplicantExperience().getYears()}</td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <spring:message code="label.periodsOfAvailability"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div id="availableListDiv">
-                        <table colspan="0" rowspan="0" style="padding: 0px; margin: 0px;">
-                            <tr>
-                                <td>
-                                    <b><spring:message code="label.from"/></b>
-                                </td>
-                                <td>
-                                    <b><spring:message code="label.to"/></b>
-                                </td>
-                            </tr>
-                            <c:forEach items="${message.getAvList()}" var="container">
-                                <tr>
-                                    <td>${container.getFrom()}</td>
-                                    <td>${container.getTo()}</td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        
+    <c:choose>
+            
+        <c:when test="${message.hasError() == true}">
+            <div class="textCenterDiv">
+                Something went wrong, we are sorry.
+            </div>
+        </c:when>
+
+        <c:otherwise>
     
-    </div>
+            <div id="contentWrapper">
+
+
+                <table id="applicationFormTable" class="formTable">
+                    <tr>
+                        <th colspan="2">
+                            <h2><spring:message code="label.applicationViewForm"/></h2> 
+                        </th>
+                    </tr>
+                    <tr>
+                        <td><spring:message code="label.firstname"/>:</td>
+                        <td>${message.getFirstname()}</td>
+                    </tr>
+                    <tr>
+                        <td><spring:message code="label.lastname"/>:</td>
+                        <td>${message.getLastname()}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <spring:message code="label.dateOfBirth"/>:
+                        </td>
+                        <td>
+                            ${message.getDateOfBirth()}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><spring:message code="label.email"/>:</td>
+                        <td>${message.getEmail()}</td>
+                    </tr>
+                    <tr>
+                        <td><spring:message code="label.phone"/>:</td>
+                        <td>${message.getPhone()}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div id="workExpertiseListDiv">
+                                <table colspan="0" rowspan="0" style="padding: 0px; margin: 0px;">
+                                    <tr>
+                                        <td>
+                                            <b><spring:message code="label.expertise"/>:</b>
+                                        </td>
+                                        <td>
+                                            <b><spring:message code="label.years"/>:</b>
+                                        </td>
+                                    </tr>
+                                    <c:forEach items="${message.getExpExpList()}" var="container">
+                                        <tr>
+                                            <td>${container.getExpertise().getExpertiseName()}</td>
+                                            <td>${container.getApplicantExperience().getYears()}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <spring:message code="label.periodsOfAvailability"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div id="availableListDiv">
+                                <table colspan="0" rowspan="0" style="padding: 0px; margin: 0px;">
+                                    <tr>
+                                        <td>
+                                            <b><spring:message code="label.from"/></b>
+                                        </td>
+                                        <td>
+                                            <b><spring:message code="label.to"/></b>
+                                        </td>
+                                    </tr>
+                                    <c:forEach items="${message.getAvList()}" var="container">
+                                        <tr>
+                                            <td>${container.getFrom()}</td>
+                                            <td>${container.getTo()}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+        </c:otherwise>
+                
+    </c:choose>
     
     <%@include file="footer.jsp" %>
             

@@ -31,7 +31,7 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
     }
 
     @Override
-    public Expertise getExpertiseWithId(int ID){
+    public Expertise getExpertiseWithId(int ID) throws Exception{
 	// The SQL code to be sent
         String sql = "SELECT * FROM expertiselist WHERE id = ?";
 	// The object containing the connection
@@ -58,7 +58,7 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
 	    // return applicant
             return exp;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         } finally {
             if (conn != null) {
                 try {
@@ -69,7 +69,7 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
     }
 
     @Override
-    public int getIdWithExpertise(String expertise) {
+    public int getIdWithExpertise(String expertise) throws Exception {
 	// The SQL code to be sent
         String sql = "SELECT * FROM expertiselist WHERE expertise = ?";
 	// The object containing the connection
@@ -96,7 +96,7 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
 	    // return applicant
             return exp.getID();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         } finally {
             if (conn != null) {
                 try {
@@ -107,7 +107,7 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
     }
     
     @Override
-    public ArrayList<Expertise> getAllExpertises() {
+    public ArrayList<Expertise> getAllExpertises() throws Exception {
 	// The SQL code to be sent
         String sql = "SELECT * FROM expertiselist";
 	// The object containing the connection
@@ -136,7 +136,7 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
 	    // return applicant
             return resultsArrayList;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         } finally {
             if (conn != null) {
                 try {

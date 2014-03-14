@@ -16,7 +16,7 @@ import java.util.ArrayList;
  
 public interface ExpertiseDAO 
 {
-    public Expertise getExpertiseWithId(int ID);
-    public int getIdWithExpertise(String expertise);
-    public ArrayList<Expertise> getAllExpertises();
+    public Expertise getExpertiseWithId(int ID) throws Exception;
+    public int getIdWithExpertise(String expertise) throws Exception;
+    public ArrayList<Expertise> getAllExpertises() throws Exception;
 }

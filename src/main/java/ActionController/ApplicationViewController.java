@@ -54,7 +54,13 @@ public class ApplicationViewController {
 	
 	// This is used for all access to Applicant class in the database
 	ApplicationDataSourceManager appDSM = new ApplicationDataSourceManager();
-	ArrayList<Applicant> appList = appDSM.getApplicantIDWhere("id='" + targetApplicantID + "'");
+	ArrayList<Applicant> appList = null;
+	try{
+	    appList = appDSM.getApplicantIDWhere("id='" + targetApplicantID + "'");
+	}catch(Exception e){
+	    appBean.hasError(true);
+	    return new ModelAndView("applicationview", "message", appBean);
+	}
 	
 	if(appList.size() >= 1){
 	    appBean.setFirstname(appList.get(0).getFirstname());
@@ -62,27 +68,48 @@ public class ApplicationViewController {
 	    appBean.setDateOfBirth(appList.get(0).getDateOfBirth());
 	    appBean.setEmail(appList.get(0).getEmail());
 	    appBean.setPhone(appList.get(0).getPhone());
-
+	
 	    // This is used for all access to Applicant class in the database
 	    ApplicationExperienceDataSourceManager appExperienceDSM = new ApplicationExperienceDataSourceManager();
 	    // Gets the id of all the 
-	    ArrayList<ApplicantExperience> appExperienceList = appExperienceDSM.getExpertiseWhere("applicantID='" + appList.get(0).getId() + "'");
+	    ArrayList<ApplicantExperience> appExperienceList = null;
+	    try{
+		appExperienceList = appExperienceDSM.getExpertiseWhere("applicantID='" + appList.get(0).getId() + "'");
+	    }catch(Exception e){
+		appBean.hasError(true);
+		return new ModelAndView("applicationview", "message", appBean);
+	    }
 	    if(appExperienceList.size() >= 1){
 		// This is used for all access to Expertise class in the database
 		ApplicationExpertiseDataSourceManager appExpertiseDSM = new ApplicationExpertiseDataSourceManager();
 		
 		for(int i = 0; i < appExperienceList.size(); i++){
 		    Expertise expertise = new Expertise();
-		    expertise.setExpertise(appExpertiseDSM.getExpertiseWithId(appExperienceList.get(i).getExpertise()).getExpertiseName());
+		    try{
+			expertise.setExpertise(appExpertiseDSM.getExpertiseWithId(appExperienceList.get(i).getExpertise()).getExpertiseName());
+		    }catch(Exception e){
+			appBean.hasError(true);
+			return new ModelAndView("applicationview", "message", appBean);
+		    }
 		    appBean.setAddToExpExpList(expertise, appExperienceList.get(i));
 		}
 	    }
 	}
 	
 	ApplicationAvailabilityDataSourceManager appAvDSM = new ApplicationAvailabilityDataSourceManager();
-	ArrayList<ApplicantAvailability> appAvList = appAvDSM.getAllApplicantAvailability(appList.get(0).getId());
+        ArrayList<ApplicantAvailability> appAvList = null;
+        
+        try{
+            appAvList = appAvDSM.getAllApplicantAvailability(appList.get(0).getId());
+        }catch(Exception e){
+            appBean.hasError(true);
+            return new ModelAndView("applicationview", "message", appBean);
+	}
+        
 	for(int i = 0; i < appAvList.size(); i++)
 	    appBean.setAddToAvList(appAvList.get(i));
+	
+	//appBean.hasError(true);
 	
 	// Just returns application jsp
         return new ModelAndView("applicationview", "message", appBean);

@@ -77,6 +77,7 @@ function Validator() {
 
 // This function checks that the value of the inputID ID'd input is text only
 function checkName(inputID){
+    return true;
     // The regex defining the desired input
     var regexp = /(^[a-zA-Z]+[a-zA-Z\s]+$)/gi;
     var elem = document.getElementById(inputID);

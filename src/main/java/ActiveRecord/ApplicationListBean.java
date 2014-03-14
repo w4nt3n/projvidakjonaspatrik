@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 public class ApplicationListBean {
     
+    private boolean hasError = false;
+    
     private ArrayList<Applicant> allApplications;
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -24,15 +26,20 @@ public class ApplicationListBean {
     }
     
     //getters
+    public boolean hasError(){
+	return this.hasError;
+    }
     public ArrayList<Applicant> getAllApplications() {
         return allApplications;
     }
 
     //setters
+    public void hasError(boolean value){
+	this.hasError = value;
+    }
     public void setAllApplications(ArrayList<Applicant> list) {
         this.allApplications = list;
     }
-    
     public void addPerson(Applicant applicant){
         this.allApplications.add(applicant);
     }

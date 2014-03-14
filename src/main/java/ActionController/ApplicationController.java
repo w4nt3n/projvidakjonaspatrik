@@ -8,7 +8,7 @@ package ActionController;
 
 /**
  *
- * @author Jonas, Vidak, Patrik
+ * @author Jonas, Vidak
  */
  
 import ActiveRecord.ApplicationBean;
@@ -52,6 +52,7 @@ public class ApplicationController {
      * @param response
      * @return a ModelAndView of the application.jsp
      * @throws javax.servlet.ServletException
+     * @throws java.lang.Exception
      * @throws java.io.IOException
      */
     @RequestMapping(value = "/addApplier", method = RequestMethod.POST)
@@ -63,6 +64,14 @@ public class ApplicationController {
                             @RequestParam("inputAvailability") String inputAvailability,
 			    HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, Exception{
         
+        // Validate input server side
+	if (!application.Validate() &&
+                dropdownYear.length() > 0 &&
+                dropdownMonth.length() > 0 &&
+                dropdownDay.length() > 0) {
+            application.hasError(true, "Invalid Inputs");
+            return new ModelAndView("application", "command", application);
+        }
 	
 	ArrayList<ApplicantExperience> appExpList = new ArrayList<>();
 	ArrayList<ApplicantAvailability> appAvDateList = new ArrayList<>();
@@ -129,7 +138,11 @@ public class ApplicationController {
         applicant.setPhone(application.getPhone());
         
 	// Adds the new applicant to the database
+	try{
         appDSM.insert(applicant);
+	} catch(Exception e){
+	    application.hasError(true);
+	}
 	
 	//------------------------------------------------------------
 	//----------------------- Writes to the availability ---------
@@ -138,17 +151,24 @@ public class ApplicationController {
 	
 	ArrayList<Applicant> appThatMatch = null;
 	// Get the ID of the newly added appicant
-	appThatMatch = appDSM.getApplicantIDWhere("name='" + applicant.getFirstname() + "' AND"
-		+ " surname='" + applicant.getLastname() + "' AND"
-		+ " dateOfBirth='" + applicant.getDateOfBirth() + "' AND"
-		+ " email='" + applicant.getEmail() + "' AND"
-		+ " telephone='" + applicant.getPhone() + "'");
+	try{
+	    appThatMatch = appDSM.getApplicantIDWhere("name='" + applicant.getFirstname() + "' AND"
+		    + " surname='" + applicant.getLastname() + "' AND"
+		    + " dateOfBirth='" + applicant.getDateOfBirth() + "' AND"
+		    + " email='" + applicant.getEmail() + "' AND"
+		    + " telephone='" + applicant.getPhone() + "'");
+	} catch(Exception e){
+	    application.hasError(true);
+	}
 	
 	if(appThatMatch.size() == 1){
 	    for(int i = 0; i < appAvDateList.size(); i++){
 		appAvDateList.get(i).setApplicantID(appThatMatch.get(0).getId());
 		appAvDSM.insert(appAvDateList.get(i));
 	    }
+	}
+	else{
+	    application.hasError(true);
 	}
 	//------------------------------------------------------------
 	//----------------------- Writes to the experience ------------
@@ -168,6 +188,7 @@ public class ApplicationController {
 		// Creates a new applicant and sets all of it's values
 		applicantExperience = new ApplicantExperience();
 		
+		// Will be true, error above else
 		if(appThatMatch.size() == 1){
 		    // There should only be one that matches, lets make an error message if there are more than one later
 		    applicantExperience.setApplicantID(appThatMatch.get(0).getId());
@@ -175,25 +196,11 @@ public class ApplicationController {
 		    applicantExperience.setYears(appExpList.get(i).getYears());
 
 		    // Adds the new applicant to the database
+		    try{
 		    appExperienceDSM.insert(applicantExperience);
-		}
-		else{
-//		    response.setContentType("text/html;charset=UTF-8");
-//		    try (PrintWriter out = response.getWriter()) {
-//
-//			out.println("<!DOCTYPE html>");
-//			out.println("<html>");
-//			out.println("<head>");
-//			out.println("<title>Servlet NewServlet</title>");	    
-//			out.println("</head>");
-//			out.println("<body>");
-//			out.println("User already exists <br />");
-//			out.println("</body>");
-//			out.println("</html>");
-//
-//		    }
-//		    return null;
-		    // Error there are multiple applicants that are identical
+		    } catch(Exception e){
+			application.hasError(true);
+		    }
 		}
 	    }
 	}
@@ -202,9 +209,8 @@ public class ApplicationController {
 	// Creates a bean that contains text that should be printed on the 
 	// new page, setAfterSubmit = true means that the page will display
 	// a message stating the insert was performed
-        ApplicationBean applicationBean = new ApplicationBean();
-        applicationBean.setAfterSubmit(true);
-        return new ModelAndView("application", "command", applicationBean);
+        application.setAfterSubmit(true);
+        return new ModelAndView("application", "command", application);
     }
      
     // This is called when /application is the input
@@ -220,10 +226,14 @@ public class ApplicationController {
 	ApplicationExpertiseDataSourceManager appExpertiseDSM = new ApplicationExpertiseDataSourceManager();
 	
 	// Creates a new applicant and sets all of it's values
-	ApplicationBean appBean = new ApplicationBean();
-	appBean.setExpertiseList(appExpertiseDSM.getAllExpertises());
+	ApplicationBean application = new ApplicationBean();
 	
+	try{
+	    application.setExpertiseList(appExpertiseDSM.getAllExpertises());
+	} catch(Exception e){
+	    application.hasError(true);
+	}
 	// Just returns application jsp
-        return new ModelAndView("application", "command", appBean);
+        return new ModelAndView("application", "command", application);
     }
 }

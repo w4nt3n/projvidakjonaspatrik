@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 public class ApplicationViewBean {
     
+    private boolean hasError = false;
+    int applicantID;
     private boolean afterSubmit;
     private String firstname;
     private String lastname;
@@ -35,6 +37,12 @@ public class ApplicationViewBean {
     // "Insert Code > Add Business Method")
     
     //getters
+    public boolean hasError(){
+	return this.hasError;
+    }
+    public int getApplicantID() {
+        return applicantID;
+    }
     public boolean getAfterSubmit(){
         return this.afterSubmit;
     }
@@ -61,6 +69,12 @@ public class ApplicationViewBean {
     }
 
     //setters
+    public void hasError(boolean value){
+	this.hasError = value;
+    }
+    public void setApplicantID (int ID) {
+        this.applicantID = ID;
+    }
     public void setAfterSubmit(boolean afterSubmit){
         this.afterSubmit = afterSubmit;
     }

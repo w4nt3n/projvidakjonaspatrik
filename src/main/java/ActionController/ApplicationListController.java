@@ -8,6 +8,7 @@ package ActionController;
 
 import ActiveRecord.ApplicationListBean;
 import ActiveRecord.ApplicantDAO;
+import java.sql.SQLException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -43,8 +44,12 @@ public class ApplicationListController {
 	
 	// Fetches all of the applicants. getALlApplicants() returns ArrayList<Applicant>
 	// this list is sent to applicationListBean
-        applicationListBean.setAllApplications(appDSM.getAllApplicants());
-        
+	try{
+	    applicationListBean.setAllApplications(appDSM.getAllApplicants());
+	}catch(Exception e){
+	    applicationListBean.hasError(true);
+	}
+	
 	// Sends the bean and reurns the page
         return new ModelAndView("applicationList", "message", applicationListBean);
     }

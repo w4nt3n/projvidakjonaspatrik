@@ -36,6 +36,12 @@
                     <spring:message code="label.submitted"/>
                 </div>
             </c:when>
+            
+            <c:when test="${command.hasError() == true}">
+                <div class="textCenterDiv">
+                    Something went wrong, we are sorry. ${command.getError()}
+                </div>
+            </c:when>
 
             <c:otherwise>
                 <form:form method="post" action="addApplier.htm">
@@ -150,7 +156,7 @@
     new Pikaday({ field: document.getElementById('datepickerFrom') });
     new Pikaday({ field: document.getElementById('datepickerTo') });
     
-    var validator = new Validator("inputName", "inputSurname", "inputEmail", "inputPhone");
+    var validator = new Validator("inputName", "inputSurname", "inputPhone");
     validator.add("dropdownYear", checkDateOfBirth);
     validator.add("dropdownMonth", checkDateOfBirth);
     validator.add("dropdownDay", checkDropdown);

@@ -32,7 +32,7 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
     }
 
     @Override
-    public void insert(ApplicantExperience applicantExperience){
+    public void insert(ApplicantExperience applicantExperience) throws Exception{
 
 	// The SQL code to be sent
         String sql = "INSERT INTO applicantexperience " +
@@ -53,7 +53,7 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
             ps.close();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception (e);
 
         } finally {
             if (conn != null) {
@@ -65,7 +65,7 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
     }
 
     @Override
-    public ArrayList<ApplicantExperience> getAllApplicantIDExpertises(int applicantID){
+    public ArrayList<ApplicantExperience> getAllApplicantIDExpertises(int applicantID) throws Exception{
 
 	// The SQL code to be sent
         String sql = "SELECT * FROM applicantexperience WHERE applicantID = ?";
@@ -97,7 +97,7 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
 	    // return applicant
             return resultsArrayList;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         } finally {
             if (conn != null) {
                 try {
@@ -108,7 +108,7 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
     }
     
     @Override
-    public ArrayList<ApplicantExperience> getExpertiseWhere(String insertedSQL) {
+    public ArrayList<ApplicantExperience> getExpertiseWhere(String insertedSQL) throws Exception {
 	// The SQL code to be sent
         String sql = "SELECT * FROM applicantexperience WHERE " + insertedSQL;
 	// The object containing the connection
@@ -137,7 +137,7 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
 	    // return applicant
             return resultsArrayList;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         } finally {
             if (conn != null) {
                 try {

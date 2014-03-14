@@ -27,15 +27,27 @@ public class ApplicationExpertiseDataSourceManager {
     }
     
     
-    public Expertise getExpertiseWithId(int ID){
-	return this.appExpertiseDAO.getExpertiseWithId(ID);
+    public Expertise getExpertiseWithId(int ID) throws Exception{
+	try{
+	    return this.appExpertiseDAO.getExpertiseWithId(ID);
+	} catch (Exception e){
+	    throw new Exception(e);
+	}
     }
     
-    public int getIdWithExpertise(String expertise){
-	return this.appExpertiseDAO.getIdWithExpertise(expertise);
+    public int getIdWithExpertise(String expertise) throws Exception{
+	try{
+	    return this.appExpertiseDAO.getIdWithExpertise(expertise);
+	} catch (Exception e){
+	    throw new Exception(e);
+	}
     }
     
-    public ArrayList<Expertise> getAllExpertises(){
-	return this.appExpertiseDAO.getAllExpertises();
+    public ArrayList<Expertise> getAllExpertises() throws Exception{
+	try{
+	    return this.appExpertiseDAO.getAllExpertises();
+	} catch (Exception e){
+	    throw new Exception(e);
+	}
     }
 }

@@ -35,7 +35,7 @@ public class JdbcApplicantDAO implements ApplicantDAO {
      * @param applicant The Applicant object to be written
      */
     @Override
-    public void insert(Applicant applicant){
+    public void insert(Applicant applicant) throws Exception {
 
 	// The SQL code to be sent
         String sql = "INSERT INTO applicant " +
@@ -59,7 +59,7 @@ public class JdbcApplicantDAO implements ApplicantDAO {
             ps.close();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
 
         } finally {
             if (conn != null) {
@@ -78,9 +78,10 @@ public class JdbcApplicantDAO implements ApplicantDAO {
      * user from the database, returning a Applicant object.
      * @param applicantId The applicant Id to be fetched
      * @return A Applicant object.
+     * @throws java.lang.Exception
      */
     @Override
-    public Applicant getApplicantWithId(int applicantId){
+    public Applicant getApplicantWithId(int applicantId) throws Exception {
 
 	// The SQL code to be sent
         String sql = "SELECT * FROM applicant WHERE id = ?";
@@ -113,7 +114,7 @@ public class JdbcApplicantDAO implements ApplicantDAO {
 	    // return applicant
             return applicant;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         } finally {
             if (conn != null) {
                 try {
@@ -131,9 +132,11 @@ public class JdbcApplicantDAO implements ApplicantDAO {
      * This method receives the Id of a user and fetches the corresponding
      * user from the database, returning a Applicant object.
      * @return an ArrayList<Applicant> of all the applicants in the database.
+     * @throws java.lang.Exception
+     * @throws java.sql.SQLException
      */
     @Override
-    public ArrayList<Applicant> getAllApplicants(){
+    public ArrayList<Applicant> getAllApplicants() throws Exception {
         // The SQL code to be sent
         String sql = "SELECT * FROM applicant";
 	// The object containing the connection
@@ -164,7 +167,7 @@ public class JdbcApplicantDAO implements ApplicantDAO {
             ps.close();
             return resultsArrayList;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         } finally {
             if (conn != null) {
                 try {
@@ -175,7 +178,7 @@ public class JdbcApplicantDAO implements ApplicantDAO {
     }
 
     @Override
-    public ArrayList<Applicant> getApplicantIDWhere(String insertedSQL) {
+    public ArrayList<Applicant> getApplicantIDWhere(String insertedSQL) throws Exception  {
 	// The SQL code to be sent
         String sql = "SELECT * FROM applicant WHERE " + insertedSQL;
 	// The object containing the connection
@@ -209,7 +212,7 @@ public class JdbcApplicantDAO implements ApplicantDAO {
 	    // return applicant
             return resultsArrayList;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new Exception(e);
         } finally {
             if (conn != null) {
                 try {

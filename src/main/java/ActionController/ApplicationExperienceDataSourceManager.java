@@ -28,15 +28,27 @@ public class ApplicationExperienceDataSourceManager {
         this.appExpDAO = (ApplicantExperienceDAO) this.context.getBean("ApplicantExperienceDAO");
     }
     
-    public void insert(ApplicantExperience applicantExperience){
-	this.appExpDAO.insert(applicantExperience);
+    public void insert(ApplicantExperience applicantExperience)throws Exception{
+	try{
+	    this.appExpDAO.insert(applicantExperience);
+	} catch(Exception e){
+	    throw new Exception(e);
+	}
     }
     
-    public ArrayList<ApplicantExperience> getAllApplicantIDExpertises(int applicantID){
-	return this.appExpDAO.getAllApplicantIDExpertises(applicantID);
+    public ArrayList<ApplicantExperience> getAllApplicantIDExpertises(int applicantID) throws Exception{
+	try{
+	    return this.appExpDAO.getAllApplicantIDExpertises(applicantID);
+	} catch(Exception e){
+	    throw new Exception(e);
+	}
     }
     
-    public ArrayList<ApplicantExperience> getExpertiseWhere(String insertedSQL){
-	return this.appExpDAO.getExpertiseWhere(insertedSQL);
+    public ArrayList<ApplicantExperience> getExpertiseWhere(String insertedSQL) throws Exception {
+	try{
+	    return this.appExpDAO.getExpertiseWhere(insertedSQL);
+	} catch(Exception e){
+	    throw new Exception(e);
+	}
     }
 }

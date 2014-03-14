@@ -8,7 +8,9 @@ package ActionController;
 
 import ActiveRecord.Applicant;
 import ActiveRecord.ApplicantDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -22,20 +24,33 @@ public class ApplicationDataSourceManager {
     private final ApplicationContext context;
     
     public ApplicationDataSourceManager(){
+	
 	this.context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 	// Fetches the applicantDAO bean
-        this.appDAO = (ApplicantDAO) this.context.getBean("applicantDAO");
+	this.appDAO = (ApplicantDAO) this.context.getBean("applicantDAO");
     }
     
-    public void insert(Applicant applicant){
-	this.appDAO.insert(applicant);
+    public void insert(Applicant applicant) throws Exception{
+	try{
+	    this.appDAO.insert(applicant);
+	} catch(Exception e){
+	    throw new Exception(e);
+	}
     }
     
-    public ArrayList<Applicant> getAllApplicants(){
-	return this.appDAO.getAllApplicants();
+    public ArrayList<Applicant> getAllApplicants() throws Exception{
+	try{
+	    return this.appDAO.getAllApplicants();
+	} catch(Exception e){
+	    throw new Exception(e);
+	}
     }
     
-    public ArrayList<Applicant> getApplicantIDWhere(String insertedSQL){
-	return this.appDAO.getApplicantIDWhere(insertedSQL);
+    public ArrayList<Applicant> getApplicantIDWhere(String insertedSQL) throws Exception{
+	try{
+	    return this.appDAO.getApplicantIDWhere(insertedSQL);
+	} catch(Exception e){
+	    throw new Exception(e);
+	}
     }
 }
