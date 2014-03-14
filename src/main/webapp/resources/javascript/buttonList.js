@@ -93,15 +93,14 @@ function ButtonList(formID, headlines) {
      * @returns {String}
      */
     this.join = function(separator) {
-        alert("joining");
         var arr = new Array();
-        for (var i = 0, row; (bool)(row = table.rows[i]); i++) {
-            for (var j = 1, col; (bool)(col = row.cells[j]); j++) {
+        for (var i = 1, row; row = table.rows[i]; i++) {
+            for (var j = 1, col; col = row.cells[j]; j++) {
                 arr.push(col.innerHTML);
             }  
         }
         return arr.join(separator);
     };
-    
+
     return this;
 }

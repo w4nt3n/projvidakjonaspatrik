@@ -580,7 +580,11 @@
          */
         toString: function(format)
         {
-            return !isDate(this._d) ? '' : hasMoment ? moment(this._d).format(format || this._o.format) : this._d.toDateString();
+            return !isDate(this._d) ? '' : hasMoment ? moment(this._d).format(format || this._o.format) : 
+                    ""+this._d.getFullYear()+"-"+
+                    ((this._d.getMonth()+1).toString()[1]?(this._d.getMonth()+1).toString():"0"+(this._d.getMonth()+1).toString()[0])+"-"+
+                    (this._d.getDate().toString()[1]?this._d.getDate().toString():"0"+this._d.getDate().toString()[0]);
+            //this._d.toDateString();
         },
 
         /**

@@ -13,8 +13,18 @@ package ActionController;
  
 import ActiveRecord.ApplicationBean;
 import ActiveRecord.Applicant;
+import ActiveRecord.ApplicantDAO;
 import ActiveRecord.ApplicantExperience;
+import ActiveRecord.ApplicantExperienceDAO;
+import ActiveRecord.ExpertiseDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
  
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,28 +42,42 @@ public class ApplicationController {
     /**
      * The method called when the form is submitted. All data collection 
      * and writing is done here.
-     * 
-     * This method collects the form values input by the user and writes
+     * <p>
+     * This method collects the form values inputed by the user and writes
      * them to the database, whereafter the user sees a message stating that
      * the write was completed.
      * @param application
      * @param result
-     * @param dropdownYear
-     * @param dropdownMonth
-     * @param dropdownDay
-     * @param inputExperience
+     * @param birthdayYearSelect
+     * @param birthdayMonthSelect
+     * @param birthdayDaySelect
      * @return a ModelAndView of the application.jsp
      */
     @RequestMapping(value = "/addApplier", method = RequestMethod.POST)
-    public ModelAndView addApplier(@ModelAttribute("application")
-                            ApplicationBean application, BindingResult result, 
+    public ModelAndView addApplier(@ModelAttribute("application") ApplicationBean application, BindingResult result, 
                             @RequestParam("dropdownYear") String dropdownYear,
                             @RequestParam("dropdownMonth") String dropdownMonth,
                             @RequestParam("dropdownDay") String dropdownDay,
 			    @RequestParam("inputExperience") String inputExperience,
-                            @RequestParam("inputAvailability") String inputAvailability){
+                            @RequestParam("inputAvailability") String inputAvailability,
+			    HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, Exception{
         
-	ArrayList<ApplicantExperience> appExpList = new ArrayList<>();
+//	response.setContentType("text/html;charset=UTF-8");
+//	try (PrintWriter out = response.getWriter()) {
+//	    out.println("<!DOCTYPE html>");
+//	    out.println("<html>");
+//	    out.println("<head>");
+//	    out.println("<title>Servlet NewServlet</title>");	    
+//	    out.println("</head>");
+//	    out.println("<body>");
+//	    /* TODO output your page here. You may use following sample code. */
+//	    out.println("\"" + inputExperience + "\"<br />");
+//	    out.println("</body>");
+//	    out.println("</html>");
+//	}
+	
+	
+	ArrayList<ApplicantExperience> appExpList = new ArrayList<ApplicantExperience>();
 	
 	// This is used for all access to Expertise class in the database
 	ApplicationExpertiseDataSourceManager appExpertiseDSM = new ApplicationExpertiseDataSourceManager();
@@ -61,43 +85,81 @@ public class ApplicationController {
 	//------------------------------------------------------------
 	//----------------------- Parses all of the expertises -------
 	
-	/*String stringBuffer = "";
-	int mode = 1;
-	ApplicantExperience appExp = new ApplicantExperience();
-	for (int i = 0; i < inputExperience.length(); i++){	// Goes through all of the characters
-	    if (inputExperience.charAt(i) == ','){	// If the next character is a tab
-		if (stringBuffer.length() >= 1){	// and we currently have something in the buffer
-		    if (mode == 1){			// and we are searching for an expertise
-			appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(stringBuffer)); // set the expertise in the current applicantExpertise
-			stringBuffer = "";		    // clear the buffer
-			mode = 2;			    // start search for years
-		    }
-		    else if (mode == 2){			    // if searching for years
-			appExp.setYears(Integer.parseInt(stringBuffer));    // set the years in the current applicantExpertise
-			stringBuffer = "";				    // clear the buffer
-			mode = 1;					    // start search for expertise			    
-			appExpList.add(appExp);					    // add expertise to expertise list
-			appExp = new ApplicantExperience();		    // create a new expertise
-		    }
-		}
-	    }
-	    else
-		stringBuffer = stringBuffer + inputExperience.charAt(i);
-	}*/
-        
-        /* Parse the input for experiences separated with comma.
-         * Each experience in turn is an expertise and yearsOfExperience
-         * also separated by a comma.
-         */
-        String experience[] = inputExperience.split(",");
-        ApplicantExperience appExp;
-        for(int i = 0; i+2 < experience.length; i+=2) {
-            appExp = new ApplicantExperience();
+//	String stringBuffer = "";
+//	int mode = 1;
+//	ApplicantExperience appExp = new ApplicantExperience();
+//	for (int i = 0; i < inputExperience.length(); i++){	// Goes through all of the characters
+//	    if (inputExperience.charAt(i) == ','){	// If the next character is a tab
+//		if (stringBuffer.length() >= 1){	// and we currently have something in the buffer
+//		    if (mode == 1){			// and we are searching for an expertise
+//			appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(stringBuffer)); // set the expertise in the current applicantExpertise
+//			stringBuffer = "";		    // clear the buffer
+//			mode = 2;			    // start search for years
+//		    }
+//		    else if (mode == 2){			    // if searching for years
+//			appExp.setYears(Integer.parseInt(stringBuffer));    // set the years in the current applicantExpertise
+//			stringBuffer = "";				    // clear the buffer
+//			mode = 1;					    // start search for expertise			    
+//			appExpList.add(appExp);					    // add expertise to expertise list
+//			appExp = new ApplicantExperience();		    // create a new expertise
+//		    }
+//		}
+//	    }
+//	    else
+//		stringBuffer = stringBuffer + inputExperience.charAt(i);
+//	}
+	
+	String experience[] = inputExperience.split(",");
+	int count = 0;
+	ApplicantExperience appExp;
+        for(int i = 0; i < experience.length; i+=2) {
+	    count++;
+	    appExp = new ApplicantExperience();
             appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(experience[i]));
             appExp.setYears(Integer.parseInt(experience[i+1]));
 
             appExpList.add(appExp);
         }
+	
+//	response.setContentType("text/html;charset=UTF-8");
+//	    try (PrintWriter out = response.getWriter()) {
+//		out.println("<!DOCTYPE html>");
+//		out.println("<html>");
+//		out.println("<head>");
+//		out.println("<title>Servlet NewServlet</title>");	    
+//		out.println("</head>");
+//		out.println("<body>");
+//		/* TODO output your page here. You may use following sample code. */
+//		out.println(appExpList.size() + "\"" + inputExperience + "\"" + "<br />");
+//		out.println("</body>");
+//		out.println("</html>");
+//	    }
+//	
+	
+//	    response.setContentType("text/html;charset=UTF-8");
+//	    try (PrintWriter out = response.getWriter()) {
+//		
+//		out.println("<!DOCTYPE html>");
+//		out.println("<html>");
+//		out.println("<head>");
+//		out.println("<title>Servlet NewServlet</title>");	    
+//		out.println("</head>");
+//		out.println("<body>");
+//		out.println(count + "<br />");
+//		for(int n = 0; n < experience.length; n++) {
+//		    out.println("\"" + experience[n] + "\" <br />");
+//		}
+//		/* TODO output your page here. You may use following sample code. */
+//		for(int i = 0; i < appExpList.size(); i++){
+//		out.println(appExpList.get(i).getExpertise() + "<br />");
+//		out.println(appExpList.get(i).getYears() + "<br />");
+//		}
+//		out.println("</body>");
+//		out.println("</html>");
+//		
+//	    }
+	
+	
 	
 	//------------------------------------------------------------
 	//----------------------- Writes to the applicant ------------
@@ -117,28 +179,30 @@ public class ApplicationController {
 	// Adds the new applicant to the database
         appDSM.insert(applicant);
 	
+	
 	//------------------------------------------------------------
 	//----------------------- Writes to the experience ------------
 	
-	if(!appExpList.isEmpty()){
+	
+	if(appExpList.size() >= 1){
 	    
 	    // This is used for all access to Experience class in the database
 	    ApplicationExperienceDataSourceManager appExperienceDSM = new ApplicationExperienceDataSourceManager();
 	    
 	    // Creates a new applicant and sets all of it's values
 	    ApplicantExperience applicantExperience = null;
-
-            // Get the ID of the newly added applicant
-            ArrayList<Applicant> appThatMatch = appDSM.getApplicantIDWhere(
-                  "name='" + applicant.getFirstname() + "' AND "
-                + "surname='" + applicant.getLastname() + "' AND "
-                + "dateOfBirth='" + applicant.getDateOfBirth() + "' AND "
-                + "email='" + applicant.getEmail() + "' AND "
-                + "telephone='" + applicant.getPhone() + "'");
-            
+	    // Get the ID of the newly added appicant
+	    ArrayList<Applicant> appThatMatch = null;
+	    
 	    for(int i = 0; i < appExpList.size(); i++){
-		// Creates a new applicant and sets all of its values
+		// Creates a new applicant and sets all of it's values
 		applicantExperience = new ApplicantExperience();
+		// Get the ID of the newly added appicant
+		appThatMatch = appDSM.getApplicantIDWhere("name='" + applicant.getFirstname() + "' AND"
+			+ " surname='" + applicant.getLastname() + "' AND"
+			+ " dateOfBirth='" + applicant.getDateOfBirth() + "' AND"
+			+ " email='" + applicant.getEmail() + "' AND"
+			+ " telephone='" + applicant.getPhone() + "'");
 		
 		
 		if(appThatMatch.size() == 1){
@@ -151,6 +215,21 @@ public class ApplicationController {
 		    appExperienceDSM.insert(applicantExperience);
 		}
 		else{
+//		    response.setContentType("text/html;charset=UTF-8");
+//		    try (PrintWriter out = response.getWriter()) {
+//
+//			out.println("<!DOCTYPE html>");
+//			out.println("<html>");
+//			out.println("<head>");
+//			out.println("<title>Servlet NewServlet</title>");	    
+//			out.println("</head>");
+//			out.println("<body>");
+//			out.println("User already exists <br />");
+//			out.println("</body>");
+//			out.println("</html>");
+//
+//		    }
+//		    return null;
 		    // Error there are multiple applicants that are identical
 		}
 	    }

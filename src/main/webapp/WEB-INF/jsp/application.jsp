@@ -11,9 +11,20 @@
     <script src="<c:url value="/resources/javascript/applicationFormChecker.js" />"></script>
     <script src="<c:url value="/resources/javascript/pikaday.js" />"></script>
     <script src="<c:url value="/resources/javascript/buttonList.js" />"></script>
+    <script type="text/javascript">
+        
+        
+    function submitButtonLists() {
+        document.getElementById("inputExperience").value = bListExp.join(",") + ",";
+        document.getElementById("inputAvailability").value = bListPeriods.join(",") + ",";
+    }
+        
+    </script>
     <title>Application Form</title>
 </head>
 <body onload="setBirthdayDaySelect()">
+    
+    <button onclick="submitButtonLists()"/>test</button>
     
     <%@include file="header.jsp" %>
     
@@ -31,8 +42,8 @@
             <c:otherwise>
                 <form:form method="post" action="addApplier.htm">
                     <table id="applicationFormTable" class="formTable">
-                        <input id="inputExperience" name="inputExperience" type="hidden" onsubmit="submitButtonLists()"/>
-                        <input id="inputAvailability" name="inputAvailability" type="hidden"/>
+                        <input id="inputExperience" name="inputExperience" type="text" style="width:700px;" onchange="submitButtonLists()"/>
+                        <input id="inputAvailability" name="inputAvailability"/>
                         <tr>
                             <th colspan="2">
                                 <h2>Contact Manager</h2>
@@ -100,7 +111,7 @@
                                             <option><%=i %></option>
                                         <%} %>
                                     </select>
-                                    <button type="button" onclick="addANewExpertise()">Add</button>
+                                    <button type="button" onclick="addANewExpertise(); submitButtonLists();">Add</button>
                                 </fieldset>
                             </td>
                         </tr>
@@ -137,8 +148,6 @@
             </c:otherwise>
                 
         </c:choose>
- 
-        
     
     </div>
 
@@ -158,11 +167,6 @@
     validator.add("dropdownYear", checkDateOfBirth);
     validator.add("dropdownMonth", checkDateOfBirth);
     validator.add("dropdownDay", checkDropdown);
-    
-    function submitButtonLists() {
-        document.getElementById("inputExperience").innerHTML = bListExp.join();
-        document.getElementById("inputAvailability").innerHTML = bListPeriods.join();
-    }
 </script>
     
 </body>
