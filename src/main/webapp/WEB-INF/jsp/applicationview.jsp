@@ -54,7 +54,6 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="hidden" id="workExpertiseInput" name="workExpertiseInput" /> 
                     <div id="workExpertiseListDiv">
                         <table colspan="0" rowspan="0" style="padding: 0px; margin: 0px;">
                             <tr>
@@ -81,27 +80,25 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    From:
-                </td>
-                <td>
-                    Year:
-                    
-                    Month:
-                    
-                    Day:
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Until:
-                </td>
-                <td>
-                    Year:
-                    
-                    Month:
-                    
-                    Day:
+                <td colspan="2">
+                    <div id="availableListDiv">
+                        <table colspan="0" rowspan="0" style="padding: 0px; margin: 0px;">
+                            <tr>
+                                <td>
+                                    <b>From</b>
+                                </td>
+                                <td>
+                                    <b>To</b>
+                                </td>
+                            </tr>
+                            <c:forEach items="${message.getAvList()}" var="container">
+                                <tr>
+                                    <td>${container.getFrom()}</td>
+                                    <td>${container.getTo()}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
                 </td>
             </tr>
         </table>

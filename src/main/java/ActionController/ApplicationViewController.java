@@ -7,12 +7,14 @@
 package ActionController;
 
 import ActiveRecord.Applicant;
+import ActiveRecord.ApplicantAvailability;
 import ActiveRecord.ApplicantExperience;
 import ActiveRecord.ApplicationViewBean;
 import ActiveRecord.Expertise;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -30,7 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ApplicationViewController {
  
     @RequestMapping("/applicationView")
-    public ModelAndView showAppliers(HttpServletRequest req, HttpServletResponse response) throws IOException {
+    public ModelAndView showAppliers(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 	// Get the value of a request parameter; the name is case-sensitive
 	String name = "applicantID";
 	int targetApplicantID;
@@ -76,6 +78,11 @@ public class ApplicationViewController {
 		}
 	    }
 	}
+	
+	ApplicationAvailabilityDataSourceManager appAvDSM = new ApplicationAvailabilityDataSourceManager();
+	ArrayList<ApplicantAvailability> appAvList = appAvDSM.getAllApplicantAvailability(appList.get(0).getId());
+	for(int i = 0; i < appAvList.size(); i++)
+	    appBean.setAddToAvList(appAvList.get(i));
 	
 	// Just returns application jsp
         return new ModelAndView("applicationview", "message", appBean);

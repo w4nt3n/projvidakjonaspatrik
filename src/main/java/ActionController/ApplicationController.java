@@ -13,6 +13,7 @@ package ActionController;
  
 import ActiveRecord.ApplicationBean;
 import ActiveRecord.Applicant;
+import ActiveRecord.ApplicantAvailability;
 import ActiveRecord.ApplicantDAO;
 import ActiveRecord.ApplicantExperience;
 import ActiveRecord.ApplicantExperienceDAO;
@@ -62,22 +63,9 @@ public class ApplicationController {
                             @RequestParam("inputAvailability") String inputAvailability,
 			    HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, Exception{
         
-//	response.setContentType("text/html;charset=UTF-8");
-//	try (PrintWriter out = response.getWriter()) {
-//	    out.println("<!DOCTYPE html>");
-//	    out.println("<html>");
-//	    out.println("<head>");
-//	    out.println("<title>Servlet NewServlet</title>");	    
-//	    out.println("</head>");
-//	    out.println("<body>");
-//	    /* TODO output your page here. You may use following sample code. */
-//	    out.println("\"" + inputExperience + "\"<br />");
-//	    out.println("</body>");
-//	    out.println("</html>");
-//	}
-	
 	
 	ArrayList<ApplicantExperience> appExpList = new ArrayList<ApplicantExperience>();
+	ArrayList<ApplicantAvailability> appAvDateList = new ArrayList<ApplicantAvailability>();
 	
 	// This is used for all access to Expertise class in the database
 	ApplicationExpertiseDataSourceManager appExpertiseDSM = new ApplicationExpertiseDataSourceManager();
@@ -85,35 +73,9 @@ public class ApplicationController {
 	//------------------------------------------------------------
 	//----------------------- Parses all of the expertises -------
 	
-//	String stringBuffer = "";
-//	int mode = 1;
-//	ApplicantExperience appExp = new ApplicantExperience();
-//	for (int i = 0; i < inputExperience.length(); i++){	// Goes through all of the characters
-//	    if (inputExperience.charAt(i) == ','){	// If the next character is a tab
-//		if (stringBuffer.length() >= 1){	// and we currently have something in the buffer
-//		    if (mode == 1){			// and we are searching for an expertise
-//			appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(stringBuffer)); // set the expertise in the current applicantExpertise
-//			stringBuffer = "";		    // clear the buffer
-//			mode = 2;			    // start search for years
-//		    }
-//		    else if (mode == 2){			    // if searching for years
-//			appExp.setYears(Integer.parseInt(stringBuffer));    // set the years in the current applicantExpertise
-//			stringBuffer = "";				    // clear the buffer
-//			mode = 1;					    // start search for expertise			    
-//			appExpList.add(appExp);					    // add expertise to expertise list
-//			appExp = new ApplicantExperience();		    // create a new expertise
-//		    }
-//		}
-//	    }
-//	    else
-//		stringBuffer = stringBuffer + inputExperience.charAt(i);
-//	}
-	
 	String experience[] = inputExperience.split(",");
-	int count = 0;
 	ApplicantExperience appExp;
         for(int i = 0; i < experience.length; i+=2) {
-	    count++;
 	    appExp = new ApplicantExperience();
             appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(experience[i]));
             appExp.setYears(Integer.parseInt(experience[i+1]));
@@ -121,45 +83,35 @@ public class ApplicationController {
             appExpList.add(appExp);
         }
 	
+	String availability[] = inputAvailability.split(",");
+	ApplicantAvailability appAv;
+        for(int i = 0; i < availability.length; i+=2) {
+	    appAv = new ApplicantAvailability();
+            appAv.setFrom(availability[i]);
+            appAv.setTo(availability[i+1]);
+
+            appAvDateList.add(appAv);
+        }
+	
+	
 //	response.setContentType("text/html;charset=UTF-8");
-//	    try (PrintWriter out = response.getWriter()) {
-//		out.println("<!DOCTYPE html>");
-//		out.println("<html>");
-//		out.println("<head>");
-//		out.println("<title>Servlet NewServlet</title>");	    
-//		out.println("</head>");
-//		out.println("<body>");
-//		/* TODO output your page here. You may use following sample code. */
-//		out.println(appExpList.size() + "\"" + inputExperience + "\"" + "<br />");
-//		out.println("</body>");
-//		out.println("</html>");
+//	try (PrintWriter out = response.getWriter()) {
+//
+//	    out.println("<!DOCTYPE html>");
+//	    out.println("<html>");
+//	    out.println("<head>");
+//	    out.println("<title>Servlet NewServlet</title>");	    
+//	    out.println("</head>");
+//	    out.println("<body>");
+//	    for(int i = 0; i < appAvDateList.size(); i++) {
+//		out.println("\"" + appAvDateList.get(i).getApplicantID() + "\"<br />");
+//		out.println("\"" + appAvDateList.get(i).getFrom() + "\"<br />");
+//		out.println("\"" + appAvDateList.get(i).getTo() + "\"<br />");
 //	    }
-//	
-	
-//	    response.setContentType("text/html;charset=UTF-8");
-//	    try (PrintWriter out = response.getWriter()) {
-//		
-//		out.println("<!DOCTYPE html>");
-//		out.println("<html>");
-//		out.println("<head>");
-//		out.println("<title>Servlet NewServlet</title>");	    
-//		out.println("</head>");
-//		out.println("<body>");
-//		out.println(count + "<br />");
-//		for(int n = 0; n < experience.length; n++) {
-//		    out.println("\"" + experience[n] + "\" <br />");
-//		}
-//		/* TODO output your page here. You may use following sample code. */
-//		for(int i = 0; i < appExpList.size(); i++){
-//		out.println(appExpList.get(i).getExpertise() + "<br />");
-//		out.println(appExpList.get(i).getYears() + "<br />");
-//		}
-//		out.println("</body>");
-//		out.println("</html>");
-//		
-//	    }
-	
-	
+//	    out.println("</body>");
+//	    out.println("</html>");
+//
+//	}
 	
 	//------------------------------------------------------------
 	//----------------------- Writes to the applicant ------------
@@ -179,7 +131,25 @@ public class ApplicationController {
 	// Adds the new applicant to the database
         appDSM.insert(applicant);
 	
+	//------------------------------------------------------------
+	//----------------------- Writes to the availability ---------
+	// This is used for all access to Applicant class in the database
+	ApplicationAvailabilityDataSourceManager appAvDSM = new ApplicationAvailabilityDataSourceManager();
 	
+	ArrayList<Applicant> appThatMatch = null;
+	// Get the ID of the newly added appicant
+	appThatMatch = appDSM.getApplicantIDWhere("name='" + applicant.getFirstname() + "' AND"
+		+ " surname='" + applicant.getLastname() + "' AND"
+		+ " dateOfBirth='" + applicant.getDateOfBirth() + "' AND"
+		+ " email='" + applicant.getEmail() + "' AND"
+		+ " telephone='" + applicant.getPhone() + "'");
+	
+	if(appThatMatch.size() == 1){
+	    for(int i = 0; i < appAvDateList.size(); i++){
+		appAvDateList.get(i).setApplicantID(appThatMatch.get(0).getId());
+		appAvDSM.insert(appAvDateList.get(i));
+	    }
+	}
 	//------------------------------------------------------------
 	//----------------------- Writes to the experience ------------
 	
@@ -192,18 +162,11 @@ public class ApplicationController {
 	    // Creates a new applicant and sets all of it's values
 	    ApplicantExperience applicantExperience = null;
 	    // Get the ID of the newly added appicant
-	    ArrayList<Applicant> appThatMatch = null;
+	    
 	    
 	    for(int i = 0; i < appExpList.size(); i++){
 		// Creates a new applicant and sets all of it's values
 		applicantExperience = new ApplicantExperience();
-		// Get the ID of the newly added appicant
-		appThatMatch = appDSM.getApplicantIDWhere("name='" + applicant.getFirstname() + "' AND"
-			+ " surname='" + applicant.getLastname() + "' AND"
-			+ " dateOfBirth='" + applicant.getDateOfBirth() + "' AND"
-			+ " email='" + applicant.getEmail() + "' AND"
-			+ " telephone='" + applicant.getPhone() + "'");
-		
 		
 		if(appThatMatch.size() == 1){
 		    // There should only be one that matches, lets make an error message if there are more than one later

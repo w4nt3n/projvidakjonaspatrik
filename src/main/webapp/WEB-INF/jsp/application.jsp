@@ -15,8 +15,8 @@
         
         
     function submitButtonLists() {
-        document.getElementById("inputExperience").value = bListExp.join(",") + ",";
-        document.getElementById("inputAvailability").value = bListPeriods.join(",") + ",";
+        document.getElementById("inputExperience").value = bListExp.join(",");
+        document.getElementById("inputAvailability").value = bListPeriods.join(",");
     }
         
     </script>
@@ -43,7 +43,7 @@
                 <form:form method="post" action="addApplier.htm">
                     <table id="applicationFormTable" class="formTable">
                         <input id="inputExperience" name="inputExperience" type="text" style="width:700px;" onchange="submitButtonLists()"/>
-                        <input id="inputAvailability" name="inputAvailability"/>
+                        <input id="inputAvailability" name="inputAvailability" type="text" style="width:700px;" onchange="submitButtonLists()"/>
                         <tr>
                             <th colspan="2">
                                 <h2>Contact Manager</h2>
@@ -123,7 +123,7 @@
                                     <legend>Periods of Availability</legend>
                                     From: <input type="text" style="width:120px;" id="datepickerFrom">
                                     To: <input type="text" style="width:120px;" id="datepickerTo">
-                                    <button type="button" onclick="addPeriod()">Add</button>
+                                    <button type="button" onclick="addPeriod(); submitButtonLists();">Add</button>
                                 </fieldset>
                             </td>
                         </tr>

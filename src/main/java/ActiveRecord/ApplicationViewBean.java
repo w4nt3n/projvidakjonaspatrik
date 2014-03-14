@@ -23,9 +23,11 @@ public class ApplicationViewBean {
     private String email;
     private String phone;
     public ArrayList<ExpertiseExperienceContainer> expExpList;
+    public ArrayList<ApplicantAvailability> expAvList;
     
     public ApplicationViewBean(){
 	this.expExpList = new ArrayList<ExpertiseExperienceContainer>();
+	this.expAvList = new ArrayList<ApplicantAvailability>();
     }
     
     
@@ -54,6 +56,9 @@ public class ApplicationViewBean {
     public ArrayList<ExpertiseExperienceContainer> getExpExpList(){
         return expExpList;
     }
+    public ArrayList<ApplicantAvailability> getAvList(){
+        return expAvList;
+    }
 
     //setters
     public void setAfterSubmit(boolean afterSubmit){
@@ -76,5 +81,8 @@ public class ApplicationViewBean {
     }
     public void setAddToExpExpList(Expertise expertise, ApplicantExperience applicantExperience){
         this.expExpList.add(new ExpertiseExperienceContainer(expertise, applicantExperience));
+    }
+    public void setAddToAvList(ApplicantAvailability av){
+        this.expAvList.add(av);
     }
 }
