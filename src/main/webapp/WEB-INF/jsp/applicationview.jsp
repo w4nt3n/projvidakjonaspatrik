@@ -2,18 +2,20 @@
     Document   : applicationview
     Created on : Mar 1, 2014, 8:30:43 AM
     Author     : Vidak
+    Edited     : Patrik
 --%>
 
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="<c:url value="/resources/css/generalStyle.css" />" type="text/css" rel="stylesheet">
     <link href="<c:url value="/resources/css/layout.css" />" type="text/css" rel="stylesheet">
-    <title>Application View</title>
+    <title><spring:message code="label.title"/></title>
 </head>
 <body>
     
@@ -58,10 +60,10 @@
                         <table colspan="0" rowspan="0" style="padding: 0px; margin: 0px;">
                             <tr>
                                 <td>
-                                    <b>Expertise:</b>
+                                    <b><spring:message code="label.expertise"/>:</b>
                                 </td>
                                 <td>
-                                    <b>Years:</b>
+                                    <b><spring:message code="label.years"/>:</b>
                                 </td>
                             </tr>
                             <c:forEach items="${message.getExpExpList()}" var="container">
@@ -76,7 +78,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    Periods of time available for work
+                    <spring:message code="label.periodsOfAvailability"/>
                 </td>
             </tr>
             <tr>
@@ -85,10 +87,10 @@
                         <table colspan="0" rowspan="0" style="padding: 0px; margin: 0px;">
                             <tr>
                                 <td>
-                                    <b>From</b>
+                                    <b><spring:message code="label.from"/></b>
                                 </td>
                                 <td>
-                                    <b>To</b>
+                                    <b><spring:message code="label.to"/></b>
                                 </td>
                             </tr>
                             <c:forEach items="${message.getAvList()}" var="container">

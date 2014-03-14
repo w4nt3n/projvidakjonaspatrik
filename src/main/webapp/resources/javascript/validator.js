@@ -34,7 +34,6 @@ function Validator() {
         element.index = 1 << (self.inputs++);   // The index bit of the element
         self.mask |= element.index;             // Each set bit represents an invalid input field.
                                                 // That means that all are valid when self.mask == 0.
-        document.getElementById("inputText").innerHTML = self.mask.toString(2);
 
         // Choose validation function depending on type of input
         if(validatorFun === undefined) {
@@ -55,7 +54,7 @@ function Validator() {
             }
         }
 
-        element.onpropertychange = element.oninput = element.onchange = function () {
+        element.onpropertychange = element.oninput = element.onchange = element.onload = function () {
             // Check if the validity of the input has changed
             
             if (validatorFun(inputID)) {
@@ -66,7 +65,7 @@ function Validator() {
                 self.mask |= element.index;
             }
             document.getElementById(submitButtonID).disabled = (self.mask !== 0);
-            document.getElementById("inputText").innerHTML = self.mask.toString(2);
+            document.getElementById("submitButtonEnableLable").style.display = (self.mask !== 0) ? "block" : "none";
         };
     };
 

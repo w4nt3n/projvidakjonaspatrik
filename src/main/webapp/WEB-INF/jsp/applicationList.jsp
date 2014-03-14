@@ -7,6 +7,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  <%-- needed to loop through list --%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

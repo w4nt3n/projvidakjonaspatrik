@@ -2,13 +2,14 @@
 <%@page import="java.util.Date"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="<c:url value="/resources/css/generalStyle.css" />" type="text/css" rel="stylesheet">
     <link href="<c:url value="/resources/css/layout.css" />" type="text/css" rel="stylesheet">
     <link href="<c:url value="/resources/css/pikaday.css" />" type="text/css" rel="stylesheet">
-    <script src="<c:url value="/resources/javascript/applicationFormChecker.js" />"></script>
+    <script src="<c:url value="/resources/javascript/validator.js" />"></script>
     <script src="<c:url value="/resources/javascript/pikaday.js" />"></script>
     <script src="<c:url value="/resources/javascript/buttonList.js" />"></script>
     <script type="text/javascript">
@@ -49,7 +50,6 @@
                         <tr>
                             <td><form:label path="firstname"><spring:message code="label.firstname"/>:</form:label></td>
                             <td><form:input path="firstname" id="inputName" class="textInput" /></td>
-                            <%--<td><input type="text" id="inputName" name="FirstName"></td>--%>
                         </tr>
                         <tr>
                             <td><form:label path="lastname"><spring:message code="label.lastname"/>:</form:label></td>
@@ -74,7 +74,7 @@
                                         <option><%=i %></option>
                                     <%} %>
                                 </select>
-                                Day:
+                                <spring:message code="label.day"/>:
                                 <select name="dropdownDay" id="dropdownDay">
                                     <option></option>
                                 </select>
@@ -126,8 +126,8 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="submit" id="submitButton" disabled="true" value="Submit application" class="centerdInput"/>
-                                <label id="submitButtonEnableLable" style="display: none; float: right; color: red;"><spring:message code="error.invalidInput"/></label>
+                                <input type="submit" id="submitButton" disabled="true" value="<spring:message code="label.submit"/>" class="centerdInput"/>
+                                <label id="submitButtonEnableLable" type="hidden" style="display: none; float: right; color: red;"><spring:message code="error.invalidInput"/></label>
                             </td>
                         </tr>
                     </table>

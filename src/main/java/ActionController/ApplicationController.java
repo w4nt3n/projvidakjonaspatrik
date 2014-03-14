@@ -8,24 +8,18 @@ package ActionController;
 
 /**
  *
- * @author Jonas, Vidak
+ * @author Jonas, Vidak, Patrik
  */
  
 import ActiveRecord.ApplicationBean;
 import ActiveRecord.Applicant;
 import ActiveRecord.ApplicantAvailability;
-import ActiveRecord.ApplicantDAO;
 import ActiveRecord.ApplicantExperience;
-import ActiveRecord.ApplicantExperienceDAO;
-import ActiveRecord.ExpertiseDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
  
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -49,10 +43,16 @@ public class ApplicationController {
      * the write was completed.
      * @param application
      * @param result
-     * @param birthdayYearSelect
-     * @param birthdayMonthSelect
-     * @param birthdayDaySelect
+     * @param dropdownYear
+     * @param dropdownMonth
+     * @param dropdownDay
+     * @param inputExperience
+     * @param inputAvailability
+     * @param request
+     * @param response
      * @return a ModelAndView of the application.jsp
+     * @throws javax.servlet.ServletException
+     * @throws java.io.IOException
      */
     @RequestMapping(value = "/addApplier", method = RequestMethod.POST)
     public ModelAndView addApplier(@ModelAttribute("application") ApplicationBean application, BindingResult result, 
@@ -64,8 +64,8 @@ public class ApplicationController {
 			    HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, Exception{
         
 	
-	ArrayList<ApplicantExperience> appExpList = new ArrayList<ApplicantExperience>();
-	ArrayList<ApplicantAvailability> appAvDateList = new ArrayList<ApplicantAvailability>();
+	ArrayList<ApplicantExperience> appExpList = new ArrayList<>();
+	ArrayList<ApplicantAvailability> appAvDateList = new ArrayList<>();
 	
 	// This is used for all access to Expertise class in the database
 	ApplicationExpertiseDataSourceManager appExpertiseDSM = new ApplicationExpertiseDataSourceManager();
