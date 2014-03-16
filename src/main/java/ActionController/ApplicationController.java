@@ -240,7 +240,7 @@ public class ApplicationController {
 	try{
 	    application.setExpertiseList(appExpertiseDSM.getAllExpertises());
 	} catch(Exception e){
-	    application.hasError(true);
+	    application.hasError(true, "Could not connect to the database");
 	}
 	// Just returns application jsp
         return new ModelAndView("application", "command", application);

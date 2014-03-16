@@ -9,6 +9,7 @@
 
 
         <http auto-config="true">
+                <!-- Blocked url patterns -->
                 <intercept-url pattern="/welcome*" access="ROLE_USER" />
                 <intercept-url pattern="/applicationView*" access="ROLE_USER" />
                 <intercept-url pattern="/applicationList*" access="ROLE_USER" />
@@ -17,6 +18,8 @@
                 <logout logout-success-url="/logout.htm" />
         </http>
 
+        <!-- Necessary for using spring security tags in jsp-files -->
+        <beans:bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
 
         <authentication-manager>
            <authentication-provider>

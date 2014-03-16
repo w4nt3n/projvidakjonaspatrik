@@ -1,3 +1,7 @@
+/**
+ * @author Jonas, Patrik
+ */
+
 package ActionController;
  
 import org.springframework.security.core.context.SecurityContextHolder;

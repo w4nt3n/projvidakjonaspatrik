@@ -14,6 +14,8 @@ import ActiveRecord.Expertise;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +46,11 @@ public class ApplicationViewController {
 	
 	parameter = req.getParameter(name);
 	
-	targetApplicantID = Integer.parseInt(parameter);
+        Matcher matcher = Pattern.compile("\\d+").matcher(parameter);
+        matcher.find();
+        targetApplicantID = Integer.valueOf(matcher.group());
+        
+	//targetApplicantID = Integer.parseInt(parameter);
 	// Creates a bean for MySQL ApplicantDAO object.
 	// Spring-Module.xml contains references to Spring-Datasource.xml
 	// and Spring-Applicant.xml, these contain beans for Applicant and database login

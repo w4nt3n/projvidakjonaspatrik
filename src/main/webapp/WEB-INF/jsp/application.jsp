@@ -1,8 +1,15 @@
+<%-- 
+    Document   : application
+    Created on : Feb 22, 2014, 13:14:15 PM
+    Author     : Vidak, Patrik
+--%>
+
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

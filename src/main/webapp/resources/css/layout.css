@@ -72,7 +72,7 @@ and open the template in the editor.
     border-bottom: 1px solid #d3d3d3;
 }
 
-#applicationListTable tr:hover{
+#applicationListTable .row:hover{
     background-color: #99ccff;
 }
 

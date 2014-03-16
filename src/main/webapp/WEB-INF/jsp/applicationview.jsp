@@ -66,7 +66,8 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <div id="workExpertiseListDiv">
+                            <fieldset id="fieldsetExperiences">
+                                <legend><spring:message code="label.areasOfExpertise"/></legend>
                                 <table colspan="0" rowspan="0" style="padding: 0px; margin: 0px;">
                                     <tr>
                                         <td>
@@ -76,6 +77,7 @@
                                             <b><spring:message code="label.years"/>:</b>
                                         </td>
                                     </tr>
+                                    
                                     <c:forEach items="${message.getExpExpList()}" var="container">
                                         <tr>
                                             <td>${container.getExpertise().getExpertiseName()}</td>
@@ -83,17 +85,13 @@
                                         </tr>
                                     </c:forEach>
                                 </table>
-                            </div>
+                            </fieldset>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <spring:message code="label.periodsOfAvailability"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <div id="availableListDiv">
+                            <fieldset id="fieldsetAvailability">
+                                <legend><spring:message code="label.periodsOfAvailability"/></legend>
                                 <table colspan="0" rowspan="0" style="padding: 0px; margin: 0px;">
                                     <tr>
                                         <td>
@@ -110,7 +108,7 @@
                                         </tr>
                                     </c:forEach>
                                 </table>
-                            </div>
+                            </fieldset>
                         </td>
                     </tr>
                 </table>
