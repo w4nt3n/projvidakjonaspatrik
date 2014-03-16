@@ -33,12 +33,14 @@
     
             <div id="contentWrapper">
 
-
                 <table id="applicationFormTable" class="formTable">
                     <tr>
                         <th colspan="2">
                             <h2><spring:message code="label.applicationViewForm"/></h2> 
                         </th>
+                        <td valign="top">
+                            <a href="javascript:history.back()">X</a>
+                        </td>
                     </tr>
                     <tr>
                         <td><spring:message code="label.firstname"/>:</td>

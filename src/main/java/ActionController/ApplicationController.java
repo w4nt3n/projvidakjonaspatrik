@@ -84,14 +84,9 @@ public class ApplicationController {
 	
 	String experience[] = inputExperience.split(",");
 	ApplicantExperience appExp;
-        for(int i = 0; i < experience.length; i+=2) {
+        for(int i = 0; i+1 < experience.length; i+=2) {
 	    appExp = new ApplicantExperience();
-	    try{
-		appExp.setExpertise(appExpertiseDSM.getIdWithExpertise(experience[i]));
-	    }catch(Exception e){
-		application.hasError(true, "Could not acces the database");
-		return new ModelAndView("application", "command", application);
-	    }
+            appExp.setExpertise(Integer.parseInt(experience[i]));
             appExp.setYears(Integer.parseInt(experience[i+1]));
 
             appExpList.add(appExp);
@@ -99,7 +94,7 @@ public class ApplicationController {
 	
 	String availability[] = inputAvailability.split(",");
 	ApplicantAvailability appAv;
-        for(int i = 0; i < availability.length; i+=2) {
+        for(int i = 0; i+1 < availability.length; i+=2) {
 	    appAv = new ApplicantAvailability();
             appAv.setFrom(availability[i]);
             appAv.setTo(availability[i+1]);

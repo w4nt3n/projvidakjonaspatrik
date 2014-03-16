@@ -13,7 +13,7 @@
                 <intercept-url pattern="/welcome*" access="ROLE_USER" />
                 <intercept-url pattern="/applicationView*" access="ROLE_USER" />
                 <intercept-url pattern="/applicationList*" access="ROLE_USER" />
-                <form-login login-page="/login.htm" default-target-url="/welcome.htm"
+                <form-login login-page="/login.htm" default-target-url="/applicationList.htm"
                         authentication-failure-url="/loginfailed.htm" />
                 <logout logout-success-url="/logout.htm" />
         </http>

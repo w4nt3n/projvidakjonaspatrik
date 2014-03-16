@@ -37,13 +37,13 @@
             }
         </script>
         <span style="float: right">
-            <img src="resources/images/england.png" onclick="addParam('lang', 'en')" alt="English" title="English" border="0">
+            <img src="resources/images/england.png" onclick="addParam('lang', 'en')" alt="English" title="English" border="0" class="clickableImg">
             |
-            <img src="resources/images/sweden.png" onclick="addParam('lang', 'sv_SE')" alt="Svenska" title="Svenska" border="0">
+            <img src="resources/images/sweden.png" onclick="addParam('lang', 'sv_SE')" alt="Svenska" title="Svenska" border="0" class="clickableImg">
             |
-            <img src="resources/images/spain.png" onclick="addParam('lang', 'es_ES')" alt="Español" title="Español" border="0">
+            <img src="resources/images/spain.png" onclick="addParam('lang', 'es_ES')" alt="Español" title="Español" border="0" class="clickableImg">
             |
-            <img src="resources/images/china.png" onclick="addParam('lang', 'zh_CN')" alt="中文" title="中文" border="0">
+            <img src="resources/images/china.png" onclick="addParam('lang', 'zh_CN')" alt="中文" title="中文" border="0" class="clickableImg">
             
             <br>
             
@@ -51,6 +51,9 @@
                 Logged in as: <sec:authentication property="principal.username" /> | 
                 <a href='<c:url value="/j_spring_security_logout" />'>Logout</a>
             </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <a href="applicationList.htm">Admin</a>
+            </sec:authorize>  
         </span>
     </div>
 </div>

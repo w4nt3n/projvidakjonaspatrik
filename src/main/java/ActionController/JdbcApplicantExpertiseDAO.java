@@ -6,8 +6,6 @@
 
 package ActionController;
 
-import ActiveRecord.ApplicantExperience;
-import ActiveRecord.ApplicantExperienceDAO;
 import ActiveRecord.Expertise;
 import ActiveRecord.ExpertiseDAO;
 
@@ -16,7 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.sql.DataSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 /**
  *
@@ -32,6 +32,8 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
 
     @Override
     public Expertise getExpertiseWithId(int ID) throws Exception{
+        Locale locale = LocaleContextHolder.getLocale();
+        
 	// The SQL code to be sent
         String sql = "SELECT * FROM expertiselist WHERE id = ?";
 	// The object containing the connection
@@ -49,8 +51,8 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
 	    // If we get a applicant that matches, write to the Applicant object
             if (rs.next()) {
                 exp = new Expertise();
-                exp.setID(rs.getInt("id"));
-                exp.setExpertise(rs.getString("expertise"));
+                exp.setID(ID);
+                exp.setExpertise(rs.getString("expertise_" + locale.toString()));
             }
 	    // Close 
             rs.close();
@@ -88,7 +90,7 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
             if (rs.next()) {
                 exp = new Expertise();
                 exp.setID(rs.getInt("id"));
-                exp.setExpertise(rs.getString("expertise"));
+                exp.setExpertise(rs.getString("expertise_en"));
             }
 	    // Close 
             rs.close();
@@ -108,7 +110,9 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
     
     @Override
     public ArrayList<Expertise> getAllExpertises() throws Exception {
-	// The SQL code to be sent
+        Locale locale = LocaleContextHolder.getLocale();
+        
+	// The SQL code to be sent  
         String sql = "SELECT * FROM expertiselist";
 	// The object containing the connection
         Connection conn = null;
@@ -127,7 +131,7 @@ public class JdbcApplicantExpertiseDAO implements ExpertiseDAO {
             while (rs.next()) {
                 exp = new Expertise();
                 exp.setID(rs.getInt("id"));
-		exp.setExpertise(rs.getString("expertise"));
+		exp.setExpertise(rs.getString("expertise_" + locale.toString()));
 		resultsArrayList.add(exp);
             }
 	    // Close 

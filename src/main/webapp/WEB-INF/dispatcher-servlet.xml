@@ -24,15 +24,6 @@
 
     <bean id="fileValidator" class="ActionView.FileValidator" />  
 
-    <!-- <bean id="messageSource"
-            class="org.springframework.context.support.ResourceBundleMessageSource">
-            <property name="basenames">
-                    <list>
-                            <value>mymessages</value>
-                    </list>
-            </property>
-    </bean> -->
-    
     <!-- Internationalization -->
     <bean id="messageSource"
         class="org.springframework.context.support.ReloadableResourceBundleMessageSource">

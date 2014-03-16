@@ -7,10 +7,6 @@
 package ActionController;
 
 import ActiveRecord.ApplicationListBean;
-import ActiveRecord.ApplicantDAO;
-import java.sql.SQLException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -50,7 +46,7 @@ public class ApplicationListController {
 	    applicationListBean.hasError(true);
 	}
 	
-	// Sends the bean and reurns the page
+	// Sends the bean and returns the page
         return new ModelAndView("applicationList", "message", applicationListBean);
     }
 }

@@ -85,7 +85,7 @@ public class ApplicationViewController {
 		appBean.hasError(true, "That applicant does not exist");
 		return new ModelAndView("applicationview", "message", appBean);
 	    }
-	    if(appExperienceList.size() >= 1){
+	    if(appExperienceList.size() > 0){
 		// This is used for all access to Expertise class in the database
 		ApplicationExpertiseDataSourceManager appExpertiseDSM = new ApplicationExpertiseDataSourceManager();
 		

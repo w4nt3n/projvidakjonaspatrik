@@ -40,7 +40,7 @@
             
             <c:when test="${command.getAfterSubmit() == true}">
                 <div class="textCenterDiv">
-                    <spring:message code="application.submitted"/>
+                    <spring:message code="label.submitted"/>
                 </div>
             </c:when>
             
@@ -107,7 +107,7 @@
                             <td colspan = "20">
                                 <fieldset id="fieldsetExperiences">
                                     <legend><spring:message code="label.areasOfExpertise"/></legend>
-                                    <spring:message code="label.expertise"/>::
+                                    <spring:message code="label.expertise"/>:
                                     <select id="workExpertiseExpertiseSelect">
                                         <c:forEach items="${command.getExpertiseList()}" var="expertise">
                                             <option value="${expertise.getID()}">${expertise.getExpertiseName()}</option>

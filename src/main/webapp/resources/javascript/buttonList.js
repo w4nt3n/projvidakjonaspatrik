@@ -10,7 +10,8 @@ function addANewExpertise() {
     var expForm   = document.getElementById("workExpertiseExpertiseSelect");
     var expertise = expForm.options[expForm.selectedIndex].innerHTML;
     var years     = document.getElementById("workExpertiseYearsSelect").value;
-    bListExp["add"](new Exp(expertise, years));
+    var id        = expForm.value;
+    bListExp["add"](new Exp(expertise+":"+id, years));
 }
 
 // Adds a period of availability from the inputs to the buttonList
@@ -67,7 +68,7 @@ function ButtonList(formID, headlines) {
      * @param {type} item Object, container of column values.
      * @returns {undefined}
      */
-    this.add = function (item) {
+    this.add = function(item, id) {
         var row = table.insertRow(-1);
 
         // Add a button to the new row
@@ -78,10 +79,22 @@ function ButtonList(formID, headlines) {
             var i = button.parentNode.parentNode.rowIndex;
             table.deleteRow(i);
         };
+        
+        row.id = id;
         row.insertCell(-1).appendChild(button);
-        // Add each value of 'item' to a new column
+        /* Add each value of 'item' to a new column
+         * If the input is of the form "key:val",
+         * the 'key' part goes into innerHTML (visible
+         * to the user) and the 'val' part is saved 
+         * internally in the value property of the col.
+         */
         for(var value in item) {
-            row.insertCell(-1).innerHTML = item[value];
+            var kvp = item[value].split(":");
+            var col = row.insertCell(-1);
+            col.innerHTML = col.value = kvp[0];
+            if(kvp.length > 1) {
+                col.value = kvp[1];
+            }
         }
     };
 	
@@ -96,8 +109,8 @@ function ButtonList(formID, headlines) {
         var arr = new Array();
         for (var i = 1, row; row = table.rows[i]; i++) {
             for (var j = 1, col; col = row.cells[j]; j++) {
-                arr.push(col.innerHTML);
-            }  
+                arr.push(col.value);
+            }
         }
         return arr.join(separator);
     };
