@@ -97,7 +97,7 @@ function ButtonList(formID, headlines) {
             }
         }
     };
-	
+    
     /**
      * Returns a string of all values in table joined by separator.
      * The inner loop starts at 1 (one) to skip the button column.
