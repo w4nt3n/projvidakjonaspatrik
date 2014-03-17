@@ -12,14 +12,14 @@ package ActiveRecord;
  */
 public class ApplicantAvailability {
     
-    int applicantID;
+    long applicantID;
     String from;
     String to;
     
     //getter and setter methods
     
     //getters
-    public int getApplicantID() {
+    public long getApplicantID() {
         return applicantID;
     }
     public String getFrom() {
@@ -30,7 +30,7 @@ public class ApplicantAvailability {
     }
     
     //setters
-    public void setApplicantID (int ID) {
+    public void setApplicantID (long ID) {
         this.applicantID = ID;
     }
     public void setFrom(String fro) {

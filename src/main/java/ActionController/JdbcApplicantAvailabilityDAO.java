@@ -29,7 +29,7 @@ public class JdbcApplicantAvailabilityDAO implements ApplicantAvailabilityDAO {
     }
 
     @Override
-    public void insert(ApplicantAvailability applicantAvailability){
+    public void insert(ApplicantAvailability applicantAvailability) throws SQLException {
 
 	// The SQL code to be sent
         String sql = "INSERT INTO applicantavailability (applicantID, dateFrom, dateTo) VALUES (?, ?, ?)";
@@ -39,18 +39,16 @@ public class JdbcApplicantAvailabilityDAO implements ApplicantAvailabilityDAO {
         try {
 	    // Get a connection (the source is Spring-Datasource.xml)
             conn = dataSource.getConnection();
-	    // We have paramaters, we need a prepareStatement
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, applicantAvailability.getApplicantID());   // <---- Fuck this
-            ps.setString(2, applicantAvailability.getFrom());	    // <---- And this
-            ps.setString(3, applicantAvailability.getTo());	    // <---- And this in particular
+            ps.setLong(1,   applicantAvailability.getApplicantID());
+            ps.setString(2, applicantAvailability.getFrom());
+            ps.setString(3, applicantAvailability.getTo());
 	    // Execute query
             ps.executeUpdate();
             ps.close();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-
+            throw new SQLException("Creating availability failed, could not connect to database.");
         } finally {
             if (conn != null) {
                 try {
@@ -59,56 +57,19 @@ public class JdbcApplicantAvailabilityDAO implements ApplicantAvailabilityDAO {
             }
         }
     }
-    
-//    @Override	// <--- Fuck this too
-//    public void insert(ArrayList<ApplicantAvailability> applicantAvailabilityList){
-//
-//	// The SQL code to be sent
-//        String sql = "INSERT INTO applicantavailability " +
-//                        "(applicantID, from, to) VALUES (?, ?, ?)";
-//	// The object containing the connection
-//        Connection conn = null;
-//
-//	for(int i = 0; i < applicantAvailabilityList.size(); i++){
-//	    try {
-//		// Get a connection (the source is Spring-Datasource.xml)
-//		conn = dataSource.getConnection();
-//		// We have paramaters, we need a prepareStatement
-//		PreparedStatement ps = conn.prepareStatement(sql);
-//		ps.setInt(1, applicantAvailabilityList.get(i).getApplicantID());
-//		ps.setString(2, applicantAvailabilityList.get(i).getFrom());
-//		ps.setString(3, applicantAvailabilityList.get(i).getTo());
-//		// Execute query
-//		ps.executeUpdate();
-//		ps.close();
-//
-//	    } catch (SQLException e) {
-//		throw new RuntimeException(e);
-//
-//	    } finally {
-//		if (conn != null) {
-//		    try {
-//			    conn.close();
-//		    } catch (SQLException e) {}
-//		}
-//	    }
-//	}
-//    }
-
+ 
     @Override
-    public ArrayList<ApplicantAvailability> getAllApplicantAvailability(int applicantID){
+    public ArrayList<ApplicantAvailability> getAllApplicantAvailability(long applicantID) throws SQLException{
 	// The SQL code to be sent
         String sql = "SELECT * FROM applicantavailability WHERE applicantID = ?";
-	// The object containing the connection
         Connection conn = null;
 
         try {
 	    // Get a connection (the source is Spring-Datasource.xml)
             conn = dataSource.getConnection();
-	    // We have paramaters, we need a prepareStatement
             PreparedStatement ps = conn.prepareStatement(sql);
-	    ArrayList<ApplicantAvailability> resultsArrayList = new ArrayList<ApplicantAvailability>();	    // <----- comment
-	    ps.setInt(1, applicantID);
+	    ArrayList<ApplicantAvailability> resultsArrayList = new ArrayList<>();
+	    ps.setLong(1, applicantID);
 	    // Creates a applicant to return
             ApplicantAvailability appExp = null;
 	    // Execute query
@@ -127,7 +88,7 @@ public class JdbcApplicantAvailabilityDAO implements ApplicantAvailabilityDAO {
 	    // return applicant
             return resultsArrayList;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new SQLException("Loading periods of availability failed, no connection.");
         } finally {
             if (conn != null) {
                 try {

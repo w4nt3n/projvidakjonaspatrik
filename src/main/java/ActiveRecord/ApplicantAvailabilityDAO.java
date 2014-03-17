@@ -7,6 +7,7 @@
 
 package ActiveRecord;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +15,7 @@ import java.util.ArrayList;
  * @author Vidak
  */
  
-public interface ApplicantAvailabilityDAO {
-    public void insert(ApplicantAvailability applicantAvailability);
-    //public void insert(ArrayList<ApplicantAvailability> applicantAvailabilityList);
-    public ArrayList<ApplicantAvailability> getAllApplicantAvailability(int applicantID);
+public interface ApplicantAvailabilityDAO  {
+    public void insert(ApplicantAvailability applicantAvailability) throws SQLException;
+    public ArrayList<ApplicantAvailability> getAllApplicantAvailability(long applicantID) throws SQLException;
 }

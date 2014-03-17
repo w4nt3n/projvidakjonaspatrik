@@ -35,7 +35,7 @@ public class ApplicationAvailabilityDataSourceManager {
 //	this.appAvDAO.insert(applicantAvailabilityList);
 //    }
     
-    public ArrayList<ApplicantAvailability> getAllApplicantAvailability(int applicantID){
+    public ArrayList<ApplicantAvailability> getAllApplicantAvailability(long applicantID){
 	return this.appAvDAO.getAllApplicantAvailability(applicantID);
     }
     

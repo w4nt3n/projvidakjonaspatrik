@@ -37,7 +37,7 @@ public class ApplicationViewController {
     public ModelAndView showAppliers(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 	// Get the value of a request parameter; the name is case-sensitive
 	String name = "applicantID";
-	int targetApplicantID;
+	long targetApplicantID;
 	String parameter = "";
 	if(req.getParameter(name) == null)
 	    try (PrintWriter out = response.getWriter()) {
@@ -80,7 +80,7 @@ public class ApplicationViewController {
 	    // Gets the id of all the 
 	    ArrayList<ApplicantExperience> appExperienceList = null;
 	    try{
-		appExperienceList = appExperienceDSM.getExpertiseWhere("applicantID='" + appList.get(0).getId() + "'");
+		appExperienceList = appExperienceDSM.getExpertiseWhere("applicantID='" + targetApplicantID + "'");
 	    }catch(Exception e){
 		appBean.hasError(true, "That applicant does not exist");
 		return new ModelAndView("applicationview", "message", appBean);
@@ -106,7 +106,7 @@ public class ApplicationViewController {
         ArrayList<ApplicantAvailability> appAvList = null;
         
         try{
-            appAvList = appAvDSM.getAllApplicantAvailability(appList.get(0).getId());
+            appAvList = appAvDSM.getAllApplicantAvailability(targetApplicantID);
         }catch(Exception e){
             appBean.hasError(true, "Could not get the applicant available date data");
             return new ModelAndView("applicationview", "message", appBean);

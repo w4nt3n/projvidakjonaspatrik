@@ -11,5 +11,5 @@ package ActiveRecord;
  * @author Patrik
  */
 public interface Validatable {
-    public boolean Validate();
+    public boolean validate();
 }

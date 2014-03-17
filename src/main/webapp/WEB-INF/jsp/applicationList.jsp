@@ -6,7 +6,6 @@
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  <%-- needed to loop through list --%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
@@ -40,7 +39,7 @@
                         <td colspan="20">
                             <fieldset>
                                 <legend><spring:message code="label.applicationFiltering" text="Application Filtering"/></legend>
-                                <input type="text"/>
+                                Available From: <input type="text"/> To: <input type="text"/><button>Filter</button>
                             </fieldset>
                         </td>
                     </tr>

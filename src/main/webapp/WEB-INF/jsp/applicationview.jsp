@@ -22,7 +22,7 @@
     <%@include file="header.jsp" %>
     
     <c:choose>
-            
+        
         <c:when test="${message.hasError() == true}">
             <div class="textCenterDiv">
                 Something went wrong, we are sorry. ${message.getError()}
@@ -39,7 +39,7 @@
                             <h2><spring:message code="label.applicationViewForm"/></h2> 
                         </th>
                         <td valign="top">
-                            <a href="javascript:history.back()">X</a>
+                            <a href="applicationList.htm">X</a>
                         </td>
                     </tr>
                     <tr>

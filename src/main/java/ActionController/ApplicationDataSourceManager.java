@@ -8,9 +8,7 @@ package ActionController;
 
 import ActiveRecord.Applicant;
 import ActiveRecord.ApplicantDAO;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -30,12 +28,14 @@ public class ApplicationDataSourceManager {
 	this.appDAO = (ApplicantDAO) this.context.getBean("applicantDAO");
     }
     
-    public void insert(Applicant applicant) throws Exception{
+    public long insert(Applicant applicant) throws Exception{
+        long id;
 	try{
-	    this.appDAO.insert(applicant);
+	    id = appDAO.insert(applicant);
 	} catch(Exception e){
 	    throw new Exception(e);
 	}
+        return id;
     }
     
     public ArrayList<Applicant> getAllApplicants() throws Exception{

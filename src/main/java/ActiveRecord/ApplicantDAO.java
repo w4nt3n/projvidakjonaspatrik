@@ -16,7 +16,7 @@ import java.util.ArrayList;
  
 public interface ApplicantDAO 
 {
-    public void insert(Applicant applicant) throws Exception;
+    public long insert(Applicant applicant) throws Exception;
     public Applicant getApplicantWithId(int applicantId) throws Exception;
     public ArrayList<Applicant> getAllApplicants() throws Exception;
     public ArrayList<Applicant> getApplicantIDWhere(String insertedSQL) throws Exception;

@@ -86,7 +86,7 @@ public class ApplicationBean implements Validatable {
     }
     
     @Override
-    public boolean Validate() {
+    public boolean validate() {
         return (firstname.length() > 0 &&
                 lastname.length() > 0 &&
                 phone.matches("^\\+?[0-9\\-\\s]{7,}$") &&

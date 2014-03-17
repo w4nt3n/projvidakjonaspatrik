@@ -45,7 +45,7 @@ public class JdbcApplicantExperienceDAO implements ApplicantExperienceDAO {
             conn = dataSource.getConnection();
 	    // We have paramaters, we need a prepareStatement
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, applicantExperience.getApplicantID());
+            ps.setLong(1,applicantExperience.getApplicantID());
             ps.setInt(2, applicantExperience.getExpertise());
             ps.setInt(3, applicantExperience.getYears());
 	    // Execute query

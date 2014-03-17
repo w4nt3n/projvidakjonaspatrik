@@ -12,14 +12,14 @@ package ActiveRecord;
  */
 public class ApplicantExperience {
     
-    int applicantID;
+    long applicantID;
     int expertise;
     int years;
     
     //getter and setter methods
     
     //getters
-    public int getApplicantID() {
+    public long getApplicantID() {
         return applicantID;
     }
     public int getExpertise() {
@@ -30,7 +30,7 @@ public class ApplicantExperience {
     }
     
     //setters
-    public void setApplicantID(int ID) {
+    public void setApplicantID(long ID) {
         this.applicantID = ID;
     }
     public void setExpertise(int exp) {

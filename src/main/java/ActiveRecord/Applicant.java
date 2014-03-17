@@ -16,7 +16,7 @@ public class Applicant
     public Applicant() {
     }
     
-    int id;
+    long id;
     String firstname;
     String lastname;
     String dateOfBirth;
@@ -27,7 +27,7 @@ public class Applicant
     //getter and setter methods
     
     //getters
-    public int getId() {
+    public long getId() {
         return id;
     }
     public String getFirstname() {
@@ -47,7 +47,7 @@ public class Applicant
     }
     
     //setters
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
     public void setFirstname(String n) {

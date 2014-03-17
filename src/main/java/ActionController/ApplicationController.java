@@ -65,7 +65,7 @@ public class ApplicationController {
 			    HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, Exception{
         
         // Validate input server side
-	if (!application.Validate() &&
+	if (!application.validate() &&
                 dropdownYear.length() > 0 &&
                 dropdownMonth.length() > 0 &&
                 dropdownDay.length() > 0) {
@@ -75,9 +75,6 @@ public class ApplicationController {
 	
 	ArrayList<ApplicantExperience> appExpList = new ArrayList<>();
 	ArrayList<ApplicantAvailability> appAvDateList = new ArrayList<>();
-	
-	// This is used for all access to Expertise class in the database
-	ApplicationExpertiseDataSourceManager appExpertiseDSM = new ApplicationExpertiseDataSourceManager();
 	
 	//------------------------------------------------------------
 	//----------------------- Parses all of the expertises -------
@@ -101,27 +98,7 @@ public class ApplicationController {
 
             appAvDateList.add(appAv);
         }
-	
-	
-//	response.setContentType("text/html;charset=UTF-8");
-//	try (PrintWriter out = response.getWriter()) {
-//
-//	    out.println("<!DOCTYPE html>");
-//	    out.println("<html>");
-//	    out.println("<head>");
-//	    out.println("<title>Servlet NewServlet</title>");	    
-//	    out.println("</head>");
-//	    out.println("<body>");
-//	    for(int i = 0; i < appAvDateList.size(); i++) {
-//		out.println("\"" + appAvDateList.get(i).getApplicantID() + "\"<br />");
-//		out.println("\"" + appAvDateList.get(i).getFrom() + "\"<br />");
-//		out.println("\"" + appAvDateList.get(i).getTo() + "\"<br />");
-//	    }
-//	    out.println("</body>");
-//	    out.println("</html>");
-//
-//	}
-	
+
 	//------------------------------------------------------------
 	//----------------------- Writes to the applicant ------------
 	
@@ -138,76 +115,43 @@ public class ApplicationController {
         applicant.setPhone(application.getPhone());
         
 	// Adds the new applicant to the database
+        long applicantId = -1;
 	try{
-	    appDSM.insert(applicant);
+	    applicantId = appDSM.insert(applicant);
 	} catch(Exception e){
 	    application.hasError(true, "Could not add application to server");
             return new ModelAndView("application", "command", application);
 	}
 	
-	//------------------------------------------------------------
-	//----------------------- Writes to the availability ---------
-	// This is used for all access to Applicant class in the database
-	ApplicationAvailabilityDataSourceManager appAvDSM = new ApplicationAvailabilityDataSourceManager();
+        applicant.setId(applicantId);
 	
-	ArrayList<Applicant> appThatMatch = null;
-	// Get the ID of the newly added appicant
-	try{
-	    appThatMatch = appDSM.getApplicantIDWhere("name='" + applicant.getFirstname() + "' AND"
-		    + " surname='" + applicant.getLastname() + "' AND"
-		    + " dateOfBirth='" + applicant.getDateOfBirth() + "' AND"
-		    + " email='" + applicant.getEmail() + "' AND"
-		    + " telephone='" + applicant.getPhone() + "'");
-	} catch(Exception e){
-	    application.hasError(true, "Could not get application ID");
+        ApplicationAvailabilityDataSourceManager appAvDSM = new ApplicationAvailabilityDataSourceManager();
+
+        try{
+            for(int i = 0; i < appAvDateList.size(); i++){
+                appAvDateList.get(i).setApplicantID(applicant.getId());
+                appAvDSM.insert(appAvDateList.get(i));
+            }
+        }catch(Exception e){
+            application.hasError(true, "Could not add the applicant availability to database");
             return new ModelAndView("application", "command", application);
-	}
-	
-	if(appThatMatch.size() == 1){
-	    for(int i = 0; i < appAvDateList.size(); i++){
-		appAvDateList.get(i).setApplicantID(appThatMatch.get(0).getId());
-		appAvDSM.insert(appAvDateList.get(i));
-	    }
-	}
-	else{
-	    application.hasError(true, "This user already exists in the database");
-            return new ModelAndView("application", "command", application);
-	}
+        }
 	//------------------------------------------------------------
 	//----------------------- Writes to the experience ------------
 	
-	
-	if(appExpList.size() >= 1){
-	    
-	    // This is used for all access to Experience class in the database
-	    ApplicationExperienceDataSourceManager appExperienceDSM = new ApplicationExperienceDataSourceManager();
-	    
-	    // Creates a new applicant and sets all of it's values
-	    ApplicantExperience applicantExperience = null;
-	    // Get the ID of the newly added appicant
-	    
-	    
-	    for(int i = 0; i < appExpList.size(); i++){
-		// Creates a new applicant and sets all of it's values
-		applicantExperience = new ApplicantExperience();
-		
-		// Will be true, error above else
-		if(appThatMatch.size() == 1){
-		    // There should only be one that matches, lets make an error message if there are more than one later
-		    applicantExperience.setApplicantID(appThatMatch.get(0).getId());
-		    applicantExperience.setExpertise(appExpList.get(i).getExpertise());
-		    applicantExperience.setYears(appExpList.get(i).getYears());
-
-		    // Adds the new applicant to the database
-		    try{
-			appExperienceDSM.insert(applicantExperience);
-		    } catch(Exception e){
-			application.hasError(true, "Could not add the applicant experiences to database");
-			return new ModelAndView("application", "command", application);
-		    }
-		}
-	    }
-	}
+        // This is used for all access to Experience class in the database
+        ApplicationExperienceDataSourceManager appExperienceDSM = new ApplicationExperienceDataSourceManager();
+    
+        try{
+            for(int i = 0; i < appExpList.size(); i++){
+                appExpList.get(i).setApplicantID(applicant.getId());
+                appExperienceDSM.insert(appExpList.get(i));
+            }
+        }catch(Exception e){
+            application.hasError(true, "Could not add the applicant experiences to database");
+            return new ModelAndView("application", "command", application);
+        }
+        
 	//------------------------------------------------------------
         
 	// Creates a bean that contains text that should be printed on the 

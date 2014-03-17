@@ -22,8 +22,6 @@
         </property>
     </bean>  
 
-    <bean id="fileValidator" class="ActionView.FileValidator" />  
-
     <!-- Internationalization -->
     <bean id="messageSource"
         class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
