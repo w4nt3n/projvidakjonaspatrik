@@ -14,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
- * @author Vidak
+ * @author Vidak, Patrik, Jonas
  */
 public class ApplicationDataSourceManager {
     private JdbcApplicantDAO jdbcAppDAO;
@@ -28,6 +28,12 @@ public class ApplicationDataSourceManager {
 	this.appDAO = (ApplicantDAO) this.context.getBean("applicantDAO");
     }
     
+    /**
+     * Writes an applicant to the DB
+     * @param applicant
+     * @return
+     * @throws Exception 
+     */
     public long insert(Applicant applicant) throws Exception{
         long id;
 	try{
@@ -38,6 +44,11 @@ public class ApplicationDataSourceManager {
         return id;
     }
     
+    /**
+     * Gets all applications from the DB
+     * @return
+     * @throws Exception 
+     */
     public ArrayList<Applicant> getAllApplicants() throws Exception{
 	try{
 	    return this.appDAO.getAllApplicants();
@@ -46,11 +57,28 @@ public class ApplicationDataSourceManager {
 	}
     }
     
-    public ArrayList<Applicant> getApplicantIDWhere(String insertedSQL) throws Exception{
+    /**
+     * Gets all applications where conditions are met from DB
+     * @param insertedSQL
+     * @return
+     * @throws Exception 
+     */
+    public ArrayList<Applicant> getApplicantWhere(String insertedSQL) throws Exception{
 	try{
 	    return this.appDAO.getApplicantIDWhere(insertedSQL);
 	} catch(Exception e){
 	    throw new Exception(e);
 	}
+    }
+
+    /**
+     * Gets all applications where the applicant can work inbetween two dates.
+     * @param datepickerFrom
+     * @param datepickerTo
+     * @return
+     * @throws Exception 
+     */
+    ArrayList<Applicant> getApplicantAvailable(String datepickerFrom, String datepickerTo) throws Exception {
+        return this.appDAO.getApplicantAvailable(datepickerFrom, datepickerTo);
     }
 }

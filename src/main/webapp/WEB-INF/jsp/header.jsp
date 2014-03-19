@@ -6,36 +6,12 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="<c:url value="/resources/javascript/url_editing.js" />"></script>
 <div id="headerDiv">
     <div class="textCenterDiv">
         <h3><spring:message code="label.title"/></h3>
-
-        <script>
-            function addParam(key, value)
-            {               
-                key = encodeURI(key); value = encodeURI(value);
-                var kvp = document.location.search.substr(1).split('&');
-                var i=kvp.length; var x;
-                while(i--) 
-                {
-                    x = kvp[i].split('=');
-                    if (x[0]==key)
-                    {
-                        x[1] = value;
-                        kvp[i] = x.join('=');
-                        break;
-                    }
-                }
-
-                if(i<0) {kvp[kvp.length] = [key,value].join('=');}
-
-                //this will reload the page
-                document.location.search = kvp.join('&'); 
-            }
-        </script>
         <span style="float: right">
             <img src="resources/images/england.png" onclick="addParam('lang', 'en')" alt="English" title="English" border="0" class="clickableImg">
             |

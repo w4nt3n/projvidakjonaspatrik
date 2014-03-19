@@ -62,7 +62,7 @@ public class ApplicationViewController {
 	ApplicationDataSourceManager appDSM = new ApplicationDataSourceManager();
 	ArrayList<Applicant> appList = null;
 	try{
-	    appList = appDSM.getApplicantIDWhere("id='" + targetApplicantID + "'");
+	    appList = appDSM.getApplicantWhere("id='" + targetApplicantID + "'");
 	}catch(Exception e){
 	    appBean.hasError(true, "That applicant does not exist");
 	    return new ModelAndView("applicationview", "message", appBean);

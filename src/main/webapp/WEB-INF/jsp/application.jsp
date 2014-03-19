@@ -21,7 +21,6 @@
     <script src="<c:url value="/resources/javascript/buttonList.js" />"></script>
     <script type="text/javascript">
         
-        
     function submitButtonLists() {
         document.getElementById("inputExperience").value = bListExp.join(",");
         document.getElementById("inputAvailability").value = bListPeriods.join(",");

@@ -32,7 +32,6 @@
         <c:otherwise>
     
             <div id="contentWrapper">
-
                 <table id="applicationFormTable" class="formTable">
                     <tr>
                         <th colspan="2">
@@ -113,15 +112,13 @@
                             </fieldset>
                         </td>
                     </tr>
-                </table>
-
-
+                </table>                                                         
             </div>
         </c:otherwise>
                 
     </c:choose>
     
     <%@include file="footer.jsp" %>
-            
+
 </body>
 </html>

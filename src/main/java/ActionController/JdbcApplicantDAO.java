@@ -182,6 +182,9 @@ public class JdbcApplicantDAO implements ApplicantDAO {
     }
 
     @Override
+    /**
+     * Get applicants where conditions are met in DB
+     */
     public ArrayList<Applicant> getApplicantIDWhere(String insertedSQL) throws Exception  {
 	// The SQL code to be sent
         String sql = "SELECT * FROM applicant WHERE " + insertedSQL;
@@ -217,6 +220,53 @@ public class JdbcApplicantDAO implements ApplicantDAO {
             return resultsArrayList;
         } catch (SQLException e) {
             throw new Exception(e);
+        } finally {
+            if (conn != null) {
+                try {
+                conn.close();
+                } catch (SQLException e) {}
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<Applicant> getApplicantAvailable(String datepickerFrom, String datepickerTo) throws Exception {
+        // The SQL code to be sent
+        String sql = "SELECT applicant.id, name, surname, email, telephone, dateofbirth FROM applicant, applicantavailability WHERE " +
+                     "applicant.id = applicantavailability.applicantID AND applicantavailability.dateFrom <= '"+ datepickerFrom +"' " +
+                     "AND applicantavailability.dateTo >= '"+ datepickerTo +"'";
+	// The object containing the connection
+        Connection conn = null;
+
+        try {
+	    // Get a connection (the source is Spring-Datasource.xml)
+            conn = dataSource.getConnection();
+	    // We have paramaters, we need a prepareStatement
+            PreparedStatement ps = conn.prepareStatement(sql);
+	    ArrayList<Applicant> resultsArrayList = new ArrayList<>();
+	    // Creates a applicant to return
+            Applicant applicant = null;
+	    // Execute query
+            ResultSet rs = ps.executeQuery();
+	    // If we get a applicant that matches, write to the Applicant object
+            while (rs.next()) {
+                applicant = new Applicant();
+		applicant.setId(rs.getInt("id"));
+                applicant.setFirstname(rs.getString("name"));
+                applicant.setLastname(rs.getString("surname"));
+                applicant.setDateOfBirth(rs.getString("dateOfBirth"));
+                applicant.setEmail(rs.getString("email"));
+                applicant.setPhone(rs.getString("telephone"));
+		// Add the applicant object to the returned ArrayList
+                resultsArrayList.add(applicant);
+            }
+	    // Close 
+            rs.close();
+            ps.close();
+	    // return applicant
+            return resultsArrayList;
+        } catch (SQLException e) {
+            throw new SQLException("Could not connect to database");
         } finally {
             if (conn != null) {
                 try {

@@ -8,6 +8,7 @@ package ActionController;
 
 import ActiveRecord.ApplicantAvailability;
 import ActiveRecord.ApplicantAvailabilityDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -27,15 +28,11 @@ public class ApplicationAvailabilityDataSourceManager {
         this.appAvDAO = (ApplicantAvailabilityDAO) this.context.getBean("ApplicantAvailabilityDAO");
     }
     
-    public void insert(ApplicantAvailability applicantAvailability){
+    public void insert(ApplicantAvailability applicantAvailability) throws SQLException{
 	this.appAvDAO.insert(applicantAvailability);
     }
-    
-//    public void insert(ArrayList<ApplicantAvailability> applicantAvailabilityList){
-//	this.appAvDAO.insert(applicantAvailabilityList);
-//    }
-    
-    public ArrayList<ApplicantAvailability> getAllApplicantAvailability(long applicantID){
+
+    public ArrayList<ApplicantAvailability> getAllApplicantAvailability(long applicantID) throws SQLException{
 	return this.appAvDAO.getAllApplicantAvailability(applicantID);
     }
     

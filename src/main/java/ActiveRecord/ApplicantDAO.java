@@ -20,4 +20,6 @@ public interface ApplicantDAO
     public Applicant getApplicantWithId(int applicantId) throws Exception;
     public ArrayList<Applicant> getAllApplicants() throws Exception;
     public ArrayList<Applicant> getApplicantIDWhere(String insertedSQL) throws Exception;
+
+    public ArrayList<Applicant> getApplicantAvailable(String datepickerFrom, String datepickerTo) throws Exception;
 }

@@ -62,7 +62,7 @@ public class ApplicationController {
                             @RequestParam("dropdownDay") String dropdownDay,
 			    @RequestParam("inputExperience") String inputExperience,
                             @RequestParam("inputAvailability") String inputAvailability,
-			    HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, Exception{
+			    HttpServletRequest request, HttpServletResponse response)throws Exception{
         
         // Validate input server side
 	if (!application.validate() &&
@@ -76,9 +76,7 @@ public class ApplicationController {
 	ArrayList<ApplicantExperience> appExpList = new ArrayList<>();
 	ArrayList<ApplicantAvailability> appAvDateList = new ArrayList<>();
 	
-	//------------------------------------------------------------
-	//----------------------- Parses all of the expertises -------
-	
+	// Parsing of expertises and dates
 	String experience[] = inputExperience.split(",");
 	ApplicantExperience appExp;
         for(int i = 0; i+1 < experience.length; i+=2) {
